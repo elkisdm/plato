@@ -23,3 +23,6 @@ material/
 # Salidas de render de Remotion.
 ts/out/
 ts/.remotion/
+
+# Build info de TypeScript
+*.tsbuildinfo
