@@ -151,3 +151,43 @@ def test_qualitative_style_accepts_extra_keys(golden_spec: dict) -> None:
     ok_spec = copy.deepcopy(golden_spec)
     ok_spec["style"].setdefault("typography", {})["nuevoDescriptor"] = "x"
     assert validate_spec(ok_spec).ok
+
+
+# --- Capa narrative (conceptual, v0.3.0, ADR-0010): opcional + strict-when-present ---
+
+def _narrative() -> dict:
+    """Narrative mínimo válido: solo los dos requeridos."""
+    return {"hook": {"device": "question", "why": "engancha"}, "thesis": "el mensaje"}
+
+
+def test_narrative_is_optional() -> None:
+    """Un spec sin narrative valida (gate suave en presencia)."""
+    assert validate_spec(_skeleton()).ok
+
+
+def test_narrative_well_formed_is_accepted(golden_spec: dict) -> None:
+    spec = copy.deepcopy(golden_spec)
+    spec["narrative"] = _narrative()
+    assert validate_spec(spec).ok, validate_spec(spec).errors
+
+
+def test_narrative_requires_hook_and_thesis() -> None:
+    spec = _skeleton()
+    spec["narrative"] = {"thesis": "el mensaje"}  # falta hook
+    result = validate_spec(spec)
+    assert not result.ok
+    assert any("hook" in e for e in result.errors)
+
+
+def test_narrative_hook_requires_why() -> None:
+    spec = _skeleton()
+    spec["narrative"] = {"hook": {"device": "question"}, "thesis": "x"}  # hook sin 'why'
+    assert not validate_spec(spec).ok
+
+
+def test_narrative_form_meaning_is_strict() -> None:
+    spec = _skeleton()
+    nar = _narrative()
+    nar["formAsMeaning"] = [{"device": "talking-head cálido"}]  # falta 'meaning'
+    spec["narrative"] = nar
+    assert not validate_spec(spec).ok

@@ -3,14 +3,9 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://plato.dev/schema/videospec.schema.json",
   "title": "VideoSpec",
-  "description": "Spec canónico de Plató (v0.2.0). Fuente de verdad única (ADR-0001). El pipeline ENRIQUECE el spec por capas (pipe-and-filter, ADR-0003), así que solo el esqueleto es requerido y cada capa de análisis es OPCIONAL. Gate duro en FORMA (cuando una capa está, se valida estricta), suave en PRESENCIA (un spec parcial M1 valida igual).",
+  "description": "Spec canónico de Plató (v0.3.0). Fuente de verdad única (ADR-0001). El pipeline ENRIQUECE el spec por capas (pipe-and-filter, ADR-0003), así que solo el esqueleto es requerido y cada capa de análisis es OPCIONAL. Gate duro en FORMA (cuando una capa está, se valida estricta), suave en PRESENCIA (un spec parcial M1 valida igual). v0.3.0: + capa narrative (conceptual, ADR-0010).",
   "type": "object",
-  "required": [
-    "specVersion",
-    "source",
-    "meta",
-    "shots"
-  ],
+  "required": ["specVersion", "source", "meta", "shots"],
   "additionalProperties": false,
   "properties": {
     "specVersion": {
@@ -21,15 +16,7 @@
     "source": {
       "type": "object",
       "description": "Metadatos del archivo de origen (de ffprobe).",
-      "required": [
-        "id",
-        "filename",
-        "durationMs",
-        "fps",
-        "width",
-        "height",
-        "codec"
-      ],
+      "required": ["id", "filename", "durationMs", "fps", "width", "height", "codec"],
       "additionalProperties": false,
       "properties": {
         "id": {
@@ -62,10 +49,7 @@
     "meta": {
       "type": "object",
       "description": "Metadatos de la corrida. Permisivo: el analyzer puede anexar parámetros.",
-      "required": [
-        "analyzedAt",
-        "analyzerVersion"
-      ],
+      "required": ["analyzedAt", "analyzerVersion"],
       "additionalProperties": true,
       "properties": {
         "analyzedAt": {
@@ -94,12 +78,7 @@
       "items": {
         "type": "object",
         "description": "Un plano. Requerido: la identidad temporal (esqueleto). Las capas de análisis (camera, object, color, transitionIn, keyframeUri) son OPCIONALES — se anexan por enriquecimiento.",
-        "required": [
-          "id",
-          "startMs",
-          "endMs",
-          "durationMs"
-        ],
+        "required": ["id", "startMs", "endMs", "durationMs"],
         "additionalProperties": false,
         "properties": {
           "id": {
@@ -124,10 +103,7 @@
           "camera": {
             "type": "object",
             "description": "Movimiento de CÁMARA (modelo global vía RANSAC, ADR-0007). Separado del movimiento de objeto. magnitude/panFrac aproximados — confidence honesto. easing NO es campo estructurado (es direccional, vive en confidence).",
-            "required": [
-              "type",
-              "confidence"
-            ],
+            "required": ["type", "confidence"],
             "additionalProperties": false,
             "properties": {
               "type": {
@@ -166,19 +142,12 @@
           "object": {
             "type": "object",
             "description": "Movimiento de OBJETO independiente (outliers del modelo de cámara). activity es feature de estilo dependiente del mundo (talking-head alto vs collage bajo).",
-            "required": [
-              "activity"
-            ],
+            "required": ["activity"],
             "additionalProperties": false,
             "properties": {
               "activity": {
                 "type": "string",
-                "enum": [
-                  "low",
-                  "medium",
-                  "high",
-                  "unknown"
-                ]
+                "enum": ["low", "medium", "high", "unknown"]
               },
               "outlierRatio": {
                 "type": "number",
@@ -189,11 +158,7 @@
           },
           "color": {
             "type": "object",
-            "required": [
-              "temperature",
-              "saturation",
-              "contrast"
-            ],
+            "required": ["temperature", "saturation", "contrast"],
             "additionalProperties": false,
             "properties": {
               "meanLab": {
@@ -214,36 +179,22 @@
               },
               "temperature": {
                 "type": "string",
-                "enum": [
-                  "warm",
-                  "neutral",
-                  "cool"
-                ]
+                "enum": ["warm", "neutral", "cool"]
               },
               "saturation": {
                 "type": "string",
-                "enum": [
-                  "high",
-                  "medium",
-                  "low"
-                ]
+                "enum": ["high", "medium", "low"]
               },
               "contrast": {
                 "type": "string",
-                "enum": [
-                  "high",
-                  "medium",
-                  "low"
-                ]
+                "enum": ["high", "medium", "low"]
               }
             }
           },
           "transitionIn": {
             "type": "object",
             "description": "Transición de ENTRADA al shot (por-frontera, autoritativa). Etiquetada, no solo contada. 'open' = primer shot, sin transición previa.",
-            "required": [
-              "type"
-            ],
+            "required": ["type"],
             "additionalProperties": false,
             "properties": {
               "type": {
@@ -284,15 +235,7 @@
       "items": {
         "type": "object",
         "description": "Texto hablado/karaoke. positionNorm opcional. style abierto (el tratamiento varía).",
-        "required": [
-          "id",
-          "text",
-          "startMs",
-          "endMs",
-          "style",
-          "source",
-          "confidence"
-        ],
+        "required": ["id", "text", "startMs", "endMs", "style", "source", "confidence"],
         "additionalProperties": false,
         "properties": {
           "id": {
@@ -312,10 +255,7 @@
           "positionNorm": {
             "type": "object",
             "description": "Posición normalizada 0–1 (resolución-independiente).",
-            "required": [
-              "x",
-              "y"
-            ],
+            "required": ["x", "y"],
             "additionalProperties": false,
             "properties": {
               "x": {
@@ -348,12 +288,7 @@
               },
               "casing": {
                 "type": "string",
-                "enum": [
-                  "lowercase",
-                  "uppercase",
-                  "title",
-                  "mixed"
-                ]
+                "enum": ["lowercase", "uppercase", "title", "mixed"]
               },
               "animation": {
                 "type": "string"
@@ -363,12 +298,7 @@
           "source": {
             "type": "string",
             "description": "Provenance del texto. Abierto pero con valores conocidos.",
-            "examples": [
-              "ocr",
-              "vision",
-              "ocr+vision",
-              "vision+24fps_strip"
-            ]
+            "examples": ["ocr", "vision", "ocr+vision", "vision+24fps_strip"]
           },
           "confidence": {
             "type": "number",
@@ -384,16 +314,7 @@
       "items": {
         "type": "object",
         "description": "Texto gráfico (no transcripción): kickers, títulos, énfasis esparcido.",
-        "required": [
-          "id",
-          "role",
-          "text",
-          "startMs",
-          "endMs",
-          "style",
-          "source",
-          "confidence"
-        ],
+        "required": ["id", "role", "text", "startMs", "endMs", "style", "source", "confidence"],
         "additionalProperties": false,
         "properties": {
           "id": {
@@ -401,13 +322,7 @@
           },
           "role": {
             "type": "string",
-            "enum": [
-              "lower_third",
-              "title",
-              "emphasis",
-              "kicker",
-              "emphasis_scatter"
-            ]
+            "enum": ["lower_third", "title", "emphasis", "kicker", "emphasis_scatter"]
           },
           "text": {
             "type": "string"
@@ -423,10 +338,7 @@
           "positionNorm": {
             "type": "object",
             "description": "Posición normalizada 0–1 (resolución-independiente).",
-            "required": [
-              "x",
-              "y"
-            ],
+            "required": ["x", "y"],
             "additionalProperties": false,
             "properties": {
               "x": {
@@ -459,12 +371,7 @@
               },
               "casing": {
                 "type": "string",
-                "enum": [
-                  "lowercase",
-                  "uppercase",
-                  "title",
-                  "mixed"
-                ]
+                "enum": ["lowercase", "uppercase", "title", "mixed"]
               },
               "animation": {
                 "type": "string"
@@ -474,12 +381,7 @@
           "source": {
             "type": "string",
             "description": "Provenance del texto. Abierto pero con valores conocidos.",
-            "examples": [
-              "ocr",
-              "vision",
-              "ocr+vision",
-              "vision+24fps_strip"
-            ]
+            "examples": ["ocr", "vision", "ocr+vision", "vision+24fps_strip"]
           },
           "confidence": {
             "type": "number",
@@ -492,24 +394,15 @@
     },
     "audio": {
       "type": "object",
-      "required": [
-        "silences",
-        "loudnessLufs"
-      ],
+      "required": ["silences", "loudnessLufs"],
       "additionalProperties": true,
       "properties": {
         "transcriptRef": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "description": "Ruta al transcript en Caption-shape. null si no se transcribió."
         },
         "beatsMs": {
-          "type": [
-            "array",
-            "null"
-          ],
+          "type": ["array", "null"],
           "items": {
             "type": "integer",
             "minimum": 0
@@ -519,10 +412,7 @@
           "type": "array",
           "items": {
             "type": "object",
-            "required": [
-              "startMs",
-              "endMs"
-            ],
+            "required": ["startMs", "endMs"],
             "additionalProperties": false,
             "properties": {
               "startMs": {
@@ -547,19 +437,12 @@
     "style": {
       "type": "object",
       "description": "Lectura cualitativa+agregada. Permisivo (prosa y agregados que evolucionan). Solo pacing y qualitativeSummary requeridos.",
-      "required": [
-        "pacing",
-        "qualitativeSummary"
-      ],
+      "required": ["pacing", "qualitativeSummary"],
       "additionalProperties": true,
       "properties": {
         "pacing": {
           "type": "object",
-          "required": [
-            "cutsPerMin",
-            "avgShotMs",
-            "medianShotMs"
-          ],
+          "required": ["cutsPerMin", "avgShotMs", "medianShotMs"],
           "additionalProperties": true,
           "properties": {
             "cutsPerMin": {
@@ -613,11 +496,7 @@
           "type": "array",
           "items": {
             "type": "object",
-            "required": [
-              "act",
-              "fromMs",
-              "toMs"
-            ],
+            "required": ["act", "fromMs", "toMs"],
             "additionalProperties": false,
             "properties": {
               "act": {
@@ -642,9 +521,7 @@
     "confidence": {
       "type": "object",
       "description": "Confianza global + por capa (motionLayer, cutDetection, ...). Permisivo: cada capa documenta su trustworthy/flagged.",
-      "required": [
-        "overall"
-      ],
+      "required": ["overall"],
       "additionalProperties": true,
       "properties": {
         "overall": {
@@ -664,10 +541,7 @@
       "items": {
         "type": "object",
         "description": "Un límite conocido y estructurado del análisis.",
-        "required": [
-          "kind",
-          "reason"
-        ],
+        "required": ["kind", "reason"],
         "additionalProperties": false,
         "properties": {
           "kind": {
@@ -693,6 +567,183 @@
             "type": "string",
             "description": "Qué herramienta/step lo resolvería (p.ej. 'semantic_embedding')."
           }
+        }
+      }
+    },
+    "narrative": {
+      "type": "object",
+      "description": "OPCIONAL. La capa CONCEPTUAL: por qué el video engancha (la historia y la retención cognitiva/emocional, no la mecánica). La escribe la sesión de visión (ADR-0007), no el CV. Permisivo a propósito (lectura interpretativa que evoluciona); solo hook y thesis requeridos.",
+      "required": ["hook", "thesis"],
+      "additionalProperties": true,
+      "properties": {
+        "hook": {
+          "type": "object",
+          "description": "Qué captura la atención en los primeros segundos y por qué.",
+          "required": ["device", "why"],
+          "additionalProperties": false,
+          "properties": {
+            "atMs": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "text": {
+              "type": "string"
+            },
+            "device": {
+              "type": "string",
+              "description": "Mecanismo del hook (abierto, con valores conocidos).",
+              "examples": [
+                "relatable_scene",
+                "bold_claim",
+                "question",
+                "pattern_interrupt",
+                "in_media_res",
+                "visual_shock",
+                "curiosity_gap"
+              ]
+            },
+            "why": {
+              "type": "string",
+              "description": "Por qué funciona."
+            }
+          }
+        },
+        "thesis": {
+          "type": "string",
+          "description": "El mensaje central / throughline en una frase."
+        },
+        "throughline": {
+          "type": "string",
+          "description": "La pregunta o tensión que sostiene todo el video."
+        },
+        "openLoops": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "description": "Una pregunta/curiosity gap abierto que arrastra al espectador.",
+            "required": ["text"],
+            "additionalProperties": false,
+            "properties": {
+              "atMs": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "text": {
+                "type": "string"
+              },
+              "resolvedAtMs": {
+                "type": "integer",
+                "minimum": 0,
+                "description": "Cuándo se cierra el loop, si se cierra."
+              }
+            }
+          }
+        },
+        "emotionalArc": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "description": "Un tramo del arco emocional.",
+            "required": ["emotion"],
+            "additionalProperties": false,
+            "properties": {
+              "fromMs": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "toMs": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "emotion": {
+                "type": "string"
+              },
+              "note": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "formAsMeaning": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "description": "Cómo un recurso visual ARGUMENTA: forma como significado.",
+            "required": ["device", "meaning"],
+            "additionalProperties": false,
+            "properties": {
+              "device": {
+                "type": "string",
+                "description": "El tratamiento visual (p.ej. 'talking-head cálido')."
+              },
+              "meaning": {
+                "type": "string",
+                "description": "Qué significa/aporta narrativamente (p.ej. 'confesión íntima')."
+              }
+            }
+          }
+        },
+        "retentionDevices": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "description": "Un mecanismo de retención conceptual (no sensorial).",
+            "required": ["kind", "note"],
+            "additionalProperties": false,
+            "properties": {
+              "kind": {
+                "type": "string",
+                "description": "Tipo de mecanismo (abierto, con valores conocidos).",
+                "examples": [
+                  "open_loop",
+                  "pattern_interrupt",
+                  "payoff",
+                  "callback",
+                  "escalation",
+                  "relatability",
+                  "contrast_worlds",
+                  "cliffhanger"
+                ]
+              },
+              "atMs": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "note": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "payoff": {
+          "type": "object",
+          "description": "Qué se lleva el espectador: el cierre del arco.",
+          "required": ["text"],
+          "additionalProperties": false,
+          "properties": {
+            "atMs": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "text": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string",
+              "description": "Tipo de cierre (abierto, con valores conocidos).",
+              "examples": ["resolution", "twist", "lesson", "call_to_action", "catharsis"]
+            }
+          }
+        },
+        "targetEmotion": {
+          "type": "string",
+          "description": "La emoción con la que queda el espectador."
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Confianza por campo en [0,1]."
         }
       }
     }

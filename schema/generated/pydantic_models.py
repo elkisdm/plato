@@ -195,6 +195,79 @@ class KnownGap(BaseModel):
     needs: str | None = Field(None, description="Qué herramienta/step lo resolvería (p.ej. 'semantic_embedding').")
 
 
+class Hook(BaseModel):
+    """
+    Qué captura la atención en los primeros segundos y por qué.
+    """
+    model_config = ConfigDict(
+        extra='forbid',
+    )
+    atMs: int | None = Field(None, ge=0)
+    text: str | None = None
+    device: str = Field(..., description='Mecanismo del hook (abierto, con valores conocidos).', examples=['relatable_scene', 'bold_claim', 'question', 'pattern_interrupt', 'in_media_res', 'visual_shock', 'curiosity_gap'])
+    why: str = Field(..., description='Por qué funciona.')
+
+
+class OpenLoop(BaseModel):
+    """
+    Una pregunta/curiosity gap abierto que arrastra al espectador.
+    """
+    model_config = ConfigDict(
+        extra='forbid',
+    )
+    atMs: int | None = Field(None, ge=0)
+    text: str
+    resolvedAtMs: int | None = Field(None, description='Cuándo se cierra el loop, si se cierra.', ge=0)
+
+
+class EmotionalBeat(BaseModel):
+    """
+    Un tramo del arco emocional.
+    """
+    model_config = ConfigDict(
+        extra='forbid',
+    )
+    fromMs: int | None = Field(None, ge=0)
+    toMs: int | None = Field(None, ge=0)
+    emotion: str
+    note: str | None = None
+
+
+class FormMeaning(BaseModel):
+    """
+    Cómo un recurso visual ARGUMENTA: forma como significado.
+    """
+    model_config = ConfigDict(
+        extra='forbid',
+    )
+    device: str = Field(..., description="El tratamiento visual (p.ej. 'talking-head cálido').")
+    meaning: str = Field(..., description="Qué significa/aporta narrativamente (p.ej. 'confesión íntima').")
+
+
+class RetentionDevice(BaseModel):
+    """
+    Un mecanismo de retención conceptual (no sensorial).
+    """
+    model_config = ConfigDict(
+        extra='forbid',
+    )
+    kind: str = Field(..., description='Tipo de mecanismo (abierto, con valores conocidos).', examples=['open_loop', 'pattern_interrupt', 'payoff', 'callback', 'escalation', 'relatability', 'contrast_worlds', 'cliffhanger'])
+    atMs: int | None = Field(None, ge=0)
+    note: str
+
+
+class Payoff(BaseModel):
+    """
+    Qué se lleva el espectador: el cierre del arco.
+    """
+    model_config = ConfigDict(
+        extra='forbid',
+    )
+    atMs: int | None = Field(None, ge=0)
+    text: str
+    type: str | None = Field(None, description='Tipo de cierre (abierto, con valores conocidos).', examples=['resolution', 'twist', 'lesson', 'call_to_action', 'catharsis'])
+
+
 class PositionNorm(BaseModel):
     """
     Posición normalizada 0–1 (resolución-independiente).
@@ -280,6 +353,25 @@ class Confidence(BaseModel):
     notes: str | None = None
 
 
+class Narrative(BaseModel):
+    """
+    OPCIONAL. La capa CONCEPTUAL: por qué el video engancha (la historia y la retención cognitiva/emocional, no la mecánica). La escribe la sesión de visión (ADR-0007), no el CV. Permisivo a propósito (lectura interpretativa que evoluciona); solo hook y thesis requeridos.
+    """
+    model_config = ConfigDict(
+        extra='allow',
+    )
+    hook: Hook
+    thesis: str = Field(..., description='El mensaje central / throughline en una frase.')
+    throughline: str | None = Field(None, description='La pregunta o tensión que sostiene todo el video.')
+    openLoops: list[OpenLoop] | None = None
+    emotionalArc: list[EmotionalBeat] | None = None
+    formAsMeaning: list[FormMeaning] | None = None
+    retentionDevices: list[RetentionDevice] | None = None
+    payoff: Payoff | None = None
+    targetEmotion: str | None = Field(None, description='La emoción con la que queda el espectador.')
+    confidence: ConfidenceScore | None = None
+
+
 class Shot(BaseModel):
     """
     Un plano. Requerido: la identidad temporal (esqueleto). Las capas de análisis (camera, object, color, transitionIn, keyframeUri) son OPCIONALES — se anexan por enriquecimiento.
@@ -335,7 +427,7 @@ class TextOverlay(BaseModel):
 
 class VideoSpec(BaseModel):
     """
-    Spec canónico de Plató (v0.2.0). Fuente de verdad única (ADR-0001). El pipeline ENRIQUECE el spec por capas (pipe-and-filter, ADR-0003), así que solo el esqueleto es requerido y cada capa de análisis es OPCIONAL. Gate duro en FORMA (cuando una capa está, se valida estricta), suave en PRESENCIA (un spec parcial M1 valida igual).
+    Spec canónico de Plató (v0.3.0). Fuente de verdad única (ADR-0001). El pipeline ENRIQUECE el spec por capas (pipe-and-filter, ADR-0003), así que solo el esqueleto es requerido y cada capa de análisis es OPCIONAL. Gate duro en FORMA (cuando una capa está, se valida estricta), suave en PRESENCIA (un spec parcial M1 valida igual). v0.3.0: + capa narrative (conceptual, ADR-0010).
     """
     model_config = ConfigDict(
         extra='forbid',
@@ -351,3 +443,4 @@ class VideoSpec(BaseModel):
     style: Style | None = None
     confidence: Confidence | None = None
     knownGaps: list[KnownGap] | None = Field(None, description='OPCIONAL. Límites conocidos del análisis, estructurados (no en prosa). Honestidad-como-feature: un consumidor puede ramificar sobre esto. Lo que un step posterior (p.ej. embeddings) debe rellenar.')
+    narrative: Narrative | None = None

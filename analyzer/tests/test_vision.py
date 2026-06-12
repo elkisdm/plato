@@ -213,3 +213,21 @@ def test_merge_style_deep_merges_color_grade() -> None:
 def test_merge_without_style_leaves_cv_style_untouched() -> None:
     merged = merge_vision(_spec_with_cv_style(), {"captions": [_valid_caption(300, 1400)]})
     assert merged["style"]["qualitativeSummary"] == "resumen factual del CV"
+
+
+# --- merge de narrative (capa conceptual, 100% del agente) ---
+
+def test_merge_sets_narrative_from_fragment() -> None:
+    fragment = {"narrative": {"hook": {"device": "relatable_scene", "why": "baja la guardia"},
+                              "thesis": "no estamos hechos para estar ocupados"}}
+    merged = merge_vision(_skeleton(), fragment)
+    assert merged["narrative"]["thesis"].startswith("no estamos")
+    assert merged["narrative"]["hook"]["device"] == "relatable_scene"
+
+
+def test_merge_rejects_invalid_narrative_and_leaves_spec_untouched() -> None:
+    spec = _skeleton()
+    before = copy.deepcopy(spec)
+    with pytest.raises(VisionMergeError):
+        merge_vision(spec, {"narrative": {"thesis": "falta el hook"}})  # narrative sin hook
+    assert spec == before

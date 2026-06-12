@@ -1,4 +1,412 @@
-import { z } from "zod"
+import { z } from 'zod';
 
-export const videoSpecSchema = z.object({ "specVersion": z.string().regex(new RegExp("^\\d+\\.\\d+\\.\\d+$")).describe("Versión del CONTRATO (forma). Distinta de meta.analyzerVersion (iteración del pipeline). Una capa nueva-opcional es minor; un cambio de forma de un campo existente es breaking."), "source": z.object({ "id": z.string(), "filename": z.string(), "durationMs": z.number().int().gte(0), "fps": z.number().gt(0), "width": z.number().int().gt(0), "height": z.number().int().gt(0), "codec": z.string() }).strict().describe("Metadatos del archivo de origen (de ffprobe)."), "meta": z.object({ "analyzedAt": z.string().describe("Fecha o timestamp ISO-8601."), "analyzerVersion": z.string().describe("Iteración del PIPELINE (eje distinto de specVersion)."), "samplingFps": z.number().gt(0).optional(), "microWindowsFps": z.number().gt(0).optional(), "notes": z.string().optional() }).catchall(z.any()).describe("Metadatos de la corrida. Permisivo: el analyzer puede anexar parámetros."), "shots": z.array(z.object({ "id": z.string(), "startMs": z.number().int().gte(0), "endMs": z.number().int().gte(0), "durationMs": z.number().int().gte(0), "keyframeUri": z.string().describe("Ruta al keyframe representativo. Opcional (lo escribe el step de keyframes; lo necesita la capa de visión).").optional(), "camera": z.object({ "type": z.enum(["static","pan","punch_in","zoom_out","drift_subtle","handheld","unknown"]), "magnitude": z.number().gte(0).optional(), "panFrac": z.number().gte(0).lte(1).optional(), "ambiguous": z.boolean().describe("Cámara vs objeto indistinguible (el sujeto llena el cuadro). Flag estructurado, no prosa.").optional(), "confidence": z.number().gte(0).lte(1).describe("Confianza por campo en [0,1].") }).strict().describe("Movimiento de CÁMARA (modelo global vía RANSAC, ADR-0007). Separado del movimiento de objeto. magnitude/panFrac aproximados — confidence honesto. easing NO es campo estructurado (es direccional, vive en confidence).").optional(), "object": z.object({ "activity": z.enum(["low","medium","high","unknown"]), "outlierRatio": z.number().gte(0).lte(1).optional() }).strict().describe("Movimiento de OBJETO independiente (outliers del modelo de cámara). activity es feature de estilo dependiente del mundo (talking-head alto vs collage bajo).").optional(), "color": z.object({ "meanLab": z.array(z.number()).min(3).max(3).describe("Color medio en CIELAB [L, a, b].").optional(), "palette": z.array(z.string().regex(new RegExp("^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6})$"))).optional(), "temperature": z.enum(["warm","neutral","cool"]), "saturation": z.enum(["high","medium","low"]), "contrast": z.enum(["high","medium","low"]) }).strict().optional(), "transitionIn": z.object({ "type": z.enum(["open","cut","flash_cut","dissolve","wipe","whip_pan","white_flash","dissolve_or_fast_motion"]), "durationMs": z.number().int().gte(0).optional(), "confidence": z.number().gte(0).lte(1).describe("Confianza por campo en [0,1].").optional() }).strict().describe("Transición de ENTRADA al shot (por-frontera, autoritativa). Etiquetada, no solo contada. 'open' = primer shot, sin transición previa.").optional() }).strict().describe("Un plano. Requerido: la identidad temporal (esqueleto). Las capas de análisis (camera, object, color, transitionIn, keyframeUri) son OPCIONALES — se anexan por enriquecimiento.")), "transitions": z.record(z.any()).describe("OPCIONAL. Resumen agregado de transiciones (conteos, dispositivos de estilo). El dato por-frontera autoritativo vive en shots[].transitionIn.").optional(), "captions": z.array(z.object({ "id": z.string(), "text": z.string(), "startMs": z.number().int().gte(0), "endMs": z.number().int().gte(0), "positionNorm": z.object({ "x": z.number().gte(0).lte(1), "y": z.number().gte(0).lte(1) }).strict().describe("Posición normalizada 0–1 (resolución-independiente).").optional(), "style": z.object({ "fontFamilyGuess": z.string().optional(), "color": z.string().regex(new RegExp("^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6})$")).optional(), "highlightColor": z.string().regex(new RegExp("^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6})$")).optional(), "casing": z.enum(["lowercase","uppercase","title","mixed"]).optional(), "animation": z.string().optional() }).catchall(z.any()).describe("Descriptor tipográfico. Abierto a propósito (tratamiento cualitativo que evoluciona)."), "source": z.string().describe("Provenance del texto. Abierto pero con valores conocidos."), "confidence": z.number().gte(0).lte(1).describe("Confianza por campo en [0,1].") }).strict().describe("Texto hablado/karaoke. positionNorm opcional. style abierto (el tratamiento varía).")).optional(), "textOverlays": z.array(z.object({ "id": z.string(), "role": z.enum(["lower_third","title","emphasis","kicker","emphasis_scatter"]), "text": z.string(), "startMs": z.number().int().gte(0), "endMs": z.number().int().gte(0), "positionNorm": z.object({ "x": z.number().gte(0).lte(1), "y": z.number().gte(0).lte(1) }).strict().describe("Posición normalizada 0–1 (resolución-independiente).").optional(), "style": z.object({ "fontFamilyGuess": z.string().optional(), "color": z.string().regex(new RegExp("^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6})$")).optional(), "highlightColor": z.string().regex(new RegExp("^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6})$")).optional(), "casing": z.enum(["lowercase","uppercase","title","mixed"]).optional(), "animation": z.string().optional() }).catchall(z.any()).describe("Descriptor tipográfico. Abierto a propósito (tratamiento cualitativo que evoluciona)."), "source": z.string().describe("Provenance del texto. Abierto pero con valores conocidos."), "confidence": z.number().gte(0).lte(1).describe("Confianza por campo en [0,1].") }).strict().describe("Texto gráfico (no transcripción): kickers, títulos, énfasis esparcido.")).optional(), "audio": z.object({ "transcriptRef": z.union([z.string().describe("Ruta al transcript en Caption-shape. null si no se transcribió."), z.null().describe("Ruta al transcript en Caption-shape. null si no se transcribió.")]).describe("Ruta al transcript en Caption-shape. null si no se transcribió.").optional(), "beatsMs": z.union([z.array(z.number().int().gte(0)), z.null()]).optional(), "silences": z.array(z.object({ "startMs": z.number().int().gte(0), "endMs": z.number().int().gte(0) }).strict()), "loudnessLufs": z.number(), "notes": z.string().optional() }).catchall(z.any()).optional(), "style": z.object({ "pacing": z.object({ "cutsPerMin": z.number().gte(0), "avgShotMs": z.number().gte(0), "medianShotMs": z.number().gte(0), "minShotMs": z.number().gte(0).optional(), "maxShotMs": z.number().gte(0).optional(), "buckets": z.record(z.number().int().gte(0)).optional() }).catchall(z.any()), "motionVocabulary": z.record(z.any()).optional(), "typography": z.record(z.any()).optional(), "colorGrade": z.record(z.any()).optional(), "transitionVocabulary": z.any().optional(), "captionStyle": z.string().optional(), "structure": z.array(z.object({ "act": z.string(), "fromMs": z.number().int().gte(0), "toMs": z.number().int().gte(0) }).strict()).optional(), "qualitativeSummary": z.string() }).catchall(z.any()).describe("Lectura cualitativa+agregada. Permisivo (prosa y agregados que evolucionan). Solo pacing y qualitativeSummary requeridos.").optional(), "confidence": z.object({ "overall": z.number().gte(0).lte(1).describe("Confianza por campo en [0,1]."), "notes": z.string().optional() }).catchall(z.any()).describe("Confianza global + por capa (motionLayer, cutDetection, ...). Permisivo: cada capa documenta su trustworthy/flagged.").optional(), "knownGaps": z.array(z.object({ "kind": z.enum(["missed_cut","ambiguous_motion","uncertain_caption","missing_transcript","other"]).describe("Tipo de gap."), "approxMs": z.number().int().gte(0).describe("Ubicación aproximada, si aplica.").optional(), "reason": z.string(), "needs": z.string().describe("Qué herramienta/step lo resolvería (p.ej. 'semantic_embedding').").optional() }).strict().describe("Un límite conocido y estructurado del análisis.")).describe("OPCIONAL. Límites conocidos del análisis, estructurados (no en prosa). Honestidad-como-feature: un consumidor puede ramificar sobre esto. Lo que un step posterior (p.ej. embeddings) debe rellenar.").optional() }).strict().describe("Spec canónico de Plató (v0.2.0). Fuente de verdad única (ADR-0001). El pipeline ENRIQUECE el spec por capas (pipe-and-filter, ADR-0003), así que solo el esqueleto es requerido y cada capa de análisis es OPCIONAL. Gate duro en FORMA (cuando una capa está, se valida estricta), suave en PRESENCIA (un spec parcial M1 valida igual).")
-export type VideoSpec = z.infer<typeof videoSpecSchema>
+export const videoSpecSchema = z
+  .object({
+    specVersion: z
+      .string()
+      .regex(new RegExp('^\\d+\\.\\d+\\.\\d+$'))
+      .describe(
+        'Versión del CONTRATO (forma). Distinta de meta.analyzerVersion (iteración del pipeline). Una capa nueva-opcional es minor; un cambio de forma de un campo existente es breaking.',
+      ),
+    source: z
+      .object({
+        id: z.string(),
+        filename: z.string(),
+        durationMs: z.number().int().gte(0),
+        fps: z.number().gt(0),
+        width: z.number().int().gt(0),
+        height: z.number().int().gt(0),
+        codec: z.string(),
+      })
+      .strict()
+      .describe('Metadatos del archivo de origen (de ffprobe).'),
+    meta: z
+      .object({
+        analyzedAt: z.string().describe('Fecha o timestamp ISO-8601.'),
+        analyzerVersion: z
+          .string()
+          .describe('Iteración del PIPELINE (eje distinto de specVersion).'),
+        samplingFps: z.number().gt(0).optional(),
+        microWindowsFps: z.number().gt(0).optional(),
+        notes: z.string().optional(),
+      })
+      .catchall(z.any())
+      .describe('Metadatos de la corrida. Permisivo: el analyzer puede anexar parámetros.'),
+    shots: z.array(
+      z
+        .object({
+          id: z.string(),
+          startMs: z.number().int().gte(0),
+          endMs: z.number().int().gte(0),
+          durationMs: z.number().int().gte(0),
+          keyframeUri: z
+            .string()
+            .describe(
+              'Ruta al keyframe representativo. Opcional (lo escribe el step de keyframes; lo necesita la capa de visión).',
+            )
+            .optional(),
+          camera: z
+            .object({
+              type: z.enum([
+                'static',
+                'pan',
+                'punch_in',
+                'zoom_out',
+                'drift_subtle',
+                'handheld',
+                'unknown',
+              ]),
+              magnitude: z.number().gte(0).optional(),
+              panFrac: z.number().gte(0).lte(1).optional(),
+              ambiguous: z
+                .boolean()
+                .describe(
+                  'Cámara vs objeto indistinguible (el sujeto llena el cuadro). Flag estructurado, no prosa.',
+                )
+                .optional(),
+              confidence: z.number().gte(0).lte(1).describe('Confianza por campo en [0,1].'),
+            })
+            .strict()
+            .describe(
+              'Movimiento de CÁMARA (modelo global vía RANSAC, ADR-0007). Separado del movimiento de objeto. magnitude/panFrac aproximados — confidence honesto. easing NO es campo estructurado (es direccional, vive en confidence).',
+            )
+            .optional(),
+          object: z
+            .object({
+              activity: z.enum(['low', 'medium', 'high', 'unknown']),
+              outlierRatio: z.number().gte(0).lte(1).optional(),
+            })
+            .strict()
+            .describe(
+              'Movimiento de OBJETO independiente (outliers del modelo de cámara). activity es feature de estilo dependiente del mundo (talking-head alto vs collage bajo).',
+            )
+            .optional(),
+          color: z
+            .object({
+              meanLab: z
+                .array(z.number())
+                .min(3)
+                .max(3)
+                .describe('Color medio en CIELAB [L, a, b].')
+                .optional(),
+              palette: z
+                .array(z.string().regex(new RegExp('^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6})$')))
+                .optional(),
+              temperature: z.enum(['warm', 'neutral', 'cool']),
+              saturation: z.enum(['high', 'medium', 'low']),
+              contrast: z.enum(['high', 'medium', 'low']),
+            })
+            .strict()
+            .optional(),
+          transitionIn: z
+            .object({
+              type: z.enum([
+                'open',
+                'cut',
+                'flash_cut',
+                'dissolve',
+                'wipe',
+                'whip_pan',
+                'white_flash',
+                'dissolve_or_fast_motion',
+              ]),
+              durationMs: z.number().int().gte(0).optional(),
+              confidence: z
+                .number()
+                .gte(0)
+                .lte(1)
+                .describe('Confianza por campo en [0,1].')
+                .optional(),
+            })
+            .strict()
+            .describe(
+              "Transición de ENTRADA al shot (por-frontera, autoritativa). Etiquetada, no solo contada. 'open' = primer shot, sin transición previa.",
+            )
+            .optional(),
+        })
+        .strict()
+        .describe(
+          'Un plano. Requerido: la identidad temporal (esqueleto). Las capas de análisis (camera, object, color, transitionIn, keyframeUri) son OPCIONALES — se anexan por enriquecimiento.',
+        ),
+    ),
+    transitions: z
+      .record(z.any())
+      .describe(
+        'OPCIONAL. Resumen agregado de transiciones (conteos, dispositivos de estilo). El dato por-frontera autoritativo vive en shots[].transitionIn.',
+      )
+      .optional(),
+    captions: z
+      .array(
+        z
+          .object({
+            id: z.string(),
+            text: z.string(),
+            startMs: z.number().int().gte(0),
+            endMs: z.number().int().gte(0),
+            positionNorm: z
+              .object({ x: z.number().gte(0).lte(1), y: z.number().gte(0).lte(1) })
+              .strict()
+              .describe('Posición normalizada 0–1 (resolución-independiente).')
+              .optional(),
+            style: z
+              .object({
+                fontFamilyGuess: z.string().optional(),
+                color: z
+                  .string()
+                  .regex(new RegExp('^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6})$'))
+                  .optional(),
+                highlightColor: z
+                  .string()
+                  .regex(new RegExp('^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6})$'))
+                  .optional(),
+                casing: z.enum(['lowercase', 'uppercase', 'title', 'mixed']).optional(),
+                animation: z.string().optional(),
+              })
+              .catchall(z.any())
+              .describe(
+                'Descriptor tipográfico. Abierto a propósito (tratamiento cualitativo que evoluciona).',
+              ),
+            source: z
+              .string()
+              .describe('Provenance del texto. Abierto pero con valores conocidos.'),
+            confidence: z.number().gte(0).lte(1).describe('Confianza por campo en [0,1].'),
+          })
+          .strict()
+          .describe(
+            'Texto hablado/karaoke. positionNorm opcional. style abierto (el tratamiento varía).',
+          ),
+      )
+      .optional(),
+    textOverlays: z
+      .array(
+        z
+          .object({
+            id: z.string(),
+            role: z.enum(['lower_third', 'title', 'emphasis', 'kicker', 'emphasis_scatter']),
+            text: z.string(),
+            startMs: z.number().int().gte(0),
+            endMs: z.number().int().gte(0),
+            positionNorm: z
+              .object({ x: z.number().gte(0).lte(1), y: z.number().gte(0).lte(1) })
+              .strict()
+              .describe('Posición normalizada 0–1 (resolución-independiente).')
+              .optional(),
+            style: z
+              .object({
+                fontFamilyGuess: z.string().optional(),
+                color: z
+                  .string()
+                  .regex(new RegExp('^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6})$'))
+                  .optional(),
+                highlightColor: z
+                  .string()
+                  .regex(new RegExp('^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6})$'))
+                  .optional(),
+                casing: z.enum(['lowercase', 'uppercase', 'title', 'mixed']).optional(),
+                animation: z.string().optional(),
+              })
+              .catchall(z.any())
+              .describe(
+                'Descriptor tipográfico. Abierto a propósito (tratamiento cualitativo que evoluciona).',
+              ),
+            source: z
+              .string()
+              .describe('Provenance del texto. Abierto pero con valores conocidos.'),
+            confidence: z.number().gte(0).lte(1).describe('Confianza por campo en [0,1].'),
+          })
+          .strict()
+          .describe('Texto gráfico (no transcripción): kickers, títulos, énfasis esparcido.'),
+      )
+      .optional(),
+    audio: z
+      .object({
+        transcriptRef: z
+          .union([
+            z.string().describe('Ruta al transcript en Caption-shape. null si no se transcribió.'),
+            z.null().describe('Ruta al transcript en Caption-shape. null si no se transcribió.'),
+          ])
+          .describe('Ruta al transcript en Caption-shape. null si no se transcribió.')
+          .optional(),
+        beatsMs: z.union([z.array(z.number().int().gte(0)), z.null()]).optional(),
+        silences: z.array(
+          z.object({ startMs: z.number().int().gte(0), endMs: z.number().int().gte(0) }).strict(),
+        ),
+        loudnessLufs: z.number(),
+        notes: z.string().optional(),
+      })
+      .catchall(z.any())
+      .optional(),
+    style: z
+      .object({
+        pacing: z
+          .object({
+            cutsPerMin: z.number().gte(0),
+            avgShotMs: z.number().gte(0),
+            medianShotMs: z.number().gte(0),
+            minShotMs: z.number().gte(0).optional(),
+            maxShotMs: z.number().gte(0).optional(),
+            buckets: z.record(z.number().int().gte(0)).optional(),
+          })
+          .catchall(z.any()),
+        motionVocabulary: z.record(z.any()).optional(),
+        typography: z.record(z.any()).optional(),
+        colorGrade: z.record(z.any()).optional(),
+        transitionVocabulary: z.any().optional(),
+        captionStyle: z.string().optional(),
+        structure: z
+          .array(
+            z
+              .object({
+                act: z.string(),
+                fromMs: z.number().int().gte(0),
+                toMs: z.number().int().gte(0),
+              })
+              .strict(),
+          )
+          .optional(),
+        qualitativeSummary: z.string(),
+      })
+      .catchall(z.any())
+      .describe(
+        'Lectura cualitativa+agregada. Permisivo (prosa y agregados que evolucionan). Solo pacing y qualitativeSummary requeridos.',
+      )
+      .optional(),
+    confidence: z
+      .object({
+        overall: z.number().gte(0).lte(1).describe('Confianza por campo en [0,1].'),
+        notes: z.string().optional(),
+      })
+      .catchall(z.any())
+      .describe(
+        'Confianza global + por capa (motionLayer, cutDetection, ...). Permisivo: cada capa documenta su trustworthy/flagged.',
+      )
+      .optional(),
+    knownGaps: z
+      .array(
+        z
+          .object({
+            kind: z
+              .enum([
+                'missed_cut',
+                'ambiguous_motion',
+                'uncertain_caption',
+                'missing_transcript',
+                'other',
+              ])
+              .describe('Tipo de gap.'),
+            approxMs: z
+              .number()
+              .int()
+              .gte(0)
+              .describe('Ubicación aproximada, si aplica.')
+              .optional(),
+            reason: z.string(),
+            needs: z
+              .string()
+              .describe("Qué herramienta/step lo resolvería (p.ej. 'semantic_embedding').")
+              .optional(),
+          })
+          .strict()
+          .describe('Un límite conocido y estructurado del análisis.'),
+      )
+      .describe(
+        'OPCIONAL. Límites conocidos del análisis, estructurados (no en prosa). Honestidad-como-feature: un consumidor puede ramificar sobre esto. Lo que un step posterior (p.ej. embeddings) debe rellenar.',
+      )
+      .optional(),
+    narrative: z
+      .object({
+        hook: z
+          .object({
+            atMs: z.number().int().gte(0).optional(),
+            text: z.string().optional(),
+            device: z.string().describe('Mecanismo del hook (abierto, con valores conocidos).'),
+            why: z.string().describe('Por qué funciona.'),
+          })
+          .strict()
+          .describe('Qué captura la atención en los primeros segundos y por qué.'),
+        thesis: z.string().describe('El mensaje central / throughline en una frase.'),
+        throughline: z
+          .string()
+          .describe('La pregunta o tensión que sostiene todo el video.')
+          .optional(),
+        openLoops: z
+          .array(
+            z
+              .object({
+                atMs: z.number().int().gte(0).optional(),
+                text: z.string(),
+                resolvedAtMs: z
+                  .number()
+                  .int()
+                  .gte(0)
+                  .describe('Cuándo se cierra el loop, si se cierra.')
+                  .optional(),
+              })
+              .strict()
+              .describe('Una pregunta/curiosity gap abierto que arrastra al espectador.'),
+          )
+          .optional(),
+        emotionalArc: z
+          .array(
+            z
+              .object({
+                fromMs: z.number().int().gte(0).optional(),
+                toMs: z.number().int().gte(0).optional(),
+                emotion: z.string(),
+                note: z.string().optional(),
+              })
+              .strict()
+              .describe('Un tramo del arco emocional.'),
+          )
+          .optional(),
+        formAsMeaning: z
+          .array(
+            z
+              .object({
+                device: z.string().describe("El tratamiento visual (p.ej. 'talking-head cálido')."),
+                meaning: z
+                  .string()
+                  .describe("Qué significa/aporta narrativamente (p.ej. 'confesión íntima')."),
+              })
+              .strict()
+              .describe('Cómo un recurso visual ARGUMENTA: forma como significado.'),
+          )
+          .optional(),
+        retentionDevices: z
+          .array(
+            z
+              .object({
+                kind: z.string().describe('Tipo de mecanismo (abierto, con valores conocidos).'),
+                atMs: z.number().int().gte(0).optional(),
+                note: z.string(),
+              })
+              .strict()
+              .describe('Un mecanismo de retención conceptual (no sensorial).'),
+          )
+          .optional(),
+        payoff: z
+          .object({
+            atMs: z.number().int().gte(0).optional(),
+            text: z.string(),
+            type: z
+              .string()
+              .describe('Tipo de cierre (abierto, con valores conocidos).')
+              .optional(),
+          })
+          .strict()
+          .describe('Qué se lleva el espectador: el cierre del arco.')
+          .optional(),
+        targetEmotion: z.string().describe('La emoción con la que queda el espectador.').optional(),
+        confidence: z.number().gte(0).lte(1).describe('Confianza por campo en [0,1].').optional(),
+      })
+      .catchall(z.any())
+      .describe(
+        'OPCIONAL. La capa CONCEPTUAL: por qué el video engancha (la historia y la retención cognitiva/emocional, no la mecánica). La escribe la sesión de visión (ADR-0007), no el CV. Permisivo a propósito (lectura interpretativa que evoluciona); solo hook y thesis requeridos.',
+      )
+      .optional(),
+  })
+  .strict()
+  .describe(
+    'Spec canónico de Plató (v0.3.0). Fuente de verdad única (ADR-0001). El pipeline ENRIQUECE el spec por capas (pipe-and-filter, ADR-0003), así que solo el esqueleto es requerido y cada capa de análisis es OPCIONAL. Gate duro en FORMA (cuando una capa está, se valida estricta), suave en PRESENCIA (un spec parcial M1 valida igual). v0.3.0: + capa narrative (conceptual, ADR-0010).',
+  );
+export type VideoSpec = z.infer<typeof videoSpecSchema>;

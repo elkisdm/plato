@@ -224,6 +224,11 @@ def merge_vision(spec: dict[str, Any], fragment: dict[str, Any]) -> dict[str, An
     if frag_style:
         merged["style"] = _merge_style(merged.get("style") or {}, frag_style)
 
+    # La capa conceptual es 100% del agente (no hay base del CV): se setea entera.
+    frag_narrative = fragment.get("narrative")
+    if frag_narrative:
+        merged["narrative"] = frag_narrative
+
     result = validate_spec(merged)
     if not result.ok:
         raise VisionMergeError("; ".join(result.errors))

@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://plato.dev/schema/videospec.schema.json",
   "title": "VideoSpec",
-  "description": "Spec canónico de Plató (v0.2.0). Fuente de verdad única (ADR-0001). El pipeline ENRIQUECE el spec por capas (pipe-and-filter, ADR-0003), así que solo el esqueleto es requerido y cada capa de análisis es OPCIONAL. Gate duro en FORMA (cuando una capa está, se valida estricta), suave en PRESENCIA (un spec parcial M1 valida igual).",
+  "description": "Spec canónico de Plató (v0.3.0). Fuente de verdad única (ADR-0001). El pipeline ENRIQUECE el spec por capas (pipe-and-filter, ADR-0003), así que solo el esqueleto es requerido y cada capa de análisis es OPCIONAL. Gate duro en FORMA (cuando una capa está, se valida estricta), suave en PRESENCIA (un spec parcial M1 valida igual). v0.3.0: + capa narrative (conceptual, ADR-0010).",
   "type": "object",
   "required": ["specVersion", "source", "meta", "shots"],
   "additionalProperties": false,
@@ -29,7 +29,8 @@
       "type": "array",
       "description": "OPCIONAL. Límites conocidos del análisis, estructurados (no en prosa). Honestidad-como-feature: un consumidor puede ramificar sobre esto. Lo que un step posterior (p.ej. embeddings) debe rellenar.",
       "items": { "$ref": "#/$defs/KnownGap" }
-    }
+    },
+    "narrative": { "$ref": "#/$defs/Narrative" }
   },
   "$defs": {
     "Source": {
@@ -54,7 +55,10 @@
       "additionalProperties": true,
       "properties": {
         "analyzedAt": { "type": "string", "description": "Fecha o timestamp ISO-8601." },
-        "analyzerVersion": { "type": "string", "description": "Iteración del PIPELINE (eje distinto de specVersion)." },
+        "analyzerVersion": {
+          "type": "string",
+          "description": "Iteración del PIPELINE (eje distinto de specVersion)."
+        },
         "samplingFps": { "type": "number", "exclusiveMinimum": 0 },
         "microWindowsFps": { "type": "number", "exclusiveMinimum": 0 },
         "notes": { "type": "string" }
@@ -70,7 +74,10 @@
         "startMs": { "type": "integer", "minimum": 0 },
         "endMs": { "type": "integer", "minimum": 0 },
         "durationMs": { "type": "integer", "minimum": 0 },
-        "keyframeUri": { "type": "string", "description": "Ruta al keyframe representativo. Opcional (lo escribe el step de keyframes; lo necesita la capa de visión)." },
+        "keyframeUri": {
+          "type": "string",
+          "description": "Ruta al keyframe representativo. Opcional (lo escribe el step de keyframes; lo necesita la capa de visión)."
+        },
         "camera": { "$ref": "#/$defs/Camera" },
         "object": { "$ref": "#/$defs/Object" },
         "color": { "$ref": "#/$defs/Color" },
@@ -132,7 +139,16 @@
       "properties": {
         "type": {
           "type": "string",
-          "enum": ["open", "cut", "flash_cut", "dissolve", "wipe", "whip_pan", "white_flash", "dissolve_or_fast_motion"]
+          "enum": [
+            "open",
+            "cut",
+            "flash_cut",
+            "dissolve",
+            "wipe",
+            "whip_pan",
+            "white_flash",
+            "dissolve_or_fast_motion"
+          ]
         },
         "durationMs": { "type": "integer", "minimum": 0 },
         "confidence": { "$ref": "#/$defs/ConfidenceScore" }
@@ -191,7 +207,10 @@
       "required": ["silences", "loudnessLufs"],
       "additionalProperties": true,
       "properties": {
-        "transcriptRef": { "type": ["string", "null"], "description": "Ruta al transcript en Caption-shape. null si no se transcribió." },
+        "transcriptRef": {
+          "type": ["string", "null"],
+          "description": "Ruta al transcript en Caption-shape. null si no se transcribió."
+        },
         "beatsMs": { "type": ["array", "null"], "items": { "type": "integer", "minimum": 0 } },
         "silences": {
           "type": "array",
@@ -225,7 +244,10 @@
             "medianShotMs": { "type": "number", "minimum": 0 },
             "minShotMs": { "type": "number", "minimum": 0 },
             "maxShotMs": { "type": "number", "minimum": 0 },
-            "buckets": { "type": "object", "additionalProperties": { "type": "integer", "minimum": 0 } }
+            "buckets": {
+              "type": "object",
+              "additionalProperties": { "type": "integer", "minimum": 0 }
+            }
           }
         },
         "motionVocabulary": { "type": "object", "additionalProperties": true },
@@ -268,11 +290,157 @@
         "kind": {
           "type": "string",
           "description": "Tipo de gap.",
-          "enum": ["missed_cut", "ambiguous_motion", "uncertain_caption", "missing_transcript", "other"]
+          "enum": [
+            "missed_cut",
+            "ambiguous_motion",
+            "uncertain_caption",
+            "missing_transcript",
+            "other"
+          ]
         },
-        "approxMs": { "type": "integer", "minimum": 0, "description": "Ubicación aproximada, si aplica." },
+        "approxMs": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Ubicación aproximada, si aplica."
+        },
         "reason": { "type": "string" },
-        "needs": { "type": "string", "description": "Qué herramienta/step lo resolvería (p.ej. 'semantic_embedding')." }
+        "needs": {
+          "type": "string",
+          "description": "Qué herramienta/step lo resolvería (p.ej. 'semantic_embedding')."
+        }
+      }
+    },
+    "Narrative": {
+      "type": "object",
+      "description": "OPCIONAL. La capa CONCEPTUAL: por qué el video engancha (la historia y la retención cognitiva/emocional, no la mecánica). La escribe la sesión de visión (ADR-0007), no el CV. Permisivo a propósito (lectura interpretativa que evoluciona); solo hook y thesis requeridos.",
+      "required": ["hook", "thesis"],
+      "additionalProperties": true,
+      "properties": {
+        "hook": { "$ref": "#/$defs/Hook" },
+        "thesis": {
+          "type": "string",
+          "description": "El mensaje central / throughline en una frase."
+        },
+        "throughline": {
+          "type": "string",
+          "description": "La pregunta o tensión que sostiene todo el video."
+        },
+        "openLoops": { "type": "array", "items": { "$ref": "#/$defs/OpenLoop" } },
+        "emotionalArc": { "type": "array", "items": { "$ref": "#/$defs/EmotionalBeat" } },
+        "formAsMeaning": { "type": "array", "items": { "$ref": "#/$defs/FormMeaning" } },
+        "retentionDevices": { "type": "array", "items": { "$ref": "#/$defs/RetentionDevice" } },
+        "payoff": { "$ref": "#/$defs/Payoff" },
+        "targetEmotion": {
+          "type": "string",
+          "description": "La emoción con la que queda el espectador."
+        },
+        "confidence": { "$ref": "#/$defs/ConfidenceScore" }
+      }
+    },
+    "Hook": {
+      "type": "object",
+      "description": "Qué captura la atención en los primeros segundos y por qué.",
+      "required": ["device", "why"],
+      "additionalProperties": false,
+      "properties": {
+        "atMs": { "type": "integer", "minimum": 0 },
+        "text": { "type": "string" },
+        "device": {
+          "type": "string",
+          "description": "Mecanismo del hook (abierto, con valores conocidos).",
+          "examples": [
+            "relatable_scene",
+            "bold_claim",
+            "question",
+            "pattern_interrupt",
+            "in_media_res",
+            "visual_shock",
+            "curiosity_gap"
+          ]
+        },
+        "why": { "type": "string", "description": "Por qué funciona." }
+      }
+    },
+    "OpenLoop": {
+      "type": "object",
+      "description": "Una pregunta/curiosity gap abierto que arrastra al espectador.",
+      "required": ["text"],
+      "additionalProperties": false,
+      "properties": {
+        "atMs": { "type": "integer", "minimum": 0 },
+        "text": { "type": "string" },
+        "resolvedAtMs": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Cuándo se cierra el loop, si se cierra."
+        }
+      }
+    },
+    "EmotionalBeat": {
+      "type": "object",
+      "description": "Un tramo del arco emocional.",
+      "required": ["emotion"],
+      "additionalProperties": false,
+      "properties": {
+        "fromMs": { "type": "integer", "minimum": 0 },
+        "toMs": { "type": "integer", "minimum": 0 },
+        "emotion": { "type": "string" },
+        "note": { "type": "string" }
+      }
+    },
+    "FormMeaning": {
+      "type": "object",
+      "description": "Cómo un recurso visual ARGUMENTA: forma como significado.",
+      "required": ["device", "meaning"],
+      "additionalProperties": false,
+      "properties": {
+        "device": {
+          "type": "string",
+          "description": "El tratamiento visual (p.ej. 'talking-head cálido')."
+        },
+        "meaning": {
+          "type": "string",
+          "description": "Qué significa/aporta narrativamente (p.ej. 'confesión íntima')."
+        }
+      }
+    },
+    "RetentionDevice": {
+      "type": "object",
+      "description": "Un mecanismo de retención conceptual (no sensorial).",
+      "required": ["kind", "note"],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Tipo de mecanismo (abierto, con valores conocidos).",
+          "examples": [
+            "open_loop",
+            "pattern_interrupt",
+            "payoff",
+            "callback",
+            "escalation",
+            "relatability",
+            "contrast_worlds",
+            "cliffhanger"
+          ]
+        },
+        "atMs": { "type": "integer", "minimum": 0 },
+        "note": { "type": "string" }
+      }
+    },
+    "Payoff": {
+      "type": "object",
+      "description": "Qué se lleva el espectador: el cierre del arco.",
+      "required": ["text"],
+      "additionalProperties": false,
+      "properties": {
+        "atMs": { "type": "integer", "minimum": 0 },
+        "text": { "type": "string" },
+        "type": {
+          "type": "string",
+          "description": "Tipo de cierre (abierto, con valores conocidos).",
+          "examples": ["resolution", "twist", "lesson", "call_to_action", "catharsis"]
+        }
       }
     },
     "PositionNorm": {
@@ -285,7 +453,12 @@
         "y": { "type": "number", "minimum": 0, "maximum": 1 }
       }
     },
-    "ConfidenceScore": { "type": "number", "minimum": 0, "maximum": 1, "description": "Confianza por campo en [0,1]." },
+    "ConfidenceScore": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Confianza por campo en [0,1]."
+    },
     "HexColor": { "type": "string", "pattern": "^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6})$" },
     "TextSource": {
       "type": "string",
