@@ -190,6 +190,23 @@ def merge_vision_cmd(
     typer.secho(f"✓ {dst}: {n_cap} captions, {n_ovl} textOverlays. Spec válido.", fg=typer.colors.GREEN, err=True)
 
 
+@app.command(name="probe")
+def probe_cmd(
+    video: Path = typer.Argument(..., exists=True, dir_okay=False, readable=True, help="Video a inspeccionar."),
+    video_id: Optional[str] = typer.Option(None, "--id", help="ID del video (por defecto un slug del nombre)."),
+    out: Optional[Path] = typer.Option(None, "--out", help="Escribe el bloque source JSON a esta ruta."),
+) -> None:
+    """Probe (M1): ffprobe → bloque `source` del VideoSpec. Primer filtro determinístico del CV."""
+    from plato_analyzer.probe import probe as run_probe
+
+    src = run_probe(video, video_id=video_id)
+    payload = json.dumps(src.to_dict(), ensure_ascii=False, indent=2)
+    typer.echo(payload)
+    if out is not None:
+        out.write_text(payload + "\n", encoding="utf-8")
+        typer.secho(f"→ {out}", fg=typer.colors.GREEN, err=True)
+
+
 def main() -> None:
     """Entrypoint del console_script `plato`."""
     app()
