@@ -1,0 +1,21 @@
+node_modules/
+.DS_Store
+dist/
+*.log
+.env
+.env.*
+
+# Python (analyzer)
+.venv/
+__pycache__/
+.pytest_cache/
+*.egg-info/
+.ruff_cache/
+
+# Output del pipeline: una carpeta por video (ADR-0002). Es output, no fuente.
+projects/
+
+# Media pesada y artefactos sandbox — no van en git (se obtienen aparte).
+*.mp4
+*.zip
+material/

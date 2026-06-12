@@ -1,0 +1,9 @@
+{
+  "extends": "@devground/tsconfig/base.json",
+  "compilerOptions": {
+    "rootDir": "..",
+    "noEmit": true
+  },
+  "include": ["src/**/*.ts", "../schema/generated/zod.ts"],
+  "exclude": ["node_modules"]
+}

@@ -1,0 +1,32 @@
+{
+  "name": "plato",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Plató — análisis de video a VideoSpec canónico (fundaciones)",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "packageManager": "pnpm@11.4.0",
+  "prettier": "@devground/prettier-config",
+  "dependencies": {
+    "zod": "^3.25.0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^21.0.2",
+    "@devground/agents-md": "^1.0.1",
+    "@devground/architecture-guide": "^1.0.1",
+    "@devground/commitlint-config": "^1.0.1",
+    "@devground/eslint-config": "^1.0.2",
+    "@devground/husky-config": "^1.1.0",
+    "@devground/lint-staged-config": "^1.0.1",
+    "@devground/tsconfig": "^2.0.0",
+    "eslint": "^10.4.1",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.0.7",
+    "typescript": "^6.0.3"
+  },
+  "scripts": {
+    "prepare": "husky"
+  }
+}

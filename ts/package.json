@@ -1,0 +1,20 @@
+{
+  "name": "@plato/schema",
+  "version": "0.1.0",
+  "private": true,
+  "description": "VideoSpec — schema Zod generado desde la fuente de verdad JSON Schema (ADR-0001)",
+  "type": "module",
+  "main": "src/index.ts",
+  "scripts": {
+    "codegen": "json-schema-to-zod -i ../schema/videospec.schema.json -o ../schema/generated/zod.ts -n videoSpecSchema -t VideoSpec -d 100 -zv 3",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@devground/tsconfig": "^2.0.0",
+    "json-schema-to-zod": "^2.4.1",
+    "typescript": "^5.5.0"
+  }
+}

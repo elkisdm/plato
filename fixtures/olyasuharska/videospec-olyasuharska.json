@@ -1,0 +1,1443 @@
+{
+  "specVersion": "0.2.0",
+  "source": {
+    "id": "olyasuharska-vemos-una-pelicula",
+    "filename": "Vemos_una_peli_cula__olyasuharska.mp4",
+    "durationMs": 176376,
+    "fps": 24,
+    "width": 720,
+    "height": 1280,
+    "codec": "h264"
+  },
+  "meta": {
+    "analyzedAt": "2026-06-12",
+    "analyzerVersion": "0.3.0-sandbox",
+    "samplingFps": 6,
+    "microWindowsFps": 24,
+    "notes": "Flow muestreado cada 4 frames; ventanas densas a 24fps en 2 animaciones; captions/overlays muestreados (no exhaustivos), leídos por visión.",
+    "shotDetection": "AdaptiveDetector (hard cuts) + dissolve detector (long-baseline hist + edge collapse) + flash labeler"
+  },
+  "shots": [
+    {
+      "id": "shot_001",
+      "startMs": 0,
+      "endMs": 1458,
+      "durationMs": 1458,
+      "transitionIn": {
+        "type": "open"
+      },
+      "camera": {
+        "type": "static",
+        "magnitude": 0.022,
+        "confidence": 0.79
+      },
+      "object": {
+        "activity": "low",
+        "outlierRatio": 0.21
+      }
+    },
+    {
+      "id": "shot_002",
+      "startMs": 1458,
+      "endMs": 4417,
+      "durationMs": 2958,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "static",
+        "magnitude": 0.004,
+        "confidence": 0.74
+      },
+      "object": {
+        "activity": "medium",
+        "outlierRatio": 0.26
+      }
+    },
+    {
+      "id": "shot_003",
+      "startMs": 4417,
+      "endMs": 5833,
+      "durationMs": 1417,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "punch_in",
+        "magnitude": 0.12,
+        "confidence": 0.64
+      },
+      "object": {
+        "activity": "high",
+        "outlierRatio": 0.36
+      }
+    },
+    {
+      "id": "shot_004",
+      "startMs": 5833,
+      "endMs": 7625,
+      "durationMs": 1792,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "punch_in",
+        "magnitude": 0.1,
+        "confidence": 0.44
+      },
+      "object": {
+        "activity": "high",
+        "outlierRatio": 0.56
+      }
+    },
+    {
+      "id": "shot_005",
+      "startMs": 7625,
+      "endMs": 9208,
+      "durationMs": 1583,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "drift_subtle",
+        "magnitude": 0.045,
+        "confidence": 0.9
+      },
+      "object": {
+        "activity": "low",
+        "outlierRatio": 0.02
+      }
+    },
+    {
+      "id": "shot_006",
+      "startMs": 9208,
+      "endMs": 10875,
+      "durationMs": 1667,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "zoom_out",
+        "magnitude": 0.45,
+        "confidence": 0.9
+      },
+      "object": {
+        "activity": "low",
+        "outlierRatio": 0.0
+      }
+    },
+    {
+      "id": "shot_007",
+      "startMs": 10875,
+      "endMs": 12875,
+      "durationMs": 2000,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "static",
+        "magnitude": 0.131,
+        "confidence": 0.9
+      },
+      "object": {
+        "activity": "low",
+        "outlierRatio": 0.01
+      }
+    },
+    {
+      "id": "shot_008",
+      "startMs": 12875,
+      "endMs": 14583,
+      "durationMs": 1708,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "punch_in",
+        "magnitude": 2.71,
+        "confidence": 0.75
+      },
+      "object": {
+        "activity": "medium",
+        "outlierRatio": 0.25
+      }
+    },
+    {
+      "id": "shot_009",
+      "startMs": 14583,
+      "endMs": 21458,
+      "durationMs": 6875,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "punch_in",
+        "magnitude": 0.643,
+        "confidence": 0.7
+      },
+      "object": {
+        "activity": "medium",
+        "outlierRatio": 0.3
+      }
+    },
+    {
+      "id": "shot_010",
+      "startMs": 21458,
+      "endMs": 25708,
+      "durationMs": 4250,
+      "transitionIn": {
+        "type": "dissolve"
+      },
+      "camera": {
+        "type": "static",
+        "magnitude": 0.67,
+        "confidence": 0.85
+      },
+      "object": {
+        "activity": "low",
+        "outlierRatio": 0.15
+      }
+    },
+    {
+      "id": "shot_011",
+      "startMs": 25708,
+      "endMs": 26792,
+      "durationMs": 1083,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "punch_in",
+        "magnitude": 0.353,
+        "confidence": 0.9
+      },
+      "object": {
+        "activity": "low",
+        "outlierRatio": 0.08
+      }
+    },
+    {
+      "id": "shot_012",
+      "startMs": 26792,
+      "endMs": 28542,
+      "durationMs": 1750,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "static",
+        "magnitude": 0.013,
+        "confidence": 0.76
+      },
+      "object": {
+        "activity": "medium",
+        "outlierRatio": 0.24
+      }
+    },
+    {
+      "id": "shot_013",
+      "startMs": 28542,
+      "endMs": 30583,
+      "durationMs": 2042,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "pan",
+        "magnitude": 0.067,
+        "confidence": 0.72
+      },
+      "object": {
+        "activity": "medium",
+        "outlierRatio": 0.28
+      }
+    },
+    {
+      "id": "shot_014",
+      "startMs": 30583,
+      "endMs": 34875,
+      "durationMs": 4292,
+      "transitionIn": {
+        "type": "flash_cut"
+      },
+      "camera": {
+        "type": "pan",
+        "magnitude": 0.491,
+        "confidence": 0.75
+      },
+      "object": {
+        "activity": "medium",
+        "outlierRatio": 0.25
+      }
+    },
+    {
+      "id": "shot_015",
+      "startMs": 34875,
+      "endMs": 38292,
+      "durationMs": 3417,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "punch_in",
+        "magnitude": 0.195,
+        "confidence": 0.79
+      },
+      "object": {
+        "activity": "low",
+        "outlierRatio": 0.21
+      }
+    },
+    {
+      "id": "shot_016",
+      "startMs": 38292,
+      "endMs": 38875,
+      "durationMs": 583,
+      "transitionIn": {
+        "type": "flash_cut"
+      },
+      "camera": {
+        "type": "unknown",
+        "confidence": 0.2
+      },
+      "object": {
+        "activity": "unknown"
+      }
+    },
+    {
+      "id": "shot_017",
+      "startMs": 38875,
+      "endMs": 39625,
+      "durationMs": 750,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "pan",
+        "magnitude": 0.068,
+        "confidence": 0.49
+      },
+      "object": {
+        "activity": "high",
+        "outlierRatio": 0.51
+      }
+    },
+    {
+      "id": "shot_018",
+      "startMs": 39625,
+      "endMs": 44750,
+      "durationMs": 5125,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "punch_in",
+        "magnitude": 0.432,
+        "confidence": 0.62
+      },
+      "object": {
+        "activity": "high",
+        "outlierRatio": 0.38
+      }
+    },
+    {
+      "id": "shot_019",
+      "startMs": 44750,
+      "endMs": 50333,
+      "durationMs": 5583,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "punch_in",
+        "magnitude": 0.279,
+        "confidence": 0.9
+      },
+      "object": {
+        "activity": "low",
+        "outlierRatio": 0.1
+      }
+    },
+    {
+      "id": "shot_020",
+      "startMs": 50333,
+      "endMs": 54333,
+      "durationMs": 4000,
+      "transitionIn": {
+        "type": "flash_cut"
+      },
+      "camera": {
+        "type": "zoom_out",
+        "magnitude": 0.567,
+        "confidence": 0.9
+      },
+      "object": {
+        "activity": "low",
+        "outlierRatio": 0.01
+      }
+    },
+    {
+      "id": "shot_021",
+      "startMs": 54333,
+      "endMs": 56333,
+      "durationMs": 2000,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "zoom_out",
+        "magnitude": 0.109,
+        "confidence": 0.9
+      },
+      "object": {
+        "activity": "low",
+        "outlierRatio": 0.02
+      }
+    },
+    {
+      "id": "shot_022",
+      "startMs": 56333,
+      "endMs": 57917,
+      "durationMs": 1583,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "pan",
+        "magnitude": 0.097,
+        "confidence": 0.71
+      },
+      "object": {
+        "activity": "medium",
+        "outlierRatio": 0.29
+      }
+    },
+    {
+      "id": "shot_023",
+      "startMs": 57917,
+      "endMs": 63208,
+      "durationMs": 5292,
+      "transitionIn": {
+        "type": "flash_cut"
+      },
+      "camera": {
+        "type": "punch_in",
+        "magnitude": 0.567,
+        "confidence": 0.9
+      },
+      "object": {
+        "activity": "low",
+        "outlierRatio": 0.07
+      }
+    },
+    {
+      "id": "shot_024",
+      "startMs": 63208,
+      "endMs": 65042,
+      "durationMs": 1833,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "zoom_out",
+        "magnitude": 0.803,
+        "confidence": 0.9
+      },
+      "object": {
+        "activity": "low",
+        "outlierRatio": 0.1
+      }
+    },
+    {
+      "id": "shot_025",
+      "startMs": 65042,
+      "endMs": 70667,
+      "durationMs": 5625,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "punch_in",
+        "magnitude": 0.271,
+        "confidence": 0.74
+      },
+      "object": {
+        "activity": "medium",
+        "outlierRatio": 0.26
+      }
+    },
+    {
+      "id": "shot_026",
+      "startMs": 70667,
+      "endMs": 71917,
+      "durationMs": 1250,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "drift_subtle",
+        "magnitude": 0.084,
+        "confidence": 0.52
+      },
+      "object": {
+        "activity": "high",
+        "outlierRatio": 0.48
+      }
+    },
+    {
+      "id": "shot_027",
+      "startMs": 71917,
+      "endMs": 72750,
+      "durationMs": 833,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "pan",
+        "magnitude": 0.035,
+        "confidence": 0.2
+      },
+      "object": {
+        "activity": "high",
+        "outlierRatio": 0.94
+      }
+    },
+    {
+      "id": "shot_028",
+      "startMs": 72750,
+      "endMs": 73583,
+      "durationMs": 833,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "drift_subtle",
+        "magnitude": 0.048,
+        "confidence": 0.36
+      },
+      "object": {
+        "activity": "high",
+        "outlierRatio": 0.64
+      }
+    },
+    {
+      "id": "shot_029",
+      "startMs": 73583,
+      "endMs": 76167,
+      "durationMs": 2583,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "pan",
+        "magnitude": 0.099,
+        "confidence": 0.36
+      },
+      "object": {
+        "activity": "high",
+        "outlierRatio": 0.64
+      }
+    },
+    {
+      "id": "shot_030",
+      "startMs": 76167,
+      "endMs": 78208,
+      "durationMs": 2042,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "zoom_out",
+        "magnitude": 0.334,
+        "confidence": 0.73
+      },
+      "object": {
+        "activity": "medium",
+        "outlierRatio": 0.27
+      }
+    },
+    {
+      "id": "shot_031",
+      "startMs": 78208,
+      "endMs": 79375,
+      "durationMs": 1167,
+      "transitionIn": {
+        "type": "flash_cut"
+      },
+      "camera": {
+        "type": "pan",
+        "magnitude": 0.001,
+        "confidence": 0.4
+      },
+      "object": {
+        "activity": "high",
+        "outlierRatio": 0.6
+      }
+    },
+    {
+      "id": "shot_032",
+      "startMs": 79375,
+      "endMs": 80875,
+      "durationMs": 1500,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "punch_in",
+        "magnitude": 0.965,
+        "confidence": 0.9
+      },
+      "object": {
+        "activity": "low",
+        "outlierRatio": 0.1
+      }
+    },
+    {
+      "id": "shot_033",
+      "startMs": 80875,
+      "endMs": 82208,
+      "durationMs": 1333,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "pan",
+        "magnitude": 0.001,
+        "confidence": 0.9
+      },
+      "object": {
+        "activity": "low",
+        "outlierRatio": 0.09
+      }
+    },
+    {
+      "id": "shot_034",
+      "startMs": 82208,
+      "endMs": 83875,
+      "durationMs": 1667,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "zoom_out",
+        "magnitude": 0.452,
+        "confidence": 0.9
+      },
+      "object": {
+        "activity": "low",
+        "outlierRatio": 0.06
+      }
+    },
+    {
+      "id": "shot_035",
+      "startMs": 83875,
+      "endMs": 86833,
+      "durationMs": 2958,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "punch_in",
+        "magnitude": 4.617,
+        "confidence": 0.72
+      },
+      "object": {
+        "activity": "medium",
+        "outlierRatio": 0.28
+      }
+    },
+    {
+      "id": "shot_036",
+      "startMs": 86833,
+      "endMs": 89250,
+      "durationMs": 2417,
+      "transitionIn": {
+        "type": "flash_cut"
+      },
+      "camera": {
+        "type": "punch_in",
+        "magnitude": 0.515,
+        "confidence": 0.52
+      },
+      "object": {
+        "activity": "high",
+        "outlierRatio": 0.48
+      }
+    },
+    {
+      "id": "shot_037",
+      "startMs": 89250,
+      "endMs": 90167,
+      "durationMs": 917,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "pan",
+        "magnitude": 1.11,
+        "confidence": 0.63
+      },
+      "object": {
+        "activity": "high",
+        "outlierRatio": 0.37
+      }
+    },
+    {
+      "id": "shot_038",
+      "startMs": 90167,
+      "endMs": 95500,
+      "durationMs": 5333,
+      "transitionIn": {
+        "type": "dissolve"
+      },
+      "camera": {
+        "type": "punch_in",
+        "magnitude": 0.295,
+        "confidence": 0.69
+      },
+      "object": {
+        "activity": "medium",
+        "outlierRatio": 0.31
+      }
+    },
+    {
+      "id": "shot_039",
+      "startMs": 95500,
+      "endMs": 98625,
+      "durationMs": 3125,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "zoom_out",
+        "magnitude": 0.622,
+        "confidence": 0.73
+      },
+      "object": {
+        "activity": "medium",
+        "outlierRatio": 0.27
+      }
+    },
+    {
+      "id": "shot_040",
+      "startMs": 98625,
+      "endMs": 101292,
+      "durationMs": 2667,
+      "transitionIn": {
+        "type": "flash_cut"
+      },
+      "camera": {
+        "type": "zoom_out",
+        "magnitude": 0.216,
+        "confidence": 0.62
+      },
+      "object": {
+        "activity": "high",
+        "outlierRatio": 0.38
+      }
+    },
+    {
+      "id": "shot_041",
+      "startMs": 101292,
+      "endMs": 104042,
+      "durationMs": 2750,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "static",
+        "magnitude": 0.091,
+        "confidence": 0.9
+      },
+      "object": {
+        "activity": "low",
+        "outlierRatio": 0.01
+      }
+    },
+    {
+      "id": "shot_042",
+      "startMs": 104042,
+      "endMs": 108958,
+      "durationMs": 4917,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "static",
+        "magnitude": 0.828,
+        "confidence": 0.86
+      },
+      "object": {
+        "activity": "low",
+        "outlierRatio": 0.14
+      }
+    },
+    {
+      "id": "shot_043",
+      "startMs": 108958,
+      "endMs": 109875,
+      "durationMs": 917,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "pan",
+        "magnitude": 0.079,
+        "confidence": 0.9
+      },
+      "object": {
+        "activity": "low",
+        "outlierRatio": 0.06
+      }
+    },
+    {
+      "id": "shot_044",
+      "startMs": 109875,
+      "endMs": 111250,
+      "durationMs": 1375,
+      "transitionIn": {
+        "type": "flash_cut"
+      },
+      "camera": {
+        "type": "zoom_out",
+        "magnitude": 0.515,
+        "confidence": 0.27
+      },
+      "object": {
+        "activity": "high",
+        "outlierRatio": 0.73
+      }
+    },
+    {
+      "id": "shot_045",
+      "startMs": 111250,
+      "endMs": 114083,
+      "durationMs": 2833,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "drift_subtle",
+        "magnitude": 0.03,
+        "confidence": 0.9
+      },
+      "object": {
+        "activity": "low",
+        "outlierRatio": 0.05
+      }
+    },
+    {
+      "id": "shot_046",
+      "startMs": 114083,
+      "endMs": 115000,
+      "durationMs": 917,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "punch_in",
+        "magnitude": 0.991,
+        "confidence": 0.86
+      },
+      "object": {
+        "activity": "low",
+        "outlierRatio": 0.14
+      }
+    },
+    {
+      "id": "shot_047",
+      "startMs": 115000,
+      "endMs": 115667,
+      "durationMs": 667,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "static",
+        "magnitude": 0.01,
+        "confidence": 0.9
+      },
+      "object": {
+        "activity": "low",
+        "outlierRatio": 0.03
+      }
+    },
+    {
+      "id": "shot_048",
+      "startMs": 115667,
+      "endMs": 121000,
+      "durationMs": 5333,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "zoom_out",
+        "magnitude": 0.141,
+        "confidence": 0.74
+      },
+      "object": {
+        "activity": "medium",
+        "outlierRatio": 0.26
+      }
+    },
+    {
+      "id": "shot_049",
+      "startMs": 121000,
+      "endMs": 122583,
+      "durationMs": 1583,
+      "transitionIn": {
+        "type": "flash_cut"
+      },
+      "camera": {
+        "type": "punch_in",
+        "magnitude": 0.311,
+        "confidence": 0.76
+      },
+      "object": {
+        "activity": "medium",
+        "outlierRatio": 0.24
+      }
+    },
+    {
+      "id": "shot_050",
+      "startMs": 122583,
+      "endMs": 124583,
+      "durationMs": 2000,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "punch_in",
+        "magnitude": 2.401,
+        "confidence": 0.87
+      },
+      "object": {
+        "activity": "low",
+        "outlierRatio": 0.13
+      }
+    },
+    {
+      "id": "shot_051",
+      "startMs": 124583,
+      "endMs": 127750,
+      "durationMs": 3167,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "zoom_out",
+        "magnitude": 0.953,
+        "confidence": 0.63
+      },
+      "object": {
+        "activity": "high",
+        "outlierRatio": 0.37
+      }
+    },
+    {
+      "id": "shot_052",
+      "startMs": 127750,
+      "endMs": 129292,
+      "durationMs": 1542,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "zoom_out",
+        "magnitude": 0.629,
+        "confidence": 0.69
+      },
+      "object": {
+        "activity": "medium",
+        "outlierRatio": 0.31
+      }
+    },
+    {
+      "id": "shot_053",
+      "startMs": 129292,
+      "endMs": 133708,
+      "durationMs": 4417,
+      "transitionIn": {
+        "type": "flash_cut"
+      },
+      "camera": {
+        "type": "punch_in",
+        "magnitude": 1.052,
+        "confidence": 0.56
+      },
+      "object": {
+        "activity": "high",
+        "outlierRatio": 0.44
+      }
+    },
+    {
+      "id": "shot_054",
+      "startMs": 133708,
+      "endMs": 138250,
+      "durationMs": 4542,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "pan",
+        "magnitude": 0.078,
+        "confidence": 0.55
+      },
+      "object": {
+        "activity": "high",
+        "outlierRatio": 0.45
+      }
+    },
+    {
+      "id": "shot_055",
+      "startMs": 138250,
+      "endMs": 141375,
+      "durationMs": 3125,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "punch_in",
+        "magnitude": 0.249,
+        "confidence": 0.64
+      },
+      "object": {
+        "activity": "high",
+        "outlierRatio": 0.36
+      }
+    },
+    {
+      "id": "shot_056",
+      "startMs": 141375,
+      "endMs": 143667,
+      "durationMs": 2292,
+      "transitionIn": {
+        "type": "flash_cut"
+      },
+      "camera": {
+        "type": "static",
+        "magnitude": 0.025,
+        "confidence": 0.59
+      },
+      "object": {
+        "activity": "high",
+        "outlierRatio": 0.41
+      }
+    },
+    {
+      "id": "shot_057",
+      "startMs": 143667,
+      "endMs": 145042,
+      "durationMs": 1375,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "pan",
+        "magnitude": 0.288,
+        "confidence": 0.9
+      },
+      "object": {
+        "activity": "low",
+        "outlierRatio": 0.03
+      }
+    },
+    {
+      "id": "shot_058",
+      "startMs": 145042,
+      "endMs": 151417,
+      "durationMs": 6375,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "static",
+        "magnitude": 0.348,
+        "confidence": 0.9
+      },
+      "object": {
+        "activity": "low",
+        "outlierRatio": 0.07
+      }
+    },
+    {
+      "id": "shot_059",
+      "startMs": 151417,
+      "endMs": 152750,
+      "durationMs": 1333,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "pan",
+        "magnitude": 2.454,
+        "confidence": 0.9
+      },
+      "object": {
+        "activity": "low",
+        "outlierRatio": 0.0
+      }
+    },
+    {
+      "id": "shot_060",
+      "startMs": 152750,
+      "endMs": 153083,
+      "durationMs": 333,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "pan",
+        "magnitude": 0.0,
+        "confidence": 0.86
+      },
+      "object": {
+        "activity": "low",
+        "outlierRatio": 0.14
+      }
+    },
+    {
+      "id": "shot_061",
+      "startMs": 153083,
+      "endMs": 156917,
+      "durationMs": 3833,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "pan",
+        "magnitude": 0.741,
+        "confidence": 0.9
+      },
+      "object": {
+        "activity": "low",
+        "outlierRatio": 0.0
+      }
+    },
+    {
+      "id": "shot_062",
+      "startMs": 156917,
+      "endMs": 159625,
+      "durationMs": 2708,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "zoom_out",
+        "magnitude": 0.674,
+        "confidence": 0.9
+      },
+      "object": {
+        "activity": "low",
+        "outlierRatio": 0.0
+      }
+    },
+    {
+      "id": "shot_063",
+      "startMs": 159625,
+      "endMs": 163792,
+      "durationMs": 4167,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "punch_in",
+        "magnitude": 0.194,
+        "confidence": 0.7
+      },
+      "object": {
+        "activity": "medium",
+        "outlierRatio": 0.3
+      }
+    },
+    {
+      "id": "shot_064",
+      "startMs": 163792,
+      "endMs": 166875,
+      "durationMs": 3083,
+      "transitionIn": {
+        "type": "flash_cut"
+      },
+      "camera": {
+        "type": "zoom_out",
+        "magnitude": 0.514,
+        "confidence": 0.9
+      },
+      "object": {
+        "activity": "low",
+        "outlierRatio": 0.1
+      }
+    },
+    {
+      "id": "shot_065",
+      "startMs": 166875,
+      "endMs": 176333,
+      "durationMs": 9458,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "punch_in",
+        "magnitude": 1.235,
+        "confidence": 0.84
+      },
+      "object": {
+        "activity": "low",
+        "outlierRatio": 0.16
+      }
+    }
+  ],
+  "transitions": {
+    "counts": {
+      "cut": 50,
+      "dissolve": 2,
+      "flash_cut": 12
+    },
+    "flashCutDevice": "escena A -> 1-2 frames blanco (lum~252) -> escena B; firma recurrente (12x)",
+    "dissolvesRecovered": "transiciones suaves que el detector consecutivo perdía (p.ej. monstruo->talking head ~21.5s)"
+  },
+  "captions": [
+    {
+      "id": "cap_001",
+      "text": "¿vamos a ver una",
+      "startMs": 300,
+      "endMs": 1400,
+      "positionNorm": {
+        "x": 0.62,
+        "y": 0.32
+      },
+      "style": {
+        "fontFamilyGuess": "rounded-sans",
+        "color": "#FFFFFF",
+        "casing": "lowercase",
+        "animation": "fade_in_word"
+      },
+      "source": "vision",
+      "confidence": 0.85
+    },
+    {
+      "id": "cap_002",
+      "text": "no estamos ocupados",
+      "startMs": 84500,
+      "endMs": 85400,
+      "positionNorm": {
+        "x": 0.4,
+        "y": 0.62
+      },
+      "style": {
+        "fontFamilyGuess": "rounded-sans",
+        "color": "#FFF6E0",
+        "highlightColor": "#E8B84B",
+        "casing": "lowercase",
+        "animation": "word_by_word_fade_glow",
+        "wordFadeMs": 80,
+        "pageSize": "2-3 palabras"
+      },
+      "source": "vision+24fps_strip",
+      "confidence": 0.9
+    },
+    {
+      "id": "cap_003",
+      "text": "era su mecanismo",
+      "startMs": 56300,
+      "endMs": 57900,
+      "positionNorm": {
+        "x": 0.35,
+        "y": 0.62
+      },
+      "style": {
+        "highlightColor": "#E8B84B",
+        "animation": "word_by_word_fade_glow"
+      },
+      "source": "vision",
+      "confidence": 0.8
+    },
+    {
+      "id": "cap_004",
+      "text": "aprendió a sufrir",
+      "startMs": 138200,
+      "endMs": 141300,
+      "positionNorm": {
+        "x": 0.3,
+        "y": 0.62
+      },
+      "style": {
+        "highlightColor": "#E8B84B",
+        "animation": "word_by_word_fade_glow"
+      },
+      "source": "vision",
+      "confidence": 0.8
+    }
+  ],
+  "textOverlays": [
+    {
+      "id": "ovl_001",
+      "role": "emphasis_scatter",
+      "text": "por eso cuando llega la calma",
+      "startMs": 121170,
+      "endMs": 122600,
+      "style": {
+        "system": "two_tier",
+        "connectors": "thin gray sans",
+        "emphasis": "heavy black sans",
+        "animation": "word_pop_vo_sync",
+        "wordAppearMs": 60
+      },
+      "source": "vision+24fps_strip",
+      "confidence": 0.9
+    },
+    {
+      "id": "ovl_002",
+      "role": "emphasis_scatter",
+      "text": "Tu cerebro recibe un aplauso",
+      "startMs": 121000,
+      "endMs": 122600,
+      "style": {
+        "system": "two_tier"
+      },
+      "source": "vision",
+      "confidence": 0.75
+    },
+    {
+      "id": "ovl_003",
+      "role": "kicker",
+      "text": "y en 1999 se operó",
+      "startMs": 30600,
+      "endMs": 34900,
+      "style": {
+        "emphasis": "bold black"
+      },
+      "source": "vision",
+      "confidence": 0.8
+    }
+  ],
+  "audio": {
+    "transcriptRef": null,
+    "beatsMs": null,
+    "silences": [],
+    "loudnessLufs": -14.2,
+    "notes": "Sin silencios >=0.5s a -35dB (audio continuo VO+música). Transcripción Whisper no disponible en este sandbox (descarga de pesos bloqueada); en pipeline local sí corre."
+  },
+  "style": {
+    "pacing": {
+      "shots": 65,
+      "cutsPerMin": 22.1,
+      "avgShotMs": 2713,
+      "medianShotMs": 2042,
+      "minShotMs": 333,
+      "maxShotMs": 9458
+    },
+    "motionVocabulary": {
+      "camera": {
+        "static": 9,
+        "punch_in": 20,
+        "drift_subtle": 4,
+        "zoom_out": 15,
+        "pan": 14,
+        "unknown": 2
+      },
+      "objectActivity": {
+        "low": 29,
+        "medium": 16,
+        "high": 17,
+        "unknown": 2
+      },
+      "method": "sparse LK + RANSAC similarity (global=camera, outliers=object); noise-floor thresholds",
+      "punchInEasing": "consistente ease_out (decelera al asentar) en punch_ins de alta confianza",
+      "notes": "37 'pans' de v1 -> 14 reales tras separar objeto/cámara. Motion hereda calidad del shot-detection (un corte perdido -> motion basura en ese shot)."
+    },
+    "typography": {
+      "talkingHead": {
+        "family": "rounded-sans",
+        "casing": "lowercase",
+        "color": "#FFF6E0",
+        "highlight": "#E8B84B glow"
+      },
+      "collage": {
+        "system": "two_tier",
+        "connectors": "thin light-gray sans",
+        "emphasis": "extra-bold black sans",
+        "extras": "anotaciones a mano (círculos)"
+      }
+    },
+    "colorGrade": {
+      "talkingHead": {
+        "look": "low-key cálido, fondo oscuro, piel cálida saturada",
+        "temperature": "warm",
+        "saturation": "high"
+      },
+      "collage": {
+        "look": "papel crema texturizado, imágenes B/N-sepia con sombra, halftone en archivo",
+        "temperature": "neutral",
+        "saturation": "low"
+      },
+      "macroDistribution": {
+        "warm": 15,
+        "neutral": 49
+      }
+    },
+    "transitionVocabulary": {
+      "cut": 50,
+      "dissolve": 2,
+      "flash_cut": 12
+    },
+    "captionStyle": "word-by-word append, fade ~80ms por palabra, palabra activa dorado glow #E8B84B, anteriores blanco cálido, páginas 2-3 palabras, lowercase, centro-bajo",
+    "structure": [
+      {
+        "act": "hook/sketch pareja",
+        "fromMs": 0,
+        "toMs": 28000
+      },
+      {
+        "act": "storytelling caso (archivo+collage)",
+        "fromMs": 28000,
+        "toMs": 80000
+      },
+      {
+        "act": "reflexión (cerebro/ocupación)",
+        "fromMs": 80000,
+        "toMs": 145000
+      },
+      {
+        "act": "resolución (la calma / el cambio)",
+        "fromMs": 145000,
+        "toMs": 176376
+      }
+    ],
+    "qualitativeSummary": "Reel narrativo en dos mundos visuales alternados: (A) talking-head cinematográfico low-key cálido con captions karaoke dorado-glow y (B) collage editorial sobre papel crema con recortes B/N, ilustraciones y tipografía cinética a dos niveles sincronizada a la voz. Nada está quieto: paneos/derivas Ken Burns en collage y punch-ins en talking head. Cortes duros + flashes blancos como puntuación. Ritmo mediana ~2s con ráfagas <1s en montaje de archivo y respiros >6s en momentos clave. Audio continuo (sin silencios), VO-driven, -14.2 LUFS."
+  },
+  "confidence": {
+    "overall": 0.72,
+    "notes": "Boundaries y pacing: alta (detector + diffs). Motion/easing: media (flow sobre frames muestreados; sujeto en movimiento puede inflar magnitud de zoom). Captions/overlays: muestreados, no exhaustivos. Timing fino de micro-animaciones: aproximado a ±1 frame (24fps). Sin transcript en sandbox.",
+    "motionLayer": {
+      "level": "media, con incertidumbre etiquetada",
+      "trustworthy": [
+        "split static/moving",
+        "punch-in easing (ease_out)",
+        "object-activity por mundo"
+      ],
+      "flagged": [
+        "8 shots 'ambiguous' (sujeto llena el cuadro)",
+        "shot_009 corte perdido",
+        "deriva lenta sub-ruido"
+      ]
+    },
+    "cutDetection": {
+      "level": "alta en cortes duros y flashes; media en disolvencias; con gap conocido",
+      "validated": [
+        "disolvencias recuperadas (515,2164) confirmadas a frame",
+        "flash_cuts confirmados (734)"
+      ],
+      "rejected": "signal estructural (thumbnail gris) auto-corte -> ~50% falsos positivos en este contenido (animacion intra-shot lo dispara)",
+      "knownGap": "cortes suaves entre escenas oscuras de histograma similar (p.ej. boy->mujer ~23s) siguen sin detectarse; requieren embedding semantico (CLIP), no signals de bajo nivel"
+    }
+  },
+  "knownGaps": [
+    {
+      "kind": "missed_cut",
+      "approxMs": 23000,
+      "reason": "cortes suaves entre escenas oscuras de histograma similar (p.ej. boy->mujer ~23s) siguen sin detectarse; requieren embedding semantico (CLIP), no signals de bajo nivel",
+      "needs": "semantic_embedding"
+    }
+  ]
+}

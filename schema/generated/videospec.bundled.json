@@ -1,0 +1,700 @@
+{
+  "$comment": "GENERADO desde videospec.schema.json — NO editar a mano (ADR-0001). Regenerar: make codegen",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://plato.dev/schema/videospec.schema.json",
+  "title": "VideoSpec",
+  "description": "Spec canónico de Plató (v0.2.0). Fuente de verdad única (ADR-0001). El pipeline ENRIQUECE el spec por capas (pipe-and-filter, ADR-0003), así que solo el esqueleto es requerido y cada capa de análisis es OPCIONAL. Gate duro en FORMA (cuando una capa está, se valida estricta), suave en PRESENCIA (un spec parcial M1 valida igual).",
+  "type": "object",
+  "required": [
+    "specVersion",
+    "source",
+    "meta",
+    "shots"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "specVersion": {
+      "type": "string",
+      "description": "Versión del CONTRATO (forma). Distinta de meta.analyzerVersion (iteración del pipeline). Una capa nueva-opcional es minor; un cambio de forma de un campo existente es breaking.",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "source": {
+      "type": "object",
+      "description": "Metadatos del archivo de origen (de ffprobe).",
+      "required": [
+        "id",
+        "filename",
+        "durationMs",
+        "fps",
+        "width",
+        "height",
+        "codec"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "filename": {
+          "type": "string"
+        },
+        "durationMs": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "fps": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "width": {
+          "type": "integer",
+          "exclusiveMinimum": 0
+        },
+        "height": {
+          "type": "integer",
+          "exclusiveMinimum": 0
+        },
+        "codec": {
+          "type": "string"
+        }
+      }
+    },
+    "meta": {
+      "type": "object",
+      "description": "Metadatos de la corrida. Permisivo: el analyzer puede anexar parámetros.",
+      "required": [
+        "analyzedAt",
+        "analyzerVersion"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "analyzedAt": {
+          "type": "string",
+          "description": "Fecha o timestamp ISO-8601."
+        },
+        "analyzerVersion": {
+          "type": "string",
+          "description": "Iteración del PIPELINE (eje distinto de specVersion)."
+        },
+        "samplingFps": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "microWindowsFps": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "shots": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "description": "Un plano. Requerido: la identidad temporal (esqueleto). Las capas de análisis (camera, object, color, transitionIn, keyframeUri) son OPCIONALES — se anexan por enriquecimiento.",
+        "required": [
+          "id",
+          "startMs",
+          "endMs",
+          "durationMs"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "startMs": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "endMs": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "durationMs": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "keyframeUri": {
+            "type": "string",
+            "description": "Ruta al keyframe representativo. Opcional (lo escribe el step de keyframes; lo necesita la capa de visión)."
+          },
+          "camera": {
+            "type": "object",
+            "description": "Movimiento de CÁMARA (modelo global vía RANSAC, ADR-0007). Separado del movimiento de objeto. magnitude/panFrac aproximados — confidence honesto. easing NO es campo estructurado (es direccional, vive en confidence).",
+            "required": [
+              "type",
+              "confidence"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "static",
+                  "pan",
+                  "punch_in",
+                  "zoom_out",
+                  "drift_subtle",
+                  "handheld",
+                  "unknown"
+                ]
+              },
+              "magnitude": {
+                "type": "number",
+                "minimum": 0
+              },
+              "panFrac": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "ambiguous": {
+                "type": "boolean",
+                "description": "Cámara vs objeto indistinguible (el sujeto llena el cuadro). Flag estructurado, no prosa."
+              },
+              "confidence": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1,
+                "description": "Confianza por campo en [0,1]."
+              }
+            }
+          },
+          "object": {
+            "type": "object",
+            "description": "Movimiento de OBJETO independiente (outliers del modelo de cámara). activity es feature de estilo dependiente del mundo (talking-head alto vs collage bajo).",
+            "required": [
+              "activity"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "activity": {
+                "type": "string",
+                "enum": [
+                  "low",
+                  "medium",
+                  "high",
+                  "unknown"
+                ]
+              },
+              "outlierRatio": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            }
+          },
+          "color": {
+            "type": "object",
+            "required": [
+              "temperature",
+              "saturation",
+              "contrast"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "meanLab": {
+                "type": "array",
+                "description": "Color medio en CIELAB [L, a, b].",
+                "items": {
+                  "type": "number"
+                },
+                "minItems": 3,
+                "maxItems": 3
+              },
+              "palette": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6})$"
+                }
+              },
+              "temperature": {
+                "type": "string",
+                "enum": [
+                  "warm",
+                  "neutral",
+                  "cool"
+                ]
+              },
+              "saturation": {
+                "type": "string",
+                "enum": [
+                  "high",
+                  "medium",
+                  "low"
+                ]
+              },
+              "contrast": {
+                "type": "string",
+                "enum": [
+                  "high",
+                  "medium",
+                  "low"
+                ]
+              }
+            }
+          },
+          "transitionIn": {
+            "type": "object",
+            "description": "Transición de ENTRADA al shot (por-frontera, autoritativa). Etiquetada, no solo contada. 'open' = primer shot, sin transición previa.",
+            "required": [
+              "type"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "open",
+                  "cut",
+                  "flash_cut",
+                  "dissolve",
+                  "wipe",
+                  "whip_pan",
+                  "white_flash",
+                  "dissolve_or_fast_motion"
+                ]
+              },
+              "durationMs": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "confidence": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1,
+                "description": "Confianza por campo en [0,1]."
+              }
+            }
+          }
+        }
+      }
+    },
+    "transitions": {
+      "type": "object",
+      "description": "OPCIONAL. Resumen agregado de transiciones (conteos, dispositivos de estilo). El dato por-frontera autoritativo vive en shots[].transitionIn.",
+      "additionalProperties": true
+    },
+    "captions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "description": "Texto hablado/karaoke. positionNorm opcional. style abierto (el tratamiento varía).",
+        "required": [
+          "id",
+          "text",
+          "startMs",
+          "endMs",
+          "style",
+          "source",
+          "confidence"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string"
+          },
+          "startMs": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "endMs": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "positionNorm": {
+            "type": "object",
+            "description": "Posición normalizada 0–1 (resolución-independiente).",
+            "required": [
+              "x",
+              "y"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "x": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "y": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            }
+          },
+          "style": {
+            "type": "object",
+            "description": "Descriptor tipográfico. Abierto a propósito (tratamiento cualitativo que evoluciona).",
+            "additionalProperties": true,
+            "properties": {
+              "fontFamilyGuess": {
+                "type": "string"
+              },
+              "color": {
+                "type": "string",
+                "pattern": "^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6})$"
+              },
+              "highlightColor": {
+                "type": "string",
+                "pattern": "^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6})$"
+              },
+              "casing": {
+                "type": "string",
+                "enum": [
+                  "lowercase",
+                  "uppercase",
+                  "title",
+                  "mixed"
+                ]
+              },
+              "animation": {
+                "type": "string"
+              }
+            }
+          },
+          "source": {
+            "type": "string",
+            "description": "Provenance del texto. Abierto pero con valores conocidos.",
+            "examples": [
+              "ocr",
+              "vision",
+              "ocr+vision",
+              "vision+24fps_strip"
+            ]
+          },
+          "confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Confianza por campo en [0,1]."
+          }
+        }
+      }
+    },
+    "textOverlays": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "description": "Texto gráfico (no transcripción): kickers, títulos, énfasis esparcido.",
+        "required": [
+          "id",
+          "role",
+          "text",
+          "startMs",
+          "endMs",
+          "style",
+          "source",
+          "confidence"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "lower_third",
+              "title",
+              "emphasis",
+              "kicker",
+              "emphasis_scatter"
+            ]
+          },
+          "text": {
+            "type": "string"
+          },
+          "startMs": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "endMs": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "positionNorm": {
+            "type": "object",
+            "description": "Posición normalizada 0–1 (resolución-independiente).",
+            "required": [
+              "x",
+              "y"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "x": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "y": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            }
+          },
+          "style": {
+            "type": "object",
+            "description": "Descriptor tipográfico. Abierto a propósito (tratamiento cualitativo que evoluciona).",
+            "additionalProperties": true,
+            "properties": {
+              "fontFamilyGuess": {
+                "type": "string"
+              },
+              "color": {
+                "type": "string",
+                "pattern": "^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6})$"
+              },
+              "highlightColor": {
+                "type": "string",
+                "pattern": "^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6})$"
+              },
+              "casing": {
+                "type": "string",
+                "enum": [
+                  "lowercase",
+                  "uppercase",
+                  "title",
+                  "mixed"
+                ]
+              },
+              "animation": {
+                "type": "string"
+              }
+            }
+          },
+          "source": {
+            "type": "string",
+            "description": "Provenance del texto. Abierto pero con valores conocidos.",
+            "examples": [
+              "ocr",
+              "vision",
+              "ocr+vision",
+              "vision+24fps_strip"
+            ]
+          },
+          "confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Confianza por campo en [0,1]."
+          }
+        }
+      }
+    },
+    "audio": {
+      "type": "object",
+      "required": [
+        "silences",
+        "loudnessLufs"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "transcriptRef": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Ruta al transcript en Caption-shape. null si no se transcribió."
+        },
+        "beatsMs": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "silences": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "startMs",
+              "endMs"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "startMs": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "endMs": {
+                "type": "integer",
+                "minimum": 0
+              }
+            }
+          }
+        },
+        "loudnessLufs": {
+          "type": "number"
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "style": {
+      "type": "object",
+      "description": "Lectura cualitativa+agregada. Permisivo (prosa y agregados que evolucionan). Solo pacing y qualitativeSummary requeridos.",
+      "required": [
+        "pacing",
+        "qualitativeSummary"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "pacing": {
+          "type": "object",
+          "required": [
+            "cutsPerMin",
+            "avgShotMs",
+            "medianShotMs"
+          ],
+          "additionalProperties": true,
+          "properties": {
+            "cutsPerMin": {
+              "type": "number",
+              "minimum": 0
+            },
+            "avgShotMs": {
+              "type": "number",
+              "minimum": 0
+            },
+            "medianShotMs": {
+              "type": "number",
+              "minimum": 0
+            },
+            "minShotMs": {
+              "type": "number",
+              "minimum": 0
+            },
+            "maxShotMs": {
+              "type": "number",
+              "minimum": 0
+            },
+            "buckets": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "integer",
+                "minimum": 0
+              }
+            }
+          }
+        },
+        "motionVocabulary": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "typography": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "colorGrade": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "transitionVocabulary": {
+          "additionalProperties": true
+        },
+        "captionStyle": {
+          "type": "string"
+        },
+        "structure": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "act",
+              "fromMs",
+              "toMs"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "act": {
+                "type": "string"
+              },
+              "fromMs": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "toMs": {
+                "type": "integer",
+                "minimum": 0
+              }
+            }
+          }
+        },
+        "qualitativeSummary": {
+          "type": "string"
+        }
+      }
+    },
+    "confidence": {
+      "type": "object",
+      "description": "Confianza global + por capa (motionLayer, cutDetection, ...). Permisivo: cada capa documenta su trustworthy/flagged.",
+      "required": [
+        "overall"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "overall": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Confianza por campo en [0,1]."
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "knownGaps": {
+      "type": "array",
+      "description": "OPCIONAL. Límites conocidos del análisis, estructurados (no en prosa). Honestidad-como-feature: un consumidor puede ramificar sobre esto. Lo que un step posterior (p.ej. embeddings) debe rellenar.",
+      "items": {
+        "type": "object",
+        "description": "Un límite conocido y estructurado del análisis.",
+        "required": [
+          "kind",
+          "reason"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "kind": {
+            "type": "string",
+            "description": "Tipo de gap.",
+            "enum": [
+              "missed_cut",
+              "ambiguous_motion",
+              "uncertain_caption",
+              "missing_transcript",
+              "other"
+            ]
+          },
+          "approxMs": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Ubicación aproximada, si aplica."
+          },
+          "reason": {
+            "type": "string"
+          },
+          "needs": {
+            "type": "string",
+            "description": "Qué herramienta/step lo resolvería (p.ej. 'semantic_embedding')."
+          }
+        }
+      }
+    }
+  }
+}
