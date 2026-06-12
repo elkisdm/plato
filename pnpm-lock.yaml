@@ -33,6 +33,9 @@ importers:
       '@devground/lint-staged-config':
         specifier: ^1.0.1
         version: 1.0.1(eslint@10.4.1(jiti@2.6.1))(prettier@3.8.4)
+      '@devground/prettier-config':
+        specifier: ^1.0.2
+        version: 1.0.2
       '@devground/tsconfig':
         specifier: ^2.0.0
         version: 2.0.0
@@ -178,6 +181,10 @@ packages:
     peerDependencies:
       eslint: '>=9.0.0'
       prettier: '>=3.0.0'
+
+  '@devground/prettier-config@1.0.2':
+    resolution: {integrity: sha512-XaDPAs1trCCbhlABe/JRaKc+SfxEU/3jaolXvWkleUSCWAMp+7aO471wzN9+kgrEPESlh9kQkAd3fZSjppyYmg==}
+    engines: {node: '>=20'}
 
   '@devground/tsconfig@2.0.0':
     resolution: {integrity: sha512-6djeqS05nTdbr1JT6O0Oe4GkF9lFaose0dd+YDk6nL+jWuPlN9QBMl6ufm0h94XUNdxsPVTjV/Oy5E5SmaZsSw==}
@@ -909,6 +916,8 @@ snapshots:
     dependencies:
       eslint: 10.4.1(jiti@2.6.1)
       prettier: 3.8.4
+
+  '@devground/prettier-config@1.0.2': {}
 
   '@devground/tsconfig@2.0.0': {}
 
