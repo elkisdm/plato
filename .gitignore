@@ -19,3 +19,7 @@ projects/
 *.mp4
 *.zip
 material/
+
+# Salidas de render de Remotion.
+ts/out/
+ts/.remotion/

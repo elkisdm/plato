@@ -2,8 +2,14 @@
   "extends": "@devground/tsconfig/base.json",
   "compilerOptions": {
     "rootDir": "..",
-    "noEmit": true
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "types": ["react", "react-dom", "node"],
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true
   },
-  "include": ["src/**/*.ts", "../schema/generated/zod.ts"],
+  "include": ["src/**/*.ts", "src/**/*.tsx", "../schema/generated/zod.ts"],
   "exclude": ["node_modules"]
 }
