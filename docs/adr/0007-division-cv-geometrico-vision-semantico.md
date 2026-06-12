@@ -1,7 +1,7 @@
 # ADR-0007 — CV resuelve lo geométrico/medible; la visión resuelve lo semántico
 
-- **Estado:** Propuesto
-- **Fecha:** 2026-06-12
+- **Estado:** Aceptado
+- **Fecha:** 2026-06-12 · actualizado 2026-06-12 (rama de ejecución de la visión)
 - **Decisor:** edaza
 - **Respalda (KB):** criterio general — no cubierto por la KB. Decisión basada en evidencia empírica de dos corridas sandbox sobre @olyasuharska (color v1, motion v2/RANSAC).
 
@@ -28,3 +28,27 @@ El alto leverage NO es pulir un método de CV indefinidamente. Es: (a) que el CV
 - **Positivas:** claridad de inversión — no semanas en optical flow denso; sí en cut-detection robusto (disolvencias, cortes sobre movimiento, flashes) y en window-targeting para la visión. Modelo de costo acotado: visión solo sobre ventanas.
 - **Negativas / costos:** la frontera CV/visión no es limpia en los bordes; hay que aceptar flags de ambigüedad en vez de forzar una etiqueta. La capa de motion seguirá siendo la de menor confianza por límite físico (frames muestreados).
 - **Trigger de re-evaluación:** el test mecánico de OCR + Whisper local es el juez. Si la capa de texto sale sola → producto (visión = motor automático). Si necesita un humano sistemáticamente para el "qué pasa" → es un asistente humano-en-el-loop, lo que cambia el posicionamiento del producto (no la arquitectura).
+
+## Actualización (2026-06-12) — la visión la ejecuta una sesión de Claude Code, NO la Anthropic API
+
+Se elige explícitamente la rama **"asistente humano-en-el-loop"** que el trigger anterior ya
+nombraba. La visión semántica **no** se implementa con un cliente `anthropic` (base64 +
+structured output Pydantic); la ejecuta **una sesión de Claude Code que lee los frames con la
+herramienta `Read`** y escribe un fragmento `captions`/`textOverlays`.
+
+Razones: cero costo/latencia/clave de API, cero `torch` para visión, y el agente ya interpreta
+imágenes nativamente. **No cambia la arquitectura** (pipe-and-filter sobre VideoSpec, ADR-0003):
+solo cambia *quién* ejecuta el filtro de visión.
+
+Contrato (3 piezas, el schema NO cambia — `TextSource` ya admite `"vision"`):
+1. **Analyzer → agente** — `manifest.json` + **contact sheets** (un keyframe/shot, etiquetado) +
+   **strips densas a 24fps** para micro-animación (`knownGaps` + ventanas marcadas con `--strip`),
+   renderizadas con ffmpeg + Pillow. El agente lee ~4 sheets + N strips, no cientos de frames sueltos
+   (mecanismo validado por la pasada sandbox: `files.zip`).
+2. **Agente → analyzer** — `vision.json`: fragmento `{captions[], textOverlays[]}` con `source:"vision"`.
+3. **Merge** — `merge_vision` valida cada entrada, asigna `id` determinístico, ordena por `startMs`
+   y **re-valida el spec completo** (gate duro); si falla, no toca el spec original.
+
+Consecuencia asumida: la capa semántica deja de ser headless/automatizable a escala (requiere una
+sesión). Aceptable para construir specs de alta calidad uno a uno; revisar si se necesita batch
+sin supervisión. Núcleo CLI (ADR-0004) intacto para todo lo geométrico.
