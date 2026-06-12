@@ -212,8 +212,9 @@ def analyze_cmd(
     video: Path = typer.Argument(..., exists=True, dir_okay=False, readable=True, help="Video a analizar."),
     out: Path = typer.Option(..., "--out", help="Escribe el VideoSpec CV (source+meta+shots)."),
     video_id: Optional[str] = typer.Option(None, "--id", help="ID del video (por defecto slug del nombre)."),
+    full: bool = typer.Option(False, "--full", help="Enriquece cada shot con motion+color y re-etiqueta transiciones (lento: CV por shot)."),
 ) -> None:
-    """M1: probe + shots → VideoSpec parcial (source, meta, shots). Entrada del resto del pipeline."""
+    """probe + shots → VideoSpec CV. Con --full agrega motion/color/transiciones (M2)."""
     from datetime import date
 
     from plato_analyzer.probe import probe as run_probe
@@ -225,20 +226,40 @@ def analyze_cmd(
     shots = detect_shots(video)
     typer.secho(f"shots: {len(shots)} detectados (AdaptiveDetector)", fg=typer.colors.CYAN, err=True)
 
-    spec = {
-        "specVersion": "0.2.0",
-        "source": src.to_dict(),
-        "meta": {"analyzedAt": date.today().isoformat(), "analyzerVersion": "0.1.0",
-                 "shotDetection": "AdaptiveDetector"},
-        "shots": [s.to_dict() for s in shots],
-    }
+    meta = {"analyzedAt": date.today().isoformat(), "analyzerVersion": "0.1.0", "shotDetection": "AdaptiveDetector"}
+
+    if full:
+        from plato_analyzer.color import color_for_shot
+        from plato_analyzer.motion import motion_for_shot
+        from plato_analyzer.transitions import relabel_shot_transitions
+
+        typer.secho("enriqueciendo (motion + color + transiciones)...", fg=typer.colors.CYAN, err=True)
+        shots = relabel_shot_transitions(shots, video)
+        shot_dicts = []
+        for s in shots:
+            d = s.to_dict()
+            mr = motion_for_shot(video, s.startMs, s.endMs)
+            d["camera"] = mr.camera.to_dict()
+            d["object"] = mr.object.to_dict()
+            d["color"] = color_for_shot(video, s.startMs, s.endMs).to_dict()
+            shot_dicts.append(d)
+        from collections import Counter
+        kinds = Counter(s.transitionIn for s in shots)
+        typer.secho(f"transiciones: {dict(kinds)}", fg=typer.colors.CYAN, err=True)
+        meta["shotDetection"] = "AdaptiveDetector + flash/dissolve labeler"
+        meta["motion"] = "optical-flow + RANSAC (camera vs object)"
+    else:
+        shot_dicts = [s.to_dict() for s in shots]
+
+    spec = {"specVersion": "0.2.0", "source": src.to_dict(), "meta": meta, "shots": shot_dicts}
     result = validate_spec(spec)
     if not result.ok:
         typer.secho(f"✗ spec inválido: {result.errors}", fg=typer.colors.RED, err=True)
         raise typer.Exit(code=1)
 
     out.write_text(json.dumps(spec, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    typer.secho(f"✓ {out}: spec CV válido ({len(shots)} shots). Siguiente: plato dump-frames.", fg=typer.colors.GREEN, err=True)
+    layers = "source+meta+shots+motion+color+transiciones" if full else "source+meta+shots"
+    typer.secho(f"✓ {out}: spec CV válido ({len(shots)} shots, {layers}). Siguiente: plato dump-frames.", fg=typer.colors.GREEN, err=True)
 
 
 def main() -> None:
