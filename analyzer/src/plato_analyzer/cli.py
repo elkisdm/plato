@@ -252,13 +252,24 @@ def analyze_cmd(
         shot_dicts = [s.to_dict() for s in shots]
 
     spec = {"specVersion": "0.2.0", "source": src.to_dict(), "meta": meta, "shots": shot_dicts}
+
+    if full:
+        from plato_analyzer.audio import analyze_audio
+        from plato_analyzer.style import aggregate_style
+
+        typer.secho("audio (loudness + silencios) + style...", fg=typer.colors.CYAN, err=True)
+        audio = analyze_audio(video)
+        spec["audio"] = audio.to_dict()
+        spec["style"] = aggregate_style(shot_dicts, src.durationMs)
+        typer.secho(f"audio: {audio.loudnessLufs} LUFS, {len(audio.silences)} silencios", fg=typer.colors.CYAN, err=True)
+
     result = validate_spec(spec)
     if not result.ok:
         typer.secho(f"✗ spec inválido: {result.errors}", fg=typer.colors.RED, err=True)
         raise typer.Exit(code=1)
 
     out.write_text(json.dumps(spec, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    layers = "source+meta+shots+motion+color+transiciones" if full else "source+meta+shots"
+    layers = "source+meta+shots+motion+color+transiciones+audio+style" if full else "source+meta+shots"
     typer.secho(f"✓ {out}: spec CV válido ({len(shots)} shots, {layers}). Siguiente: plato dump-frames.", fg=typer.colors.GREEN, err=True)
 
 
