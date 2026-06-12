@@ -181,11 +181,29 @@ def render_grid(
 # Merge (agente → analyzer)
 # --------------------------------------------------------------------------- #
 
-def merge_vision(spec: dict[str, Any], fragment: dict[str, Any]) -> dict[str, Any]:
-    """Injerta `captions`/`textOverlays` del fragmento en una COPIA del spec.
+def _merge_style(base: dict[str, Any], incoming: dict[str, Any]) -> dict[str, Any]:
+    """Funde el `style` semántico del agente sobre el numérico del CV.
 
-    - concatena con lo existente y ordena cada capa por `startMs`,
-    - reasigna `id` determinístico (`cap_NNN`/`ovl_NNN`) por posición → unicidad garantizada,
+    El CV aporta `pacing`/`motionVocabulary`/`transitionVocabulary`/`colorGrade.macroDistribution`;
+    el agente aporta `qualitativeSummary` rico + `typography`/`captionStyle`/`structure` y la prosa
+    de `colorGrade` (talkingHead/collage). `colorGrade` se funde en profundidad para no perder la
+    `macroDistribution` del CV; el resto reemplaza.
+    """
+    merged = dict(base)
+    for key, value in incoming.items():
+        if key == "colorGrade" and isinstance(value, dict) and isinstance(merged.get(key), dict):
+            merged[key] = {**merged[key], **value}
+        else:
+            merged[key] = value
+    return merged
+
+
+def merge_vision(spec: dict[str, Any], fragment: dict[str, Any]) -> dict[str, Any]:
+    """Injerta `captions`/`textOverlays` y, opcionalmente, `style` del fragmento en una COPIA del spec.
+
+    - captions/textOverlays: concatena con lo existente, ordena por `startMs`, reasigna `id`
+      determinístico (`cap_NNN`/`ovl_NNN`) por posición → unicidad garantizada,
+    - style: funde el bloque semántico del agente sobre el numérico del CV (ver `_merge_style`),
     - re-valida el spec completo. Si no valida, lanza `VisionMergeError` y el spec original
       queda intacto (trabajamos sobre una copia).
     """
@@ -201,6 +219,10 @@ def merge_vision(spec: dict[str, Any], fragment: dict[str, Any]) -> dict[str, An
         for i, entry in enumerate(combined, start=1):
             entry["id"] = f"{prefix}_{i:03d}"
         merged[key] = combined
+
+    frag_style = fragment.get("style")
+    if frag_style:
+        merged["style"] = _merge_style(merged.get("style") or {}, frag_style)
 
     result = validate_spec(merged)
     if not result.ok:

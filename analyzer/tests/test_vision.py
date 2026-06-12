@@ -177,3 +177,39 @@ def test_merge_rejects_invalid_entry_and_leaves_spec_untouched() -> None:
 def test_merge_empty_fragment_is_noop() -> None:
     merged = merge_vision(_skeleton(), {})
     assert "captions" not in merged or merged["captions"] == []
+
+
+# --- merge de style (capa semántica del agente sobre el numérico del CV) ---
+
+def _spec_with_cv_style() -> dict:
+    spec = _skeleton()
+    spec["style"] = {
+        "pacing": {"cutsPerMin": 21.1, "avgShotMs": 2799, "medianShotMs": 2041},
+        "colorGrade": {"macroDistribution": {"warm": 12, "neutral": 51}},
+        "qualitativeSummary": "resumen factual del CV",
+    }
+    return spec
+
+
+def test_merge_style_overlays_rich_summary_preserving_cv_pacing() -> None:
+    fragment = {"style": {
+        "qualitativeSummary": "Alterna talking-head cálido con collage de papel; mediana 2s...",
+        "typography": {"system": "two_tier"},
+    }}
+    merged = merge_vision(_spec_with_cv_style(), fragment)
+    assert merged["style"]["qualitativeSummary"].startswith("Alterna talking-head")
+    assert merged["style"]["pacing"]["cutsPerMin"] == 21.1  # numérico del CV preservado
+    assert merged["style"]["typography"] == {"system": "two_tier"}
+
+
+def test_merge_style_deep_merges_color_grade() -> None:
+    fragment = {"style": {"colorGrade": {"talkingHead": {"look": "low-key cálido"}}}}
+    merged = merge_vision(_spec_with_cv_style(), fragment)
+    cg = merged["style"]["colorGrade"]
+    assert cg["macroDistribution"] == {"warm": 12, "neutral": 51}  # CV no se pierde
+    assert cg["talkingHead"] == {"look": "low-key cálido"}  # prosa del agente se suma
+
+
+def test_merge_without_style_leaves_cv_style_untouched() -> None:
+    merged = merge_vision(_spec_with_cv_style(), {"captions": [_valid_caption(300, 1400)]})
+    assert merged["style"]["qualitativeSummary"] == "resumen factual del CV"
