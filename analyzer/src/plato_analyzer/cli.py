@@ -207,6 +207,40 @@ def probe_cmd(
         typer.secho(f"→ {out}", fg=typer.colors.GREEN, err=True)
 
 
+@app.command(name="analyze")
+def analyze_cmd(
+    video: Path = typer.Argument(..., exists=True, dir_okay=False, readable=True, help="Video a analizar."),
+    out: Path = typer.Option(..., "--out", help="Escribe el VideoSpec CV (source+meta+shots)."),
+    video_id: Optional[str] = typer.Option(None, "--id", help="ID del video (por defecto slug del nombre)."),
+) -> None:
+    """M1: probe + shots → VideoSpec parcial (source, meta, shots). Entrada del resto del pipeline."""
+    from datetime import date
+
+    from plato_analyzer.probe import probe as run_probe
+    from plato_analyzer.schema import validate_spec
+    from plato_analyzer.shots import detect_shots
+
+    src = run_probe(video, video_id=video_id)
+    typer.secho(f"probe: {src.fps}fps {src.width}×{src.height} {src.codec} · {src.durationMs/1000:.1f}s", fg=typer.colors.CYAN, err=True)
+    shots = detect_shots(video)
+    typer.secho(f"shots: {len(shots)} detectados (AdaptiveDetector)", fg=typer.colors.CYAN, err=True)
+
+    spec = {
+        "specVersion": "0.2.0",
+        "source": src.to_dict(),
+        "meta": {"analyzedAt": date.today().isoformat(), "analyzerVersion": "0.1.0",
+                 "shotDetection": "AdaptiveDetector"},
+        "shots": [s.to_dict() for s in shots],
+    }
+    result = validate_spec(spec)
+    if not result.ok:
+        typer.secho(f"✗ spec inválido: {result.errors}", fg=typer.colors.RED, err=True)
+        raise typer.Exit(code=1)
+
+    out.write_text(json.dumps(spec, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    typer.secho(f"✓ {out}: spec CV válido ({len(shots)} shots). Siguiente: plato dump-frames.", fg=typer.colors.GREEN, err=True)
+
+
 def main() -> None:
     """Entrypoint del console_script `plato`."""
     app()
