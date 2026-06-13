@@ -1,0 +1,2459 @@
+{
+  "specVersion": "0.2.0",
+  "source": {
+    "id": "vemos-una-pelicula-olyasuharska",
+    "filename": "Vemos una película @olyasuharska.mp4",
+    "durationMs": 176376,
+    "fps": 24,
+    "width": 720,
+    "height": 1280,
+    "codec": "h264"
+  },
+  "meta": {
+    "analyzedAt": "2026-06-12",
+    "analyzerVersion": "0.1.0",
+    "shotDetection": "AdaptiveDetector + flash/dissolve labeler",
+    "motion": "optical-flow + RANSAC (camera vs object)"
+  },
+  "shots": [
+    {
+      "id": "shot_001",
+      "startMs": 0,
+      "endMs": 1458,
+      "durationMs": 1458,
+      "transitionIn": {
+        "type": "open"
+      },
+      "camera": {
+        "type": "static",
+        "confidence": 0.686,
+        "magnitude": 0.0029
+      },
+      "object": {
+        "activity": "low",
+        "outlierRatio": 0.227
+      },
+      "color": {
+        "meanLab": [27.9, 5.1, 7.1],
+        "palette": ["#1C1411", "#5A4539", "#907C73"],
+        "temperature": "warm",
+        "saturation": "medium",
+        "contrast": "medium"
+      }
+    },
+    {
+      "id": "shot_002",
+      "startMs": 1458,
+      "endMs": 4417,
+      "durationMs": 2959,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "static",
+        "confidence": 0.724,
+        "magnitude": 0.0029
+      },
+      "object": {
+        "activity": "low",
+        "outlierRatio": 0.197
+      },
+      "color": {
+        "meanLab": [12.9, 3.6, -0.9],
+        "palette": ["#0E0808", "#614336", "#275E89"],
+        "temperature": "neutral",
+        "saturation": "high",
+        "contrast": "medium"
+      }
+    },
+    {
+      "id": "shot_003",
+      "startMs": 4417,
+      "endMs": 5833,
+      "durationMs": 1416,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "static",
+        "confidence": 0.683,
+        "magnitude": 0.0028
+      },
+      "object": {
+        "activity": "low",
+        "outlierRatio": 0.229
+      },
+      "color": {
+        "meanLab": [28.3, 6.1, 7.4],
+        "palette": ["#1A1310", "#644639", "#917E75"],
+        "temperature": "warm",
+        "saturation": "medium",
+        "contrast": "medium"
+      }
+    },
+    {
+      "id": "shot_004",
+      "startMs": 5833,
+      "endMs": 7625,
+      "durationMs": 1792,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "static",
+        "confidence": 0.358,
+        "magnitude": 0.0038
+      },
+      "object": {
+        "activity": "high",
+        "outlierRatio": 0.517
+      },
+      "color": {
+        "meanLab": [12.7, 3.4, -1.5],
+        "palette": ["#0E0808", "#624436", "#225A86"],
+        "temperature": "neutral",
+        "saturation": "high",
+        "contrast": "medium"
+      }
+    },
+    {
+      "id": "shot_005",
+      "startMs": 7625,
+      "endMs": 9208,
+      "durationMs": 1583,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "static",
+        "confidence": 0.955,
+        "magnitude": 0.0038
+      },
+      "object": {
+        "activity": "low",
+        "outlierRatio": 0.03
+      },
+      "color": {
+        "meanLab": [30.5, 6.8, 8.0],
+        "palette": ["#1D1511", "#654639", "#917D74"],
+        "temperature": "warm",
+        "saturation": "medium",
+        "contrast": "medium"
+      }
+    },
+    {
+      "id": "shot_006",
+      "startMs": 9208,
+      "endMs": 10000,
+      "durationMs": 792,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "static",
+        "confidence": 0.992,
+        "magnitude": 0.003
+      },
+      "object": {
+        "activity": "low",
+        "outlierRatio": 0.006
+      },
+      "color": {
+        "meanLab": [12.3, 3.4, -1.1],
+        "palette": ["#0E0808", "#624537", "#225B87"],
+        "temperature": "neutral",
+        "saturation": "high",
+        "contrast": "medium"
+      }
+    },
+    {
+      "id": "shot_007",
+      "startMs": 10000,
+      "endMs": 10875,
+      "durationMs": 875,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "static",
+        "confidence": 0.897,
+        "magnitude": 0.0021
+      },
+      "object": {
+        "activity": "low",
+        "outlierRatio": 0.071
+      },
+      "color": {
+        "meanLab": [12.5, 3.5, -1.1],
+        "palette": ["#0E0808", "#624437", "#225A87"],
+        "temperature": "neutral",
+        "saturation": "high",
+        "contrast": "medium"
+      }
+    },
+    {
+      "id": "shot_008",
+      "startMs": 10875,
+      "endMs": 12875,
+      "durationMs": 2000,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "static",
+        "confidence": 0.831,
+        "magnitude": 0.0093
+      },
+      "object": {
+        "activity": "low",
+        "outlierRatio": 0.117
+      },
+      "color": {
+        "meanLab": [15.6, 0.1, -1.4],
+        "palette": ["#131618", "#584E4C", "#929396"],
+        "temperature": "neutral",
+        "saturation": "medium",
+        "contrast": "medium"
+      }
+    },
+    {
+      "id": "shot_009",
+      "startMs": 12875,
+      "endMs": 14583,
+      "durationMs": 1708,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "punch_in",
+        "confidence": 0.63,
+        "magnitude": 0.0187
+      },
+      "object": {
+        "activity": "medium",
+        "outlierRatio": 0.271
+      },
+      "color": {
+        "meanLab": [15.6, 1.3, -0.2],
+        "palette": ["#0A0C0D", "#6E6061", "#3E3939"],
+        "temperature": "neutral",
+        "saturation": "medium",
+        "contrast": "medium"
+      }
+    },
+    {
+      "id": "shot_010",
+      "startMs": 14583,
+      "endMs": 25708,
+      "durationMs": 11125,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "punch_in",
+        "confidence": 0.535,
+        "magnitude": 0.0119
+      },
+      "object": {
+        "activity": "medium",
+        "outlierRatio": 0.351
+      },
+      "color": {
+        "meanLab": [14.1, 8.0, 5.2],
+        "palette": ["#171010", "#814338", "#C6C8C9"],
+        "temperature": "neutral",
+        "saturation": "medium",
+        "contrast": "medium"
+      }
+    },
+    {
+      "id": "shot_011",
+      "startMs": 25708,
+      "endMs": 26792,
+      "durationMs": 1084,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "static",
+        "confidence": 0.551,
+        "magnitude": 0.0098
+      },
+      "object": {
+        "activity": "medium",
+        "outlierRatio": 0.337
+      },
+      "color": {
+        "meanLab": [29.7, 0.6, 1.9],
+        "palette": ["#1D1D1F", "#79736B", "#C4BAAC"],
+        "temperature": "neutral",
+        "saturation": "low",
+        "contrast": "medium"
+      }
+    },
+    {
+      "id": "shot_012",
+      "startMs": 26792,
+      "endMs": 28542,
+      "durationMs": 1750,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "static",
+        "confidence": 0.569,
+        "magnitude": 0.0036
+      },
+      "object": {
+        "activity": "medium",
+        "outlierRatio": 0.322
+      },
+      "color": {
+        "meanLab": [73.4, 1.0, 5.4],
+        "palette": ["#D8CFC6", "#B8B2A9", "#544F4B"],
+        "temperature": "neutral",
+        "saturation": "low",
+        "contrast": "medium"
+      }
+    },
+    {
+      "id": "shot_013",
+      "startMs": 28542,
+      "endMs": 30583,
+      "durationMs": 2041,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "drift_subtle",
+        "confidence": 0.574,
+        "magnitude": 0.0119
+      },
+      "object": {
+        "activity": "medium",
+        "outlierRatio": 0.317
+      },
+      "color": {
+        "meanLab": [11.2, 2.2, 3.8],
+        "palette": ["#0E0A07", "#4B3A30", "#7E7268"],
+        "temperature": "neutral",
+        "saturation": "high",
+        "contrast": "medium"
+      }
+    },
+    {
+      "id": "shot_014",
+      "startMs": 30583,
+      "endMs": 34875,
+      "durationMs": 4292,
+      "transitionIn": {
+        "type": "flash_cut"
+      },
+      "camera": {
+        "type": "static",
+        "confidence": 0.571,
+        "magnitude": 0.008
+      },
+      "object": {
+        "activity": "medium",
+        "outlierRatio": 0.32
+      },
+      "color": {
+        "meanLab": [73.5, 0.8, 6.8],
+        "palette": ["#DBD1C4", "#BDB4A8", "#393736"],
+        "temperature": "warm",
+        "saturation": "low",
+        "contrast": "medium"
+      }
+    },
+    {
+      "id": "shot_015",
+      "startMs": 34875,
+      "endMs": 38292,
+      "durationMs": 3417,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "punch_in",
+        "confidence": 0.649,
+        "magnitude": 0.0028
+      },
+      "object": {
+        "activity": "medium",
+        "outlierRatio": 0.256
+      },
+      "color": {
+        "meanLab": [11.4, 2.2, 4.0],
+        "palette": ["#0F0B07", "#4F3B30", "#7D746A"],
+        "temperature": "neutral",
+        "saturation": "high",
+        "contrast": "medium"
+      }
+    },
+    {
+      "id": "shot_016",
+      "startMs": 38292,
+      "endMs": 38875,
+      "durationMs": 583,
+      "transitionIn": {
+        "type": "flash_cut"
+      },
+      "camera": {
+        "type": "unknown",
+        "confidence": 0.091,
+        "magnitude": 0.0131,
+        "ambiguous": true
+      },
+      "object": {
+        "activity": "high",
+        "outlierRatio": 0.638
+      },
+      "color": {
+        "meanLab": [67.8, 2.3, 5.6],
+        "palette": ["#D0C8BD", "#292627", "#774447"],
+        "temperature": "neutral",
+        "saturation": "low",
+        "contrast": "medium"
+      }
+    },
+    {
+      "id": "shot_017",
+      "startMs": 38875,
+      "endMs": 39625,
+      "durationMs": 750,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "static",
+        "confidence": 0.297,
+        "magnitude": 0.007
+      },
+      "object": {
+        "activity": "high",
+        "outlierRatio": 0.581
+      },
+      "color": {
+        "meanLab": [58.2, 0.5, 4.3],
+        "palette": ["#CAC2B7", "#28292A", "#5C5752"],
+        "temperature": "neutral",
+        "saturation": "low",
+        "contrast": "high"
+      }
+    },
+    {
+      "id": "shot_018",
+      "startMs": 39625,
+      "endMs": 44750,
+      "durationMs": 5125,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "drift_subtle",
+        "confidence": 0.668,
+        "magnitude": 0.0108
+      },
+      "object": {
+        "activity": "low",
+        "outlierRatio": 0.241
+      },
+      "color": {
+        "meanLab": [74.1, 0.9, 6.2],
+        "palette": ["#DAD1C6", "#B9B1A7", "#4C4947"],
+        "temperature": "warm",
+        "saturation": "low",
+        "contrast": "medium"
+      }
+    },
+    {
+      "id": "shot_019",
+      "startMs": 44750,
+      "endMs": 50333,
+      "durationMs": 5583,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "static",
+        "confidence": 0.69,
+        "magnitude": 0.0015
+      },
+      "object": {
+        "activity": "low",
+        "outlierRatio": 0.223
+      },
+      "color": {
+        "meanLab": [11.5, 2.3, 4.1],
+        "palette": ["#0F0B07", "#4F3C31", "#7F746A"],
+        "temperature": "neutral",
+        "saturation": "high",
+        "contrast": "medium"
+      }
+    },
+    {
+      "id": "shot_020",
+      "startMs": 50333,
+      "endMs": 54333,
+      "durationMs": 4000,
+      "transitionIn": {
+        "type": "flash_cut"
+      },
+      "camera": {
+        "type": "zoom_out",
+        "confidence": 0.835,
+        "magnitude": 0.0055
+      },
+      "object": {
+        "activity": "low",
+        "outlierRatio": 0.114
+      },
+      "color": {
+        "meanLab": [73.3, 1.5, 5.6],
+        "palette": ["#BAB2A9", "#D7CEC4", "#827972"],
+        "temperature": "neutral",
+        "saturation": "low",
+        "contrast": "low"
+      }
+    },
+    {
+      "id": "shot_021",
+      "startMs": 54333,
+      "endMs": 56333,
+      "durationMs": 2000,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "static",
+        "confidence": 0.649,
+        "magnitude": 0.0042
+      },
+      "object": {
+        "activity": "medium",
+        "outlierRatio": 0.256
+      },
+      "color": {
+        "meanLab": [68.6, 1.5, 4.1],
+        "palette": ["#B9B2A9", "#D7CEC7", "#403D3F"],
+        "temperature": "neutral",
+        "saturation": "low",
+        "contrast": "medium"
+      }
+    },
+    {
+      "id": "shot_022",
+      "startMs": 56333,
+      "endMs": 57917,
+      "durationMs": 1584,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "punch_in",
+        "confidence": 0.459,
+        "magnitude": 0.0157
+      },
+      "object": {
+        "activity": "medium",
+        "outlierRatio": 0.42
+      },
+      "color": {
+        "meanLab": [11.3, 2.0, 3.9],
+        "palette": ["#0E0A07", "#47382D", "#7D6E64"],
+        "temperature": "neutral",
+        "saturation": "high",
+        "contrast": "medium"
+      }
+    },
+    {
+      "id": "shot_023",
+      "startMs": 57917,
+      "endMs": 63208,
+      "durationMs": 5291,
+      "transitionIn": {
+        "type": "flash_cut"
+      },
+      "camera": {
+        "type": "punch_in",
+        "confidence": 0.675,
+        "magnitude": 0.003
+      },
+      "object": {
+        "activity": "low",
+        "outlierRatio": 0.235
+      },
+      "color": {
+        "meanLab": [70.2, 0.7, 5.5],
+        "palette": ["#D9D0C5", "#B8B1A6", "#313131"],
+        "temperature": "neutral",
+        "saturation": "low",
+        "contrast": "medium"
+      }
+    },
+    {
+      "id": "shot_024",
+      "startMs": 63208,
+      "endMs": 65042,
+      "durationMs": 1834,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "drift_subtle",
+        "confidence": 0.798,
+        "magnitude": 0.0153
+      },
+      "object": {
+        "activity": "low",
+        "outlierRatio": 0.141
+      },
+      "color": {
+        "meanLab": [76.9, 0.9, 6.7],
+        "palette": ["#DBD2C6", "#BEB7AC", "#5D5751"],
+        "temperature": "warm",
+        "saturation": "low",
+        "contrast": "low"
+      }
+    },
+    {
+      "id": "shot_025",
+      "startMs": 65042,
+      "endMs": 70667,
+      "durationMs": 5625,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "static",
+        "confidence": 0.641,
+        "magnitude": 0.0025
+      },
+      "object": {
+        "activity": "medium",
+        "outlierRatio": 0.262
+      },
+      "color": {
+        "meanLab": [11.2, 2.3, 4.1],
+        "palette": ["#0F0B07", "#4C382C", "#786C63"],
+        "temperature": "neutral",
+        "saturation": "high",
+        "contrast": "medium"
+      }
+    },
+    {
+      "id": "shot_026",
+      "startMs": 70667,
+      "endMs": 71917,
+      "durationMs": 1250,
+      "transitionIn": {
+        "type": "dissolve"
+      },
+      "camera": {
+        "type": "handheld",
+        "confidence": 0.136,
+        "magnitude": 0.0083
+      },
+      "object": {
+        "activity": "high",
+        "outlierRatio": 0.536
+      },
+      "color": {
+        "meanLab": [37.7, 0.8, 3.9],
+        "palette": ["#1F1F21", "#C1B4A1", "#67625D"],
+        "temperature": "neutral",
+        "saturation": "low",
+        "contrast": "high"
+      }
+    },
+    {
+      "id": "shot_027",
+      "startMs": 71917,
+      "endMs": 72750,
+      "durationMs": 833,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "unknown",
+        "confidence": 0.03,
+        "magnitude": 0.048,
+        "ambiguous": true
+      },
+      "object": {
+        "activity": "high",
+        "outlierRatio": 0.879
+      },
+      "color": {
+        "meanLab": [38.9, 0.6, 4.2],
+        "palette": ["#212122", "#6D6961", "#BBB09E"],
+        "temperature": "neutral",
+        "saturation": "low",
+        "contrast": "medium"
+      }
+    },
+    {
+      "id": "shot_028",
+      "startMs": 72750,
+      "endMs": 73583,
+      "durationMs": 833,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "static",
+        "confidence": 0.424,
+        "magnitude": 0.002
+      },
+      "object": {
+        "activity": "high",
+        "outlierRatio": 0.453
+      },
+      "color": {
+        "meanLab": [26.7, 0.4, 1.9],
+        "palette": ["#19191B", "#BEB6A5", "#645E57"],
+        "temperature": "neutral",
+        "saturation": "low",
+        "contrast": "medium"
+      }
+    },
+    {
+      "id": "shot_029",
+      "startMs": 73583,
+      "endMs": 76167,
+      "durationMs": 2584,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "unknown",
+        "confidence": 0.091,
+        "magnitude": 0.007,
+        "ambiguous": true
+      },
+      "object": {
+        "activity": "high",
+        "outlierRatio": 0.638
+      },
+      "color": {
+        "meanLab": [30.9, 0.9, 2.2],
+        "palette": ["#1D1D1F", "#645F5A", "#A59B8E"],
+        "temperature": "neutral",
+        "saturation": "low",
+        "contrast": "medium"
+      }
+    },
+    {
+      "id": "shot_030",
+      "startMs": 76167,
+      "endMs": 78208,
+      "durationMs": 2041,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "punch_in",
+        "confidence": 0.553,
+        "magnitude": 0.0088
+      },
+      "object": {
+        "activity": "medium",
+        "outlierRatio": 0.336
+      },
+      "color": {
+        "meanLab": [11.0, 2.1, 4.0],
+        "palette": ["#0E0B07", "#4D392D", "#796E66"],
+        "temperature": "neutral",
+        "saturation": "high",
+        "contrast": "medium"
+      }
+    },
+    {
+      "id": "shot_031",
+      "startMs": 78208,
+      "endMs": 79375,
+      "durationMs": 1167,
+      "transitionIn": {
+        "type": "flash_cut"
+      },
+      "camera": {
+        "type": "unknown",
+        "confidence": 0.09,
+        "magnitude": 0.0344,
+        "ambiguous": true
+      },
+      "object": {
+        "activity": "high",
+        "outlierRatio": 0.64
+      },
+      "color": {
+        "meanLab": [77.8, 0.9, 7.3],
+        "palette": ["#D9CFC2", "#BBB3A8", "#4C4644"],
+        "temperature": "warm",
+        "saturation": "low",
+        "contrast": "low"
+      }
+    },
+    {
+      "id": "shot_032",
+      "startMs": 79375,
+      "endMs": 80875,
+      "durationMs": 1500,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "drift_subtle",
+        "confidence": 0.649,
+        "magnitude": 0.0197
+      },
+      "object": {
+        "activity": "medium",
+        "outlierRatio": 0.256
+      },
+      "color": {
+        "meanLab": [59.6, 1.2, 5.4],
+        "palette": ["#C1B8AC", "#2F2D2D", "#7C736B"],
+        "temperature": "neutral",
+        "saturation": "low",
+        "contrast": "medium"
+      }
+    },
+    {
+      "id": "shot_033",
+      "startMs": 80875,
+      "endMs": 82208,
+      "durationMs": 1333,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "drift_subtle",
+        "confidence": 0.635,
+        "magnitude": 0.0219
+      },
+      "object": {
+        "activity": "medium",
+        "outlierRatio": 0.267
+      },
+      "color": {
+        "meanLab": [63.4, 1.1, 6.0],
+        "palette": ["#C1B8AC", "#3C3938", "#78716A"],
+        "temperature": "neutral",
+        "saturation": "low",
+        "contrast": "medium"
+      }
+    },
+    {
+      "id": "shot_034",
+      "startMs": 82208,
+      "endMs": 83875,
+      "durationMs": 1667,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "zoom_out",
+        "confidence": 0.665,
+        "magnitude": 0.025
+      },
+      "object": {
+        "activity": "low",
+        "outlierRatio": 0.243
+      },
+      "color": {
+        "meanLab": [61.2, 1.1, 5.6],
+        "palette": ["#C2BAAD", "#2D2B2B", "#6F6862"],
+        "temperature": "neutral",
+        "saturation": "low",
+        "contrast": "medium"
+      }
+    },
+    {
+      "id": "shot_035",
+      "startMs": 83875,
+      "endMs": 86833,
+      "durationMs": 2958,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "drift_subtle",
+        "confidence": 0.563,
+        "magnitude": 0.0107
+      },
+      "object": {
+        "activity": "medium",
+        "outlierRatio": 0.327
+      },
+      "color": {
+        "meanLab": [12.2, 2.4, 4.5],
+        "palette": ["#0F0B07", "#4F3A2D", "#7B7067"],
+        "temperature": "neutral",
+        "saturation": "high",
+        "contrast": "medium"
+      }
+    },
+    {
+      "id": "shot_036",
+      "startMs": 86833,
+      "endMs": 89250,
+      "durationMs": 2417,
+      "transitionIn": {
+        "type": "flash_cut"
+      },
+      "camera": {
+        "type": "handheld",
+        "confidence": 0.161,
+        "magnitude": 0.0145
+      },
+      "object": {
+        "activity": "high",
+        "outlierRatio": 0.473
+      },
+      "color": {
+        "meanLab": [71.0, 0.6, 5.8],
+        "palette": ["#DBD3C6", "#BEB7AC", "#2D2C2D"],
+        "temperature": "neutral",
+        "saturation": "low",
+        "contrast": "medium"
+      }
+    },
+    {
+      "id": "shot_037",
+      "startMs": 89250,
+      "endMs": 95500,
+      "durationMs": 6250,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "handheld",
+        "confidence": 0.164,
+        "magnitude": 0.0162
+      },
+      "object": {
+        "activity": "high",
+        "outlierRatio": 0.465
+      },
+      "color": {
+        "meanLab": [78.9, 0.8, 6.8],
+        "palette": ["#DFD6C9", "#C1B9AF", "#373331"],
+        "temperature": "warm",
+        "saturation": "low",
+        "contrast": "low"
+      }
+    },
+    {
+      "id": "shot_038",
+      "startMs": 95500,
+      "endMs": 98625,
+      "durationMs": 3125,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "static",
+        "confidence": 0.568,
+        "magnitude": 0.0077
+      },
+      "object": {
+        "activity": "medium",
+        "outlierRatio": 0.322
+      },
+      "color": {
+        "meanLab": [11.8, 2.2, 4.3],
+        "palette": ["#0F0B07", "#4C392C", "#786B62"],
+        "temperature": "neutral",
+        "saturation": "high",
+        "contrast": "medium"
+      }
+    },
+    {
+      "id": "shot_039",
+      "startMs": 98625,
+      "endMs": 101292,
+      "durationMs": 2667,
+      "transitionIn": {
+        "type": "flash_cut"
+      },
+      "camera": {
+        "type": "punch_in",
+        "confidence": 0.577,
+        "magnitude": 0.0051
+      },
+      "object": {
+        "activity": "medium",
+        "outlierRatio": 0.315
+      },
+      "color": {
+        "meanLab": [75.6, 1.6, 4.9],
+        "palette": ["#DFD6CD", "#C0B8B0", "#363334"],
+        "temperature": "neutral",
+        "saturation": "low",
+        "contrast": "medium"
+      }
+    },
+    {
+      "id": "shot_040",
+      "startMs": 101292,
+      "endMs": 104042,
+      "durationMs": 2750,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "static",
+        "confidence": 0.87,
+        "magnitude": 0.0079
+      },
+      "object": {
+        "activity": "low",
+        "outlierRatio": 0.09
+      },
+      "color": {
+        "meanLab": [64.7, 1.7, 4.3],
+        "palette": ["#D5CDC4", "#302C2D", "#79706B"],
+        "temperature": "neutral",
+        "saturation": "low",
+        "contrast": "medium"
+      }
+    },
+    {
+      "id": "shot_041",
+      "startMs": 104042,
+      "endMs": 108958,
+      "durationMs": 4916,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "static",
+        "confidence": 0.538,
+        "magnitude": 0.0032
+      },
+      "object": {
+        "activity": "medium",
+        "outlierRatio": 0.348
+      },
+      "color": {
+        "meanLab": [78.7, 1.5, 5.3],
+        "palette": ["#DFD6CC", "#C0B8B0", "#67605C"],
+        "temperature": "neutral",
+        "saturation": "low",
+        "contrast": "low"
+      }
+    },
+    {
+      "id": "shot_042",
+      "startMs": 108958,
+      "endMs": 109875,
+      "durationMs": 917,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "punch_in",
+        "confidence": 0.634,
+        "magnitude": 0.0372
+      },
+      "object": {
+        "activity": "medium",
+        "outlierRatio": 0.268
+      },
+      "color": {
+        "meanLab": [12.5, 3.1, 5.1],
+        "palette": ["#100C08", "#4D392C", "#7C6458"],
+        "temperature": "neutral",
+        "saturation": "high",
+        "contrast": "medium"
+      }
+    },
+    {
+      "id": "shot_043",
+      "startMs": 109875,
+      "endMs": 111250,
+      "durationMs": 1375,
+      "transitionIn": {
+        "type": "flash_cut"
+      },
+      "camera": {
+        "type": "unknown",
+        "confidence": 0.074,
+        "magnitude": 0.0157,
+        "ambiguous": true
+      },
+      "object": {
+        "activity": "high",
+        "outlierRatio": 0.702
+      },
+      "color": {
+        "meanLab": [74.4, 0.9, 7.5],
+        "palette": ["#D6CCBD", "#BAB1A5", "#59544E"],
+        "temperature": "warm",
+        "saturation": "low",
+        "contrast": "low"
+      }
+    },
+    {
+      "id": "shot_044",
+      "startMs": 111250,
+      "endMs": 114083,
+      "durationMs": 2833,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "static",
+        "confidence": 0.679,
+        "magnitude": 0.0065
+      },
+      "object": {
+        "activity": "low",
+        "outlierRatio": 0.232
+      },
+      "color": {
+        "meanLab": [58.5, 1.4, 5.1],
+        "palette": ["#C1B7AC", "#383534", "#7A726C"],
+        "temperature": "neutral",
+        "saturation": "low",
+        "contrast": "medium"
+      }
+    },
+    {
+      "id": "shot_045",
+      "startMs": 114083,
+      "endMs": 115000,
+      "durationMs": 917,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "punch_in",
+        "confidence": 0.671,
+        "magnitude": 0.0011
+      },
+      "object": {
+        "activity": "low",
+        "outlierRatio": 0.239
+      },
+      "color": {
+        "meanLab": [34.0, 0.6, 2.9],
+        "palette": ["#343231", "#6C6760", "#BEB5A2"],
+        "temperature": "neutral",
+        "saturation": "low",
+        "contrast": "medium"
+      }
+    },
+    {
+      "id": "shot_046",
+      "startMs": 115000,
+      "endMs": 115667,
+      "durationMs": 667,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "zoom_out",
+        "confidence": 0.622,
+        "magnitude": 0.0198
+      },
+      "object": {
+        "activity": "medium",
+        "outlierRatio": 0.278
+      },
+      "color": {
+        "meanLab": [35.8, 0.9, 3.1],
+        "palette": ["#343232", "#706B64", "#CEC4B1"],
+        "temperature": "neutral",
+        "saturation": "low",
+        "contrast": "medium"
+      }
+    },
+    {
+      "id": "shot_047",
+      "startMs": 115667,
+      "endMs": 121000,
+      "durationMs": 5333,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "zoom_out",
+        "confidence": 0.528,
+        "magnitude": 0.0058
+      },
+      "object": {
+        "activity": "medium",
+        "outlierRatio": 0.357
+      },
+      "color": {
+        "meanLab": [12.2, 2.6, 5.1],
+        "palette": ["#110D08", "#513A2D", "#7D7168"],
+        "temperature": "neutral",
+        "saturation": "high",
+        "contrast": "medium"
+      }
+    },
+    {
+      "id": "shot_048",
+      "startMs": 121000,
+      "endMs": 122583,
+      "durationMs": 1583,
+      "transitionIn": {
+        "type": "flash_cut"
+      },
+      "camera": {
+        "type": "punch_in",
+        "confidence": 0.689,
+        "magnitude": 0.0019
+      },
+      "object": {
+        "activity": "low",
+        "outlierRatio": 0.224
+      },
+      "color": {
+        "meanLab": [78.8, 0.8, 7.4],
+        "palette": ["#BFB6AB", "#DCD2C5", "#433F3D"],
+        "temperature": "warm",
+        "saturation": "low",
+        "contrast": "low"
+      }
+    },
+    {
+      "id": "shot_049",
+      "startMs": 122583,
+      "endMs": 124583,
+      "durationMs": 2000,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "punch_in",
+        "confidence": 0.607,
+        "magnitude": 0.003
+      },
+      "object": {
+        "activity": "medium",
+        "outlierRatio": 0.29
+      },
+      "color": {
+        "meanLab": [64.4, 1.1, 4.9],
+        "palette": ["#B6AEA4", "#D4CBC0", "#3E3B3C"],
+        "temperature": "neutral",
+        "saturation": "low",
+        "contrast": "medium"
+      }
+    },
+    {
+      "id": "shot_050",
+      "startMs": 124583,
+      "endMs": 127750,
+      "durationMs": 3167,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "handheld",
+        "confidence": 0.132,
+        "magnitude": 0.006
+      },
+      "object": {
+        "activity": "high",
+        "outlierRatio": 0.547
+      },
+      "color": {
+        "meanLab": [42.6, 1.0, 3.3],
+        "palette": ["#202022", "#C4BBAE", "#7E746C"],
+        "temperature": "neutral",
+        "saturation": "low",
+        "contrast": "high"
+      }
+    },
+    {
+      "id": "shot_051",
+      "startMs": 127750,
+      "endMs": 129292,
+      "durationMs": 1542,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "punch_in",
+        "confidence": 0.483,
+        "magnitude": 0.0182
+      },
+      "object": {
+        "activity": "medium",
+        "outlierRatio": 0.398
+      },
+      "color": {
+        "meanLab": [11.5, 2.2, 4.5],
+        "palette": ["#0F0B07", "#4B3A2D", "#7C6F64"],
+        "temperature": "neutral",
+        "saturation": "high",
+        "contrast": "medium"
+      }
+    },
+    {
+      "id": "shot_052",
+      "startMs": 129292,
+      "endMs": 133708,
+      "durationMs": 4416,
+      "transitionIn": {
+        "type": "flash_cut"
+      },
+      "camera": {
+        "type": "handheld",
+        "confidence": 0.132,
+        "magnitude": 0.0121
+      },
+      "object": {
+        "activity": "high",
+        "outlierRatio": 0.547
+      },
+      "color": {
+        "meanLab": [74.1, 0.9, 6.9],
+        "palette": ["#D8CEC0", "#BAB2A7", "#474341"],
+        "temperature": "warm",
+        "saturation": "low",
+        "contrast": "medium"
+      }
+    },
+    {
+      "id": "shot_053",
+      "startMs": 133708,
+      "endMs": 138250,
+      "durationMs": 4542,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "handheld",
+        "confidence": 0.154,
+        "magnitude": 0.0105
+      },
+      "object": {
+        "activity": "high",
+        "outlierRatio": 0.489
+      },
+      "color": {
+        "meanLab": [60.1, 0.9, 5.4],
+        "palette": ["#C6BDB0", "#6A6560", "#333130"],
+        "temperature": "neutral",
+        "saturation": "low",
+        "contrast": "medium"
+      }
+    },
+    {
+      "id": "shot_054",
+      "startMs": 138250,
+      "endMs": 141375,
+      "durationMs": 3125,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "static",
+        "confidence": 0.585,
+        "magnitude": 0.0057
+      },
+      "object": {
+        "activity": "medium",
+        "outlierRatio": 0.309
+      },
+      "color": {
+        "meanLab": [13.5, 2.3, 5.2],
+        "palette": ["#110D08", "#534031", "#7F7166"],
+        "temperature": "neutral",
+        "saturation": "high",
+        "contrast": "medium"
+      }
+    },
+    {
+      "id": "shot_055",
+      "startMs": 141375,
+      "endMs": 143667,
+      "durationMs": 2292,
+      "transitionIn": {
+        "type": "flash_cut"
+      },
+      "camera": {
+        "type": "static",
+        "confidence": 0.62,
+        "magnitude": 0.0036
+      },
+      "object": {
+        "activity": "medium",
+        "outlierRatio": 0.28
+      },
+      "color": {
+        "meanLab": [73.2, 1.3, 4.4],
+        "palette": ["#BBB4AC", "#DAD2CA", "#393636"],
+        "temperature": "neutral",
+        "saturation": "low",
+        "contrast": "medium"
+      }
+    },
+    {
+      "id": "shot_056",
+      "startMs": 143667,
+      "endMs": 145042,
+      "durationMs": 1375,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "punch_in",
+        "confidence": 0.686,
+        "magnitude": 0.0138
+      },
+      "object": {
+        "activity": "low",
+        "outlierRatio": 0.226
+      },
+      "color": {
+        "meanLab": [65.2, 1.2, 3.9],
+        "palette": ["#CCC4BC", "#2A2829", "#7B7671"],
+        "temperature": "neutral",
+        "saturation": "low",
+        "contrast": "medium"
+      }
+    },
+    {
+      "id": "shot_057",
+      "startMs": 145042,
+      "endMs": 151417,
+      "durationMs": 6375,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "static",
+        "confidence": 0.702,
+        "magnitude": 0.0078
+      },
+      "object": {
+        "activity": "low",
+        "outlierRatio": 0.214
+      },
+      "color": {
+        "meanLab": [76.5, 1.4, 4.7],
+        "palette": ["#BAB2AB", "#DBD2CA", "#3B3837"],
+        "temperature": "neutral",
+        "saturation": "low",
+        "contrast": "low"
+      }
+    },
+    {
+      "id": "shot_058",
+      "startMs": 151417,
+      "endMs": 152750,
+      "durationMs": 1333,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "drift_subtle",
+        "confidence": 0.892,
+        "magnitude": 0.0146
+      },
+      "object": {
+        "activity": "low",
+        "outlierRatio": 0.074
+      },
+      "color": {
+        "meanLab": [68.8, 1.8, 4.4],
+        "palette": ["#DBD3CB", "#B7AEA6", "#534D4C"],
+        "temperature": "neutral",
+        "saturation": "low",
+        "contrast": "medium"
+      }
+    },
+    {
+      "id": "shot_059",
+      "startMs": 152750,
+      "endMs": 156875,
+      "durationMs": 4125,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "punch_in",
+        "confidence": 0.839,
+        "magnitude": 0.0166
+      },
+      "object": {
+        "activity": "low",
+        "outlierRatio": 0.112
+      },
+      "color": {
+        "meanLab": [72.5, 1.5, 4.1],
+        "palette": ["#DAD1CA", "#B2ACA6", "#5F5A59"],
+        "temperature": "neutral",
+        "saturation": "low",
+        "contrast": "medium"
+      }
+    },
+    {
+      "id": "shot_060",
+      "startMs": 156875,
+      "endMs": 159625,
+      "durationMs": 2750,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "zoom_out",
+        "confidence": 0.826,
+        "magnitude": 0.0099
+      },
+      "object": {
+        "activity": "low",
+        "outlierRatio": 0.121
+      },
+      "color": {
+        "meanLab": [72.8, 1.3, 4.1],
+        "palette": ["#DED6CD", "#BAB5AD", "#7A7471"],
+        "temperature": "neutral",
+        "saturation": "low",
+        "contrast": "medium"
+      }
+    },
+    {
+      "id": "shot_061",
+      "startMs": 159625,
+      "endMs": 163792,
+      "durationMs": 4167,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "punch_in",
+        "confidence": 0.549,
+        "magnitude": 0.0191
+      },
+      "object": {
+        "activity": "medium",
+        "outlierRatio": 0.339
+      },
+      "color": {
+        "meanLab": [13.4, 2.6, 5.1],
+        "palette": ["#100C08", "#4E3A2D", "#7B6B60"],
+        "temperature": "neutral",
+        "saturation": "high",
+        "contrast": "medium"
+      }
+    },
+    {
+      "id": "shot_062",
+      "startMs": 163792,
+      "endMs": 166875,
+      "durationMs": 3083,
+      "transitionIn": {
+        "type": "flash_cut"
+      },
+      "camera": {
+        "type": "punch_in",
+        "confidence": 0.702,
+        "magnitude": 0.0037
+      },
+      "object": {
+        "activity": "low",
+        "outlierRatio": 0.214
+      },
+      "color": {
+        "meanLab": [73.1, 1.2, 6.7],
+        "palette": ["#B9B0A5", "#D7CCC0", "#4D4846"],
+        "temperature": "warm",
+        "saturation": "low",
+        "contrast": "medium"
+      }
+    },
+    {
+      "id": "shot_063",
+      "startMs": 166875,
+      "endMs": 176333,
+      "durationMs": 9458,
+      "transitionIn": {
+        "type": "cut"
+      },
+      "camera": {
+        "type": "static",
+        "confidence": 0.693,
+        "magnitude": 0.0024
+      },
+      "object": {
+        "activity": "low",
+        "outlierRatio": 0.221
+      },
+      "color": {
+        "meanLab": [12.7, 2.4, 4.8],
+        "palette": ["#0F0B07", "#47362A", "#79685D"],
+        "temperature": "neutral",
+        "saturation": "high",
+        "contrast": "medium"
+      }
+    }
+  ],
+  "audio": {
+    "silences": [],
+    "loudnessLufs": -14.2,
+    "transcriptRef": null,
+    "beatsMs": null
+  },
+  "style": {
+    "pacing": {
+      "shots": 63,
+      "cutsPerMin": 21.1,
+      "avgShotMs": 2799,
+      "medianShotMs": 2041,
+      "minShotMs": 583,
+      "maxShotMs": 11125
+    },
+    "transitionVocabulary": {
+      "cut": 49,
+      "flash_cut": 12,
+      "dissolve": 1
+    },
+    "motionVocabulary": {
+      "camera": {
+        "static": 24,
+        "punch_in": 16,
+        "drift_subtle": 7,
+        "unknown": 5,
+        "zoom_out": 5,
+        "handheld": 6
+      },
+      "objectActivity": {
+        "low": 24,
+        "high": 14,
+        "medium": 25
+      }
+    },
+    "colorGrade": {
+      "macroDistribution": {
+        "warm": 12,
+        "neutral": 51
+      },
+      "talkingHead": {
+        "look": "low-key cálido, fondo oscuro, piel cálida saturada",
+        "temperature": "warm",
+        "saturation": "high"
+      },
+      "collage": {
+        "look": "papel crema texturizado, recortes B/N-sepia con sombra, halftone",
+        "temperature": "neutral",
+        "saturation": "low"
+      }
+    },
+    "qualitativeSummary": "Alterna talking-head low-key cálido con collage de papel crema; corta a mediana 2s con ráfagas <1s y respiros >6s; nunca deja el frame quieto (deriva o punch-in); puntúa los saltos de mundo con flash blanco de ~2 frames; captions karaoke dorado-glow palabra a palabra (~80ms/palabra, páginas de 2-3); en collage, texto esparcido a dos pesos (conectores gris fino + énfasis negro bold) sincronizado a la voz; audio continuo a -14 LUFS.",
+    "typography": {
+      "talkingHead": {
+        "family": "rounded-sans",
+        "casing": "lowercase",
+        "color": "#FFF6E0",
+        "highlight": "#E8B84B glow",
+        "animation": "fade_in_word ~80ms"
+      },
+      "collage": {
+        "system": "two_tier",
+        "connectors": "thin light-gray sans",
+        "emphasis": "heavy black sans",
+        "layout": "esparcido",
+        "animation": "word_pop sync VO"
+      }
+    },
+    "captionStyle": "word-by-word append, fade ~80ms por palabra, palabra activa dorado glow #E8B84B, anteriores blanco cálido, páginas 2-3 palabras, lowercase, centro-bajo",
+    "structure": [
+      {
+        "act": "hook/sketch pareja",
+        "fromMs": 0,
+        "toMs": 28000
+      },
+      {
+        "act": "storytelling caso (archivo+collage)",
+        "fromMs": 28000,
+        "toMs": 80000
+      },
+      {
+        "act": "reflexión (cerebro/ocupación)",
+        "fromMs": 80000,
+        "toMs": 145000
+      },
+      {
+        "act": "resolución (la calma / el cambio)",
+        "fromMs": 145000,
+        "toMs": 176376
+      }
+    ]
+  },
+  "captions": [
+    {
+      "text": "¿vamos a ver una peli?",
+      "startMs": 0,
+      "endMs": 1458,
+      "style": {
+        "fontFamilyGuess": "rounded-sans",
+        "color": "#FFFFFF",
+        "highlightColor": "#E8B84B",
+        "casing": "lowercase",
+        "animation": "fade_in_word"
+      },
+      "source": "vision",
+      "confidence": 0.8,
+      "id": "cap_001"
+    },
+    {
+      "text": "nos vamos",
+      "startMs": 1458,
+      "endMs": 4417,
+      "style": {
+        "fontFamilyGuess": "rounded-sans",
+        "color": "#FFFFFF",
+        "highlightColor": "#E8B84B",
+        "casing": "lowercase",
+        "animation": "fade_in_word"
+      },
+      "source": "vision",
+      "confidence": 0.78,
+      "id": "cap_002"
+    },
+    {
+      "text": "porfa",
+      "startMs": 4417,
+      "endMs": 5833,
+      "style": {
+        "fontFamilyGuess": "rounded-sans",
+        "color": "#FFFFFF",
+        "highlightColor": "#E8B84B",
+        "casing": "lowercase",
+        "animation": "fade_in_word"
+      },
+      "source": "vision",
+      "confidence": 0.8,
+      "id": "cap_003"
+    },
+    {
+      "text": "no puedo más",
+      "startMs": 22000,
+      "endMs": 23300,
+      "style": {
+        "fontFamilyGuess": "rounded-sans",
+        "color": "#FFFFFF",
+        "highlightColor": "#E8B84B",
+        "casing": "lowercase",
+        "animation": "fade_in_word"
+      },
+      "source": "vision+24fps_strip",
+      "confidence": 0.9,
+      "id": "cap_004"
+    },
+    {
+      "text": "obesidad",
+      "startMs": 28542,
+      "endMs": 30583,
+      "style": {
+        "fontFamilyGuess": "rounded-sans",
+        "color": "#FFFFFF",
+        "highlightColor": "#E8B84B",
+        "casing": "lowercase",
+        "animation": "fade_in_word"
+      },
+      "source": "vision",
+      "confidence": 0.7,
+      "id": "cap_005"
+    },
+    {
+      "text": "perdió una cantidad",
+      "startMs": 34875,
+      "endMs": 38292,
+      "style": {
+        "fontFamilyGuess": "rounded-sans",
+        "color": "#FFFFFF",
+        "highlightColor": "#E8B84B",
+        "casing": "lowercase",
+        "animation": "fade_in_word"
+      },
+      "source": "vision",
+      "confidence": 0.72,
+      "id": "cap_006"
+    },
+    {
+      "text": "en sólo su",
+      "startMs": 44750,
+      "endMs": 50333,
+      "style": {
+        "fontFamilyGuess": "rounded-sans",
+        "color": "#FFFFFF",
+        "highlightColor": "#E8B84B",
+        "casing": "lowercase",
+        "animation": "fade_in_word"
+      },
+      "source": "vision",
+      "confidence": 0.68,
+      "id": "cap_007"
+    },
+    {
+      "text": "era su mecanismo",
+      "startMs": 56333,
+      "endMs": 57917,
+      "style": {
+        "fontFamilyGuess": "rounded-sans",
+        "color": "#FFFFFF",
+        "highlightColor": "#E8B84B",
+        "casing": "lowercase",
+        "animation": "fade_in_word"
+      },
+      "source": "vision",
+      "confidence": 0.72,
+      "id": "cap_008"
+    },
+    {
+      "text": "sus vacíos y",
+      "startMs": 65042,
+      "endMs": 70667,
+      "style": {
+        "fontFamilyGuess": "rounded-sans",
+        "color": "#FFFFFF",
+        "highlightColor": "#E8B84B",
+        "casing": "lowercase",
+        "animation": "fade_in_word"
+      },
+      "source": "vision",
+      "confidence": 0.7,
+      "id": "cap_009"
+    },
+    {
+      "text": "que la cirugía",
+      "startMs": 71917,
+      "endMs": 72750,
+      "style": {
+        "fontFamilyGuess": "rounded-sans",
+        "color": "#FFFFFF",
+        "highlightColor": "#E8B84B",
+        "casing": "lowercase",
+        "animation": "fade_in_word"
+      },
+      "source": "vision",
+      "confidence": 0.7,
+      "id": "cap_010"
+    },
+    {
+      "text": "que tienes",
+      "startMs": 73583,
+      "endMs": 76167,
+      "style": {
+        "fontFamilyGuess": "rounded-sans",
+        "color": "#FFFFFF",
+        "highlightColor": "#E8B84B",
+        "casing": "lowercase",
+        "animation": "fade_in_word"
+      },
+      "source": "vision",
+      "confidence": 0.7,
+      "id": "cap_011"
+    },
+    {
+      "text": "no estamos ocupados",
+      "startMs": 83875,
+      "endMs": 86833,
+      "style": {
+        "fontFamilyGuess": "rounded-sans",
+        "color": "#FFFFFF",
+        "highlightColor": "#E8B84B",
+        "casing": "lowercase",
+        "animation": "fade_in_word"
+      },
+      "source": "vision+24fps_strip",
+      "confidence": 0.92,
+      "id": "cap_012"
+    },
+    {
+      "text": "que eres un",
+      "startMs": 95500,
+      "endMs": 98625,
+      "style": {
+        "fontFamilyGuess": "rounded-sans",
+        "color": "#FFFFFF",
+        "highlightColor": "#E8B84B",
+        "casing": "lowercase",
+        "animation": "fade_in_word"
+      },
+      "source": "vision",
+      "confidence": 0.68,
+      "id": "cap_013"
+    },
+    {
+      "text": "plin",
+      "startMs": 108958,
+      "endMs": 109875,
+      "style": {
+        "fontFamilyGuess": "rounded-sans",
+        "color": "#FFFFFF",
+        "highlightColor": "#E8B84B",
+        "casing": "lowercase",
+        "animation": "fade_in_word"
+      },
+      "source": "vision",
+      "confidence": 0.75,
+      "id": "cap_014"
+    },
+    {
+      "text": "empieza a",
+      "startMs": 127750,
+      "endMs": 129292,
+      "style": {
+        "fontFamilyGuess": "rounded-sans",
+        "color": "#FFFFFF",
+        "highlightColor": "#E8B84B",
+        "casing": "lowercase",
+        "animation": "fade_in_word"
+      },
+      "source": "vision",
+      "confidence": 0.72,
+      "id": "cap_015"
+    },
+    {
+      "text": "aprende a sufrir",
+      "startMs": 138250,
+      "endMs": 141375,
+      "style": {
+        "fontFamilyGuess": "rounded-sans",
+        "color": "#FFFFFF",
+        "highlightColor": "#E8B84B",
+        "casing": "lowercase",
+        "animation": "fade_in_word"
+      },
+      "source": "vision",
+      "confidence": 0.74,
+      "id": "cap_016"
+    },
+    {
+      "text": "no se resuelve",
+      "startMs": 159625,
+      "endMs": 163792,
+      "style": {
+        "fontFamilyGuess": "rounded-sans",
+        "color": "#FFFFFF",
+        "highlightColor": "#E8B84B",
+        "casing": "lowercase",
+        "animation": "fade_in_word"
+      },
+      "source": "vision",
+      "confidence": 0.76,
+      "id": "cap_017"
+    },
+    {
+      "text": "vas a...",
+      "startMs": 166875,
+      "endMs": 176333,
+      "style": {
+        "fontFamilyGuess": "rounded-sans",
+        "color": "#FFFFFF",
+        "highlightColor": "#E8B84B",
+        "casing": "lowercase",
+        "animation": "fade_in_word"
+      },
+      "source": "vision",
+      "confidence": 0.6,
+      "id": "cap_018"
+    }
+  ],
+  "textOverlays": [
+    {
+      "role": "emphasis",
+      "text": "¿y si te vas a la quiebra?",
+      "startMs": 14583,
+      "endMs": 21458,
+      "style": {
+        "system": "two_tier",
+        "connectors": "thin gray sans",
+        "emphasis": "heavy black sans",
+        "casing": "lowercase",
+        "animation": "word_pop_vo_sync"
+      },
+      "source": "vision",
+      "confidence": 0.72,
+      "id": "ovl_001"
+    },
+    {
+      "role": "title",
+      "text": "Carrie Wilson",
+      "startMs": 25708,
+      "endMs": 26792,
+      "style": {
+        "fontFamilyGuess": "serif-display",
+        "casing": "title"
+      },
+      "source": "vision",
+      "confidence": 0.85,
+      "id": "ovl_002"
+    },
+    {
+      "role": "emphasis",
+      "text": "pesaba 136",
+      "startMs": 26792,
+      "endMs": 28542,
+      "style": {
+        "system": "two_tier",
+        "connectors": "thin gray sans",
+        "emphasis": "heavy black sans",
+        "casing": "lowercase",
+        "animation": "word_pop_vo_sync"
+      },
+      "source": "vision",
+      "confidence": 0.8,
+      "id": "ovl_003"
+    },
+    {
+      "role": "emphasis_scatter",
+      "text": "y en 1999 se operó",
+      "startMs": 30583,
+      "endMs": 34875,
+      "style": {
+        "system": "two_tier",
+        "connectors": "thin gray sans",
+        "emphasis": "heavy black sans",
+        "casing": "lowercase",
+        "animation": "word_pop_vo_sync"
+      },
+      "source": "vision",
+      "confidence": 0.78,
+      "id": "ovl_004"
+    },
+    {
+      "role": "emphasis_scatter",
+      "text": "fue tanto el cambio",
+      "startMs": 38292,
+      "endMs": 39625,
+      "style": {
+        "system": "two_tier",
+        "connectors": "thin gray sans",
+        "emphasis": "heavy black sans",
+        "casing": "lowercase",
+        "animation": "word_pop_vo_sync"
+      },
+      "source": "vision",
+      "confidence": 0.8,
+      "id": "ovl_005"
+    },
+    {
+      "role": "emphasis_scatter",
+      "text": "se convirtió en",
+      "startMs": 39625,
+      "endMs": 44750,
+      "style": {
+        "system": "two_tier",
+        "connectors": "thin gray sans",
+        "emphasis": "heavy black sans",
+        "casing": "lowercase",
+        "animation": "word_pop_vo_sync"
+      },
+      "source": "vision",
+      "confidence": 0.72,
+      "id": "ovl_006"
+    },
+    {
+      "role": "emphasis_scatter",
+      "text": "sólo por",
+      "startMs": 50333,
+      "endMs": 54333,
+      "style": {
+        "system": "two_tier",
+        "connectors": "thin gray sans",
+        "emphasis": "heavy black sans",
+        "casing": "lowercase",
+        "animation": "word_pop_vo_sync"
+      },
+      "source": "vision",
+      "confidence": 0.65,
+      "id": "ovl_007"
+    },
+    {
+      "role": "emphasis_scatter",
+      "text": "para comer",
+      "startMs": 57917,
+      "endMs": 63208,
+      "style": {
+        "system": "two_tier",
+        "connectors": "thin gray sans",
+        "emphasis": "heavy black sans",
+        "casing": "lowercase",
+        "animation": "word_pop_vo_sync"
+      },
+      "source": "vision",
+      "confidence": 0.72,
+      "id": "ovl_008"
+    },
+    {
+      "role": "emphasis_scatter",
+      "text": "sólo cambió de",
+      "startMs": 63208,
+      "endMs": 65042,
+      "style": {
+        "system": "two_tier",
+        "connectors": "thin gray sans",
+        "emphasis": "heavy black sans",
+        "casing": "lowercase",
+        "animation": "word_pop_vo_sync"
+      },
+      "source": "vision",
+      "confidence": 0.7,
+      "id": "ovl_009"
+    },
+    {
+      "role": "emphasis",
+      "text": "ella misma admitió",
+      "startMs": 70667,
+      "endMs": 71917,
+      "style": {
+        "system": "two_tier",
+        "connectors": "thin gray sans",
+        "emphasis": "heavy black sans",
+        "casing": "lowercase",
+        "animation": "word_pop_vo_sync"
+      },
+      "source": "vision",
+      "confidence": 0.74,
+      "id": "ovl_010"
+    },
+    {
+      "role": "emphasis_scatter",
+      "text": "que la cirugía del estómago",
+      "startMs": 72750,
+      "endMs": 73583,
+      "style": {
+        "system": "two_tier",
+        "connectors": "thin gray sans",
+        "emphasis": "heavy black sans",
+        "casing": "lowercase",
+        "animation": "word_pop_vo_sync"
+      },
+      "source": "vision",
+      "confidence": 0.72,
+      "id": "ovl_011"
+    },
+    {
+      "role": "emphasis_scatter",
+      "text": "pero somos",
+      "startMs": 78208,
+      "endMs": 79375,
+      "style": {
+        "system": "two_tier",
+        "connectors": "thin gray sans",
+        "emphasis": "heavy black sans",
+        "casing": "lowercase",
+        "animation": "word_pop_vo_sync"
+      },
+      "source": "vision",
+      "confidence": 0.68,
+      "id": "ovl_012"
+    },
+    {
+      "role": "emphasis_scatter",
+      "text": "mil para tener juntas",
+      "startMs": 80875,
+      "endMs": 82208,
+      "style": {
+        "system": "two_tier",
+        "connectors": "thin gray sans",
+        "emphasis": "heavy black sans",
+        "casing": "lowercase",
+        "animation": "word_pop_vo_sync"
+      },
+      "source": "vision",
+      "confidence": 0.6,
+      "id": "ovl_013"
+    },
+    {
+      "role": "emphasis_scatter",
+      "text": "o a sentirnos ocupados",
+      "startMs": 82208,
+      "endMs": 83875,
+      "style": {
+        "system": "two_tier",
+        "connectors": "thin gray sans",
+        "emphasis": "heavy black sans",
+        "casing": "lowercase",
+        "animation": "word_pop_vo_sync"
+      },
+      "source": "vision",
+      "confidence": 0.78,
+      "id": "ovl_014"
+    },
+    {
+      "role": "emphasis_scatter",
+      "text": "y es que somos",
+      "startMs": 86833,
+      "endMs": 89250,
+      "style": {
+        "system": "two_tier",
+        "connectors": "thin gray sans",
+        "emphasis": "heavy black sans",
+        "casing": "lowercase",
+        "animation": "word_pop_vo_sync"
+      },
+      "source": "vision",
+      "confidence": 0.7,
+      "id": "ovl_015"
+    },
+    {
+      "role": "emphasis_scatter",
+      "text": "desde que eres niño, después de mil caídas",
+      "startMs": 90167,
+      "endMs": 95500,
+      "style": {
+        "system": "two_tier",
+        "connectors": "thin gray sans",
+        "emphasis": "heavy black sans",
+        "casing": "lowercase",
+        "animation": "word_pop_vo_sync"
+      },
+      "source": "vision",
+      "confidence": 0.7,
+      "id": "ovl_016"
+    },
+    {
+      "role": "emphasis_scatter",
+      "text": "cuando descifras esa tabla de excel",
+      "startMs": 98625,
+      "endMs": 101292,
+      "style": {
+        "system": "two_tier",
+        "connectors": "thin gray sans",
+        "emphasis": "heavy black sans",
+        "casing": "lowercase",
+        "animation": "word_pop_vo_sync"
+      },
+      "source": "vision",
+      "confidence": 0.74,
+      "id": "ovl_017"
+    },
+    {
+      "role": "emphasis",
+      "text": "BUM",
+      "startMs": 104042,
+      "endMs": 108958,
+      "style": {
+        "system": "two_tier",
+        "connectors": "thin gray sans",
+        "emphasis": "heavy black sans",
+        "casing": "lowercase",
+        "animation": "word_pop_vo_sync"
+      },
+      "source": "vision",
+      "confidence": 0.82,
+      "id": "ovl_018"
+    },
+    {
+      "role": "emphasis_scatter",
+      "text": "inyección de dopamina",
+      "startMs": 109875,
+      "endMs": 111250,
+      "style": {
+        "system": "two_tier",
+        "connectors": "thin gray sans",
+        "emphasis": "heavy black sans",
+        "casing": "lowercase",
+        "animation": "word_pop_vo_sync"
+      },
+      "source": "vision",
+      "confidence": 0.8,
+      "id": "ovl_019"
+    },
+    {
+      "role": "emphasis_scatter",
+      "text": "tu cerebro recibe un aplauso",
+      "startMs": 111250,
+      "endMs": 114083,
+      "style": {
+        "system": "two_tier",
+        "connectors": "thin gray sans",
+        "emphasis": "heavy black sans",
+        "casing": "lowercase",
+        "animation": "word_pop_vo_sync"
+      },
+      "source": "vision",
+      "confidence": 0.78,
+      "id": "ovl_020"
+    },
+    {
+      "role": "emphasis_scatter",
+      "text": "y se cuelga una medallita",
+      "startMs": 114083,
+      "endMs": 115667,
+      "style": {
+        "system": "two_tier",
+        "connectors": "thin gray sans",
+        "emphasis": "heavy black sans",
+        "casing": "lowercase",
+        "animation": "word_pop_vo_sync"
+      },
+      "source": "vision",
+      "confidence": 0.78,
+      "id": "ovl_021"
+    },
+    {
+      "role": "emphasis_scatter",
+      "text": "por eso cuando llega la calma",
+      "startMs": 121000,
+      "endMs": 122583,
+      "style": {
+        "system": "two_tier",
+        "connectors": "thin gray sans",
+        "emphasis": "heavy black sans",
+        "casing": "lowercase",
+        "animation": "word_pop_vo_sync"
+      },
+      "source": "vision+24fps_strip",
+      "confidence": 0.92,
+      "id": "ovl_022"
+    },
+    {
+      "role": "emphasis_scatter",
+      "text": "cuando te tiras a la playa",
+      "startMs": 122583,
+      "endMs": 124583,
+      "style": {
+        "system": "two_tier",
+        "connectors": "thin gray sans",
+        "emphasis": "heavy black sans",
+        "casing": "lowercase",
+        "animation": "word_pop_vo_sync"
+      },
+      "source": "vision",
+      "confidence": 0.74,
+      "id": "ovl_023"
+    },
+    {
+      "role": "emphasis_scatter",
+      "text": "o cuando te tomas una tarde libre",
+      "startMs": 124583,
+      "endMs": 127750,
+      "style": {
+        "system": "two_tier",
+        "connectors": "thin gray sans",
+        "emphasis": "heavy black sans",
+        "casing": "lowercase",
+        "animation": "word_pop_vo_sync"
+      },
+      "source": "vision",
+      "confidence": 0.72,
+      "id": "ovl_024"
+    },
+    {
+      "role": "emphasis_scatter",
+      "text": "buscar fallos en tu relación",
+      "startMs": 129292,
+      "endMs": 133708,
+      "style": {
+        "system": "two_tier",
+        "connectors": "thin gray sans",
+        "emphasis": "heavy black sans",
+        "casing": "lowercase",
+        "animation": "word_pop_vo_sync"
+      },
+      "source": "vision",
+      "confidence": 0.76,
+      "id": "ovl_025"
+    },
+    {
+      "role": "emphasis_scatter",
+      "text": "también puede aprender a",
+      "startMs": 141375,
+      "endMs": 143667,
+      "style": {
+        "system": "two_tier",
+        "connectors": "thin gray sans",
+        "emphasis": "heavy black sans",
+        "casing": "lowercase",
+        "animation": "word_pop_vo_sync"
+      },
+      "source": "vision",
+      "confidence": 0.7,
+      "id": "ovl_026"
+    },
+    {
+      "role": "emphasis_scatter",
+      "text": "sin sentirse culpable",
+      "startMs": 143667,
+      "endMs": 145042,
+      "style": {
+        "system": "two_tier",
+        "connectors": "thin gray sans",
+        "emphasis": "heavy black sans",
+        "casing": "lowercase",
+        "animation": "word_pop_vo_sync"
+      },
+      "source": "vision",
+      "confidence": 0.74,
+      "id": "ovl_027"
+    },
+    {
+      "role": "emphasis_scatter",
+      "text": "sin esperar a que",
+      "startMs": 145042,
+      "endMs": 151417,
+      "style": {
+        "system": "two_tier",
+        "connectors": "thin gray sans",
+        "emphasis": "heavy black sans",
+        "casing": "lowercase",
+        "animation": "word_pop_vo_sync"
+      },
+      "source": "vision",
+      "confidence": 0.7,
+      "id": "ovl_028"
+    },
+    {
+      "role": "emphasis_scatter",
+      "text": "pensando que no te mereces",
+      "startMs": 151417,
+      "endMs": 153083,
+      "style": {
+        "system": "two_tier",
+        "connectors": "thin gray sans",
+        "emphasis": "heavy black sans",
+        "casing": "lowercase",
+        "animation": "word_pop_vo_sync"
+      },
+      "source": "vision",
+      "confidence": 0.74,
+      "id": "ovl_029"
+    },
+    {
+      "role": "emphasis_scatter",
+      "text": "has hecho, lo dejas de intentar",
+      "startMs": 156917,
+      "endMs": 159625,
+      "style": {
+        "system": "two_tier",
+        "connectors": "thin gray sans",
+        "emphasis": "heavy black sans",
+        "casing": "lowercase",
+        "animation": "word_pop_vo_sync"
+      },
+      "source": "vision",
+      "confidence": 0.66,
+      "id": "ovl_030"
+    },
+    {
+      "role": "emphasis_scatter",
+      "text": "se sigue cambiando el nivel",
+      "startMs": 163792,
+      "endMs": 166875,
+      "style": {
+        "system": "two_tier",
+        "connectors": "thin gray sans",
+        "emphasis": "heavy black sans",
+        "casing": "lowercase",
+        "animation": "word_pop_vo_sync"
+      },
+      "source": "vision",
+      "confidence": 0.8,
+      "id": "ovl_031"
+    }
+  ]
+}
