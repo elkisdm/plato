@@ -268,6 +268,7 @@ def analyze_cmd(
         typer.secho(f"✗ spec inválido: {result.errors}", fg=typer.colors.RED, err=True)
         raise typer.Exit(code=1)
 
+    out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(spec, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     layers = "source+meta+shots+motion+color+transiciones+audio+style" if full else "source+meta+shots"
     typer.secho(f"✓ {out}: spec CV válido ({len(shots)} shots, {layers}). Siguiente: plato dump-frames.", fg=typer.colors.GREEN, err=True)
