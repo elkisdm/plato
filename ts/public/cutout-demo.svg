@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 220">
+  <!-- Estrella "recortada a mano": vértices levemente irregulares a propósito,
+       tinta del sistema de papel (#141109). Asset demo de PaperScene. -->
+  <path
+    d="M110 8 L138 76 L212 80 L155 127 L176 202 L110 161 L46 205 L64 128 L6 84 L81 77 Z"
+    fill="#141109"
+  />
+</svg>

@@ -2,12 +2,14 @@
 // (18 captions + 31 overlays + style + narrative):
 //   - SpecComposition: captions/overlays sobre el fondo del mundo de color (sin video).
 //   - SpecOverVideo: lo mismo ENCIMA del mp4 fuente (public/source.mp4, gitignored).
+//   - PaperScene: demo del sistema "papel que cobra vida" (paperTokens + paperMotion).
 // El spec completo vive en src/fixtures/ como fixture de render; el golden sigue en /fixtures.
 
 import { Composition, staticFile } from 'remotion';
 
 import fullSpecJson from '../fixtures/olyasuharska.full.json';
 import { extractPresets } from './presets';
+import { PaperScene } from './scenes/PaperScene';
 import { SpecComposition } from './SpecComposition';
 import type { SpecCompositionProps, VideoSpec } from './types';
 
@@ -38,6 +40,14 @@ export const RemotionRoot = () => {
         defaultProps={
           { spec, presets, videoSrc: staticFile('source.mp4') } satisfies SpecCompositionProps
         }
+      />
+      <Composition
+        id="PaperScene"
+        component={PaperScene}
+        width={s.width}
+        height={s.height}
+        fps={s.fps}
+        durationInFrames={5 * s.fps}
       />
     </>
   );
