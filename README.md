@@ -20,6 +20,7 @@ make validate    # valida el spec de referencia contra el schema
 make codegen     # regenera Pydantic y Zod desde el schema
 
 cd analyzer && uv sync && uv run plato --help
+pnpm install                 # raíz: hooks y el zod que usa schema/generated
 cd ts && pnpm install && pnpm test && pnpm studio
 ```
 
