@@ -1,0 +1,33 @@
+{
+  "id": "ejemplo",
+  "nombre": "Marca de ejemplo",
+  "colores": {
+    "noche": "#111827",
+    "navy": "#1F2937",
+    "indigo": "#6366F1",
+    "indigoSuave": "#EEF2FF",
+    "hueso": "#F5F5F4",
+    "texto": "#111827",
+    "textoSecundario": "#4B5563",
+    "cian": "#22D3EE",
+    "blanco": "#FFFFFF",
+    "cursiva": "#A5B4FC",
+    "antetitulo": "#C7D2FE"
+  },
+  "tipografias": {
+    "titulos": "Instrument Serif",
+    "interfaz": "Inter"
+  },
+  "logos": {},
+  "iconos": {},
+  "redaccion": [
+    {
+      "patron": "\\b(vos|tenés|podés|querés|sabés|hacés|mirá|dejá|usá)\\b",
+      "motivo": "Español neutro con tuteo: nada de voseo."
+    }
+  ],
+  "identidad": {
+    "llamado": "Escríbenos",
+    "url": "example.com"
+  }
+}

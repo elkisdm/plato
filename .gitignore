@@ -20,9 +20,16 @@ projects/
 *.zip
 material/
 
+# Binarios del estudio: fuera de git, descritos por los manifiestos assets.json (ADR-0011).
+ts/public/estudio/
+
 # Salidas de render de Remotion.
 ts/out/
 ts/.remotion/
 
 # Build info de TypeScript
 *.tsbuildinfo
+
+# HyperFrames (ADR-0013): catálogo = clon parcial de heygen-com/hyperframes (git pull para actualizar); piezas = copias de trabajo generadas
+hyperframes/upstream
+hyperframes/piezas/

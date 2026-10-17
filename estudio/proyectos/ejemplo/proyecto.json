@@ -1,0 +1,9 @@
+{
+  "id": "ejemplo",
+  "nombre": "Proyecto de ejemplo",
+  "version": "0.1.0",
+  "marca": "ejemplo",
+  "tipo": "comercial",
+  "descripcion": "Comercial mínimo sin assets ni voz: sirve para probar el estudio recién clonado.",
+  "formatos": ["horizontal", "vertical"]
+}

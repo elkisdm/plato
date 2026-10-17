@@ -6,6 +6,7 @@
 // El spec completo vive en src/fixtures/ como fixture de render; el golden sigue en /fixtures.
 
 import { Composition, staticFile } from 'remotion';
+import { ComposicionesEstudio } from '../estudio/Composiciones';
 
 import fullSpecJson from '../fixtures/olyasuharska.full.json';
 import { extractPresets } from './presets';
@@ -49,6 +50,8 @@ export const RemotionRoot = () => {
         fps={s.fps}
         durationInFrames={5 * s.fps}
       />
+      {/* Estudio de video (ADR-0011): una composición por proyecto y formato, más su poster. */}
+      <ComposicionesEstudio />
     </>
   );
 };

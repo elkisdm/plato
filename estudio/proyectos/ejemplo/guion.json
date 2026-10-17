@@ -1,0 +1,58 @@
+{
+  "escenas": [
+    {
+      "id": "saludo",
+      "escena": "saludo",
+      "segundos": 3,
+      "antetitulo": "Estudio de video",
+      "titulo": "Hola, *esto es un ejemplo*",
+      "locucion": "Hola. Este es un comercial de ejemplo, hecho con el estudio de video.",
+      "props": {
+        "logo": false
+      }
+    },
+    {
+      "id": "canales",
+      "escena": "canales",
+      "segundos": 4,
+      "titulo": "Un centro, *varios canales*",
+      "locucion": "Un solo centro atiende la llamada, el chat y el correo.",
+      "props": {
+        "centro": "Tu marca",
+        "canales": ["Llamada", "Chat", "Correo"]
+      }
+    },
+    {
+      "id": "conversacion",
+      "escena": "conversacion",
+      "segundos": 4,
+      "titulo": "Responde *a toda hora*",
+      "locucion": "Responde a toda hora, sin dejar a nadie esperando.",
+      "props": {
+        "mensajes": 4,
+        "reloj": "24/7"
+      }
+    },
+    {
+      "id": "agenda",
+      "escena": "agenda",
+      "segundos": 4,
+      "titulo": "Agenda *en segundos*",
+      "locucion": "Y cuando alguien quiere conversar, la reunión queda agendada en segundos.",
+      "props": {
+        "confirmacion": "Reunión confirmada",
+        "celda": 8
+      }
+    },
+    {
+      "id": "grafica",
+      "escena": "grafica",
+      "segundos": 4,
+      "titulo": "Y mira *cómo crece*",
+      "locucion": "Así se ve un negocio que crece.",
+      "props": {
+        "serie": [0.2, 0.35, 0.3, 0.55, 0.7, 0.9]
+      }
+    }
+  ]
+}

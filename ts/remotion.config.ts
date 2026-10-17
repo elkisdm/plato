@@ -3,3 +3,5 @@ import { Config } from '@remotion/cli/config';
 
 Config.setVideoImageFormat('jpeg');
 Config.setOverwriteOutput(true);
+// WebGL por GPU (ANGLE sobre Metal): las escenas con three.js (cromo 3D, bloom) lo necesitan.
+Config.setChromiumOpenGlRenderer('angle');
