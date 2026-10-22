@@ -65,8 +65,8 @@ export const Balanza = ({ desde, tNi, tTachado, tCalma }: Props) => {
           const e = extremo(lado);
           const cx = e.x;
           const cy = e.y + CARTA.colgado;
-          const caida = spring({ frame: frame - tNi[k], fps, config: { damping: 9, stiffness: 130, mass: 0.8 } });
-          const vis = frame >= tNi[k];
+          const caida = spring({ frame: frame - tNi[k]!, fps, config: { damping: 9, stiffness: 130, mass: 0.8 } });
+          const vis = frame >= tNi[k]!;
           if (!vis) return null;
           const dy = (1 - caida) * -240;
           return (
@@ -106,16 +106,16 @@ export const Balanza = ({ desde, tNi, tTachado, tCalma }: Props) => {
       />
 
       {([-1, 1] as const).map((lado, k) => {
-        if (frame < tNi[k]) return null;
+        if (frame < tNi[k]!) return null;
         const e = extremo(lado);
-        const caida = spring({ frame: frame - tNi[k], fps, config: { damping: 9, stiffness: 130, mass: 0.8 } });
-        const t = entre(frame, tTachado[k], tTachado[k] + 8);
-        const golpeado = frame >= tTachado[k] && frame < tTachado[k] + 7;
+        const caida = spring({ frame: frame - tNi[k]!, fps, config: { damping: 9, stiffness: 130, mass: 0.8 } });
+        const t = entre(frame, tTachado[k]!, tTachado[k]! + 8);
+        const golpeado = frame >= tTachado[k]! && frame < tTachado[k]! + 7;
         const sacude = golpeado ? Math.sin(frame * 3.1) * 4 : 0;
         const sway = -ang * 0.25 + Math.sin(frame / 11 + k * 2) * 1.2;
         const trazo = trazoOnduloso(18, 62, 282, 58, `e03-a-${k}`, 6, 5);
         const trazo2 = trazoOnduloso(30, 84, 270, 74, `e03-b-${k}`, 5, 4);
-        const fin = entre(frame, tTachado[k] + 6, tTachado[k] + 14);
+        const fin = entre(frame, tTachado[k]! + 6, tTachado[k]! + 14);
         return (
           <div
             key={k}
@@ -145,14 +145,14 @@ export const Balanza = ({ desde, tNi, tTachado, tCalma }: Props) => {
               transformOrigin: '50% -60px',
             }}
           >
-            <span>{TEXTOS[k][0]}</span>
-            <span style={{ whiteSpace: 'nowrap' }}>{TEXTOS[k][1]}</span>
+            <span>{TEXTOS[k]![0]}</span>
+            <span style={{ whiteSpace: 'nowrap' }}>{TEXTOS[k]![1]}</span>
             <svg width={CARTA.ancho} height={CARTA.alto} style={{ position: 'absolute', left: -2, top: -2, overflow: 'visible' }}>
               <path d={trazo.d} fill="none" stroke={WARN} strokeWidth={9} strokeLinecap="round" strokeDasharray={trazo.largo} strokeDashoffset={trazo.largo * (1 - t)} />
               <path d={trazo2.d} fill="none" stroke={WARN} strokeWidth={5} strokeLinecap="round" opacity={0.7} strokeDasharray={trazo2.largo} strokeDashoffset={trazo2.largo * (1 - fin)} />
             </svg>
             <div style={{ position: 'absolute', left: 0, top: 0 }}>
-              <Fragmentos inicio={tTachado[k] + 8} x={282} y={58} color={WARN} semilla={`e03-tacha-${k}`} cantidad={8} velocidad={10} gravedad={0.4} vida={14} tamano={11} />
+              <Fragmentos inicio={tTachado[k]! + 8} x={282} y={58} color={WARN} semilla={`e03-tacha-${k}`} cantidad={8} velocidad={10} gravedad={0.4} vida={14} tamano={11} />
             </div>
           </div>
         );
