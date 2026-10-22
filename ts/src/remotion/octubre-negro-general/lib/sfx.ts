@@ -56,9 +56,9 @@ export type EfectoSfx = {
 
 /** Pesos de volumen por tipo: impactos arriba, ticks abajo. */
 const V = {
-  impactoFuerte: 0.6,
-  impactoSuave: 0.45,
-  riser: 0.4,
+  impactoFuerte: 0.3,
+  impactoSuave: 0.4,
+  riser: 0.3,
   llaves: 0.4,
   cerrojo: 0.45,
   whoosh: 0.3,
@@ -188,9 +188,20 @@ export const EFECTOS: EfectoSfx[] = construir();
 
 /* ------------------------------------------------------------------ música */
 
-export const MUSICA_BASE = 0.2;
-export const MUSICA_HABLA = 0.14;
-export const MUSICA_ARRANQUE = 0.35;
+/*
+ * Ajuste tras medir la mezcla (brief: 0,20 / 0,14 / 0,35): con esos valores la música quedaba ~35 dB bajo
+ * la voz, inaudible. Se suben a 0,28 / 0,20 / 0,45 (cama ~16 dB bajo la voz) y se compensa el nivel
+ * integrado con VOLUMEN_VOZ.
+ */
+export const MUSICA_BASE = 0.28;
+export const MUSICA_HABLA = 0.2;
+export const MUSICA_ARRANQUE = 0.45;
+
+/**
+ * Ganancia de la voz. Su pico en PARCHE es −1,1 dBFS: subirla (1,2 dio +0,1 dBFS) satura al coincidir con el
+ * impacto, así que se deja por debajo de 1 y el nivel se logra con efectos y música.
+ */
+export const VOLUMEN_VOZ = 0.95;
 
 /** Primer 0,6 s de música a volumen alto, luego baja. */
 const ARRANQUE = aFrame(0.6);
