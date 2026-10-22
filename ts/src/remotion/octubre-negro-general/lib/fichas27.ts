@@ -43,3 +43,11 @@ export function tamanoCuadricula() {
     alto: filas * V.alto + (filas - 1) * V.gapY,
   };
 }
+
+/** Retraso (en unidades de escalón) de la ficha `i` en la ola de entrada: diagonal desde la esquina superior izquierda. */
+export function retrasoOla(i: number): number {
+  if (!Number.isInteger(i) || i < 0 || i >= TOTAL_FICHAS) {
+    throw new Error(`Ficha fuera de rango: ${i}`);
+  }
+  return (i % V.cols) + Math.floor(i / V.cols);
+}

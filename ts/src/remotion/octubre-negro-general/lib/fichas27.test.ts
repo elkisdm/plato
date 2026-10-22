@@ -6,6 +6,7 @@ import {
   MARGEN_LATERAL_FICHAS,
   posicionFicha,
   REALES,
+  retrasoOla,
   TOTAL_FICHAS,
   tamanoCuadricula,
 } from './fichas27';
@@ -60,5 +61,19 @@ describe('clase de cada ficha', () => {
       (i) => !REALES.includes(i) && !EXAGERADAS.includes(i),
     )!;
     expect(claseFicha(neutra)).toBe('neutra');
+  });
+});
+
+describe('ola de entrada', () => {
+  it('la diagonal crece desde la ficha 0 y la última llega después', () => {
+    expect(retrasoOla(0)).toBe(0);
+    expect(retrasoOla(1)).toBe(1);
+    expect(retrasoOla(5)).toBe(1);
+    expect(retrasoOla(24)).toBe(8);
+    expect(Math.max(...Array.from({ length: TOTAL_FICHAS }, (_, i) => retrasoOla(i)))).toBe(8);
+  });
+
+  it('lanza si el índice no existe', () => {
+    expect(() => retrasoOla(27)).toThrow();
   });
 });

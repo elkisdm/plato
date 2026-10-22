@@ -19,9 +19,10 @@ export const GOLPES_CAMARA: Golpe[] = [
   // E01 — «revisara»: el sello REVISAR golpea (`FRAME_IMPACTO_SELLO` = 6 después de empezar a caer)
   { frame: aFrame(palabra('revisara.', 0).inicio), fuerza: 0.55, x: 540, y: 1340 },
 
-  // E02 — «exageraciones» hincha las fichas ámbar
-  { frame: aFrame(palabra('exageraciones', 1).inicio), fuerza: 0.8, x: 540, y: 780 },
-  // (E02: agrega aquí los demás golpes de la escena)
+  // E02 — «exageraciones» hincha las fichas ámbar (la onda nace en el centro de la cuadrícula)
+  { frame: aFrame(palabra('exageraciones', 1).inicio), fuerza: 0.8, x: 540, y: 640 },
+  // E02 — «reportado»: la ficha 19 OCT aterriza sobre la línea de tiempo (termina su vuelo de 14 frames)
+  { frame: aFrame(palabra('reportado', 1).inicio), fuerza: 0.6, x: 355, y: 1280 },
 
   // E03 — «viene» (de dónde viene): la lupa revela la fuente
   { frame: aFrame(palabra('viene', 2).inicio), fuerza: 0.7, x: 540, y: 820 },

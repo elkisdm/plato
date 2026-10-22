@@ -82,6 +82,8 @@ const en = (texto: string, linea: number, n = 0): number => {
 /** Un whoosh de transición entra 3 frames antes del corte de cada escena (variantes rotadas). */
 const WHOOSH_TRANSICION = ['whoosh_corto_2.mp3', 'whoosh_corto_3.mp3', 'whoosh_corto_1.mp3'];
 const ANTICIPO_WHOOSH = 3;
+/** Frames de vuelo de la ficha 19 OCT (E02): el whoosh arranca con el vuelo y el impacto cae al aterrizar. */
+const VUELO_FECHA = 14;
 
 const rd = (n: number): number => Math.round(n);
 const dur = (archivo: string): number => rd(DURACION_SFX[archivo]! * FPS);
@@ -128,7 +130,7 @@ function construir(): EfectoSfx[] {
   add(ef(exag, 'alerta_1.mp3', V.alerta, 'exageraciones'));
   const reportado = en('reportado', 1);
   add(ef(reportado, 'impacto_suave_2.mp3', V.impactoSuave, 'cae la ficha 19 OCT'));
-  add(ef(reportado - ANTICIPO_WHOOSH, 'whoosh_corto_2.mp3', V.whoosh, 'cruce de la ficha 19 OCT', -ANTICIPO_WHOOSH));
+  add(ef(reportado - VUELO_FECHA, 'whoosh_corto_2.mp3', V.whoosh, 'cruce de la ficha 19 OCT', -VUELO_FECHA));
 
   // Línea 2 · fuente
   for (const t of ['mundo,', 'mentira.']) {
@@ -173,7 +175,7 @@ function construir(): EfectoSfx[] {
   const sigueme = en('sígueme', 6);
   add(ef(sigueme - 6, 'whoosh_largo_2.mp3', V.whooshLargo, 'sube el bloque', -6));
   add(ef(sigueme, 'pop_1.mp3', V.pop, 'entra SÍGUEME'));
-  add(ef(sigueme + 6, 'shimmer_2.mp3', V.shimmer, 'botón seguir', 6));
+  add(ef(sigueme + 30, 'shimmer_2.mp3', V.shimmer, 'botón seguir: «+» pasa a «✓»', 30));
 
   // Transiciones de escena: un whoosh por corte (líneas 1–6)
   ESCENAS.slice(1).forEach((e, i) => {
