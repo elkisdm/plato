@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 
 import onda from '../data/onda.json';
 import { PALABRAS, aFrame } from './alineacion';
-import { DURACION, ESCENAS } from './lineaTiempo';
+import { DURACION, ESCENAS, SOLAPE } from './lineaTiempo';
 
 describe('ESCENAS', () => {
   it('son 7 y la primera empieza en 0', () => {
@@ -35,5 +35,13 @@ describe('DURACION', () => {
 
   it('son 1834 frames (61,1 s)', () => {
     expect(DURACION).toBe(1834);
+  });
+});
+
+describe('SOLAPE', () => {
+  it('las escenas contiguas se solapan 14 frames (ventana de la transición)', () => {
+    for (let i = 0; i < ESCENAS.length - 1; i++) {
+      expect(ESCENAS[i]!.hasta - ESCENAS[i + 1]!.desde).toBe(SOLAPE);
+    }
   });
 });

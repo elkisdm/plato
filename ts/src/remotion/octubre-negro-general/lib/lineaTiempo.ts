@@ -18,8 +18,8 @@ export type IdEscena = (typeof NOMBRES_ESCENAS)[number];
 const COLA = 75;
 /** Cuánto antes de la primera palabra de la línea entra la escena. */
 const ANTICIPO = 8;
-/** Solape entre escenas contiguas (fundido cruzado). */
-const SOLAPE = 10;
+/** Solape entre escenas contiguas: ventana de la transición (cámara con desenfoque y separación cromática). */
+export const SOLAPE = 14;
 
 export const DURACION = aFrame(finLinea(NOMBRES_ESCENAS.length - 1)) + COLA;
 
