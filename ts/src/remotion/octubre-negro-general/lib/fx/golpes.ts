@@ -38,8 +38,9 @@ export const GOLPES_CAMARA: Golpe[] = [
   { frame: aFrame(palabra('cierra', 4).inicio) + 14, fuerza: 0.3, x: 540, y: 870 },
 
   // E06 — «alcanza» sella los tres pasos
-  { frame: aFrame(palabra('alcanza', 5).inicio), fuerza: 0.8, x: 540, y: 820 },
-  // (E06: agrega aquí los demás golpes de la escena)
+  { frame: aFrame(palabra('alcanza', 5).inicio), fuerza: 0.8, x: 540, y: 700 },
+  // E06 — el sello ALCANZA golpea 10 frames después (su onda propia nace en el sello; aquí solo shake)
+  { frame: aFrame(palabra('alcanza', 5).inicio) + 10, fuerza: 0.45, x: 540, y: 1230 },
 
   // E07 — «PARCHE» cae
   { frame: aFrame(palabra('PARCHE', 6).inicio), fuerza: 0.9, x: 540, y: 760 },

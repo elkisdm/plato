@@ -6,6 +6,7 @@ import {
   anguloPuerta,
   barridoPeriodico,
   FRAMES_CIERRE,
+  poseAbanico,
   GOLPES_E05,
   GOLPES_E06,
   GOLPES_E07,
@@ -94,5 +95,24 @@ describe('progresoSigueme', () => {
     expect(progresoSigueme(100, 100)).toBe(0);
     expect(progresoSigueme(200, 100)).toBe(1);
     expect(progresoSigueme(110, 100)).toBeGreaterThan(progresoSigueme(105, 100));
+  });
+});
+
+describe('poseAbanico', () => {
+  it('cada tarjeta parte de una pose distinta (abanico) y termina en su sitio', () => {
+    const iniciales = [0, 1, 2].map((i) => poseAbanico(i, 0));
+    expect(new Set(iniciales.map((p) => p.rot)).size).toBe(3);
+    for (const p of iniciales) expect(Math.abs(p.rot)).toBeGreaterThan(5);
+    for (const i of [0, 1, 2]) expect(poseAbanico(i, 1)).toEqual({ rot: 0, x: 0, y: 0 });
+  });
+
+  it('con overshoot del spring (s > 1) se pasa al otro lado antes de asentarse', () => {
+    const antes = poseAbanico(1, 0);
+    const pasada = poseAbanico(1, 1.1);
+    expect(Math.sign(pasada.rot)).toBe(-Math.sign(antes.rot));
+  });
+
+  it('ninguna pose inicial saca la tarjeta por encima de la zona segura', () => {
+    for (const i of [0, 1, 2]) expect(poseAbanico(i, 0).y).toBeGreaterThanOrEqual(-60 * (i + 1));
   });
 });

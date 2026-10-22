@@ -70,3 +70,16 @@ export function barridoPeriodico(
 /** 0→1 de la transición PARCHE grande → PARCHE pequeño + «sígueme». */
 export const progresoSigueme = (frame: number, sigueme: number): number =>
   entrada(frame, sigueme, 18);
+
+/** Pose inicial (grados y px) de cada tarjeta del abanico de E06 antes de caer en su fila. */
+const ABANICO = [
+  { rot: -16, x: -120, y: -50 },
+  { rot: 12, x: 110, y: -90 },
+  { rot: -9, x: -90, y: -130 },
+] as const;
+
+/** Pose de la tarjeta `i` según el progreso `s` del spring (0 = abanico, 1 = en su fila; puede pasar de 1). */
+export function poseAbanico(i: number, s: number): { rot: number; x: number; y: number } {
+  const a = ABANICO[i]!;
+  return { rot: a.rot * (1 - s) || 0, x: a.x * (1 - s) || 0, y: a.y * (1 - s) || 0 };
+}
