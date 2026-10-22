@@ -14,9 +14,10 @@ import { aFrame, palabra } from '../alineacion';
 export type Golpe = { frame: number; fuerza: number; x?: number; y?: number };
 
 export const GOLPES_CAMARA: Golpe[] = [
-  // E01 — «veintisiete» aterriza el 27
-  { frame: aFrame(palabra('veintisiete', 0).inicio), fuerza: 0.9, x: 540, y: 760 },
-  // (E01: agrega aquí los demás golpes de la escena)
+  // E01 — «veintisiete»: el 27 del marcador aterriza (la onda nace en su centro, y 520)
+  { frame: aFrame(palabra('veintisiete', 0).inicio), fuerza: 0.9, x: 540, y: 520 },
+  // E01 — «revisara»: el sello REVISAR golpea (`FRAME_IMPACTO_SELLO` = 6 después de empezar a caer)
+  { frame: aFrame(palabra('revisara.', 0).inicio), fuerza: 0.55, x: 540, y: 1340 },
 
   // E02 — «exageraciones» hincha las fichas ámbar
   { frame: aFrame(palabra('exageraciones', 1).inicio), fuerza: 0.8, x: 540, y: 780 },
