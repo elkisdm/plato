@@ -9,7 +9,7 @@
  * Cada escena tiene su bloque: las tareas de escenas agregan ahí sus golpes (no en otro lugar).
  */
 
-import { aFrame, palabra } from '../alineacion';
+import { aFrame, normalizar, PALABRAS, palabra } from '../alineacion';
 
 export type Golpe = { frame: number; fuerza: number; x?: number; y?: number };
 
@@ -27,9 +27,10 @@ export const GOLPES_CAMARA: Golpe[] = [
   // E03 — «dónde»: la lupa aterriza y el haz de luz revela la ficha ¿FUENTE? (la onda nace en la ficha)
   { frame: aFrame(palabra('dónde', 2).inicio), fuerza: 0.7, x: 540, y: 1195 },
 
-  // E04 — «llaves» (cambiar tus llaves)
-  { frame: aFrame(palabra('llaves', 3).inicio), fuerza: 0.85, x: 540, y: 800 },
-  // (E04: agrega aquí los demás golpes de la escena)
+  // E04 — «pasa» (a la casa le pasa algo): onda ámbar que recorre la casa
+  { frame: aFrame(palabra('pasa', 3).inicio), fuerza: 0.6, x: 540, y: 620 },
+  // E04 — tercer «tus» (cambiar tus llaves): las llaves nuevas encajan con destello (misma ancla que la escena y el sonido)
+  { frame: aFrame(PALABRAS.filter((w) => w.linea === 3 && normalizar(w.texto) === 'tus')[2]!.inicio), fuerza: 0.85, x: 540, y: 1210 },
 
   // E05 — «cierra» la puerta
   { frame: aFrame(palabra('cierra', 4).inicio), fuerza: 1, x: 540, y: 900 },
