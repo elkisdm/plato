@@ -31,8 +31,9 @@ export const GOLPES_CAMARA: Golpe[] = [
   // (E04: agrega aquí los demás golpes de la escena)
 
   // E05 — «cierra» la puerta
-  { frame: aFrame(palabra('cierra', 4).inicio), fuerza: 1, x: 540, y: 820 },
-  // (E05: agrega aquí los demás golpes de la escena)
+  { frame: aFrame(palabra('cierra', 4).inicio), fuerza: 1, x: 540, y: 900 },
+  // E05 — el candado hace click 14 frames después (solo shake leve; el destello turquesa es de la escena)
+  { frame: aFrame(palabra('cierra', 4).inicio) + 14, fuerza: 0.3, x: 540, y: 870 },
 
   // E06 — «alcanza» sella los tres pasos
   { frame: aFrame(palabra('alcanza', 5).inicio), fuerza: 0.8, x: 540, y: 820 },

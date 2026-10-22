@@ -4,9 +4,12 @@ import { ESCENAS } from './lineaTiempo';
 import {
   ANGULO_ABIERTA,
   anguloPuerta,
+  barridoPeriodico,
+  FRAMES_CIERRE,
   GOLPES_E05,
   GOLPES_E06,
   GOLPES_E07,
+  OSCILACION_PUERTA,
   progresoSigueme,
 } from './golpesFinales';
 
@@ -44,20 +47,44 @@ describe('anclas de E05–E07', () => {
 });
 
 describe('anguloPuerta', () => {
-  it('queda entreabierta hasta «cierra»', () => {
-    expect(anguloPuerta(0, 100)).toBe(ANGULO_ABIERTA);
-    expect(anguloPuerta(100, 100)).toBe(ANGULO_ABIERTA);
+  const inicioCierre = 100 - FRAMES_CIERRE;
+
+  it('oscila alrededor de la apertura base mientras espera y nunca queda fija', () => {
+    const valores = Array.from({ length: 80 }, (_, f) => anguloPuerta(f, 400));
+    for (const a of valores) {
+      expect(Math.abs(a - ANGULO_ABIERTA)).toBeLessThanOrEqual(OSCILACION_PUERTA + 1e-9);
+    }
+    expect(new Set(valores.map((a) => a.toFixed(3))).size).toBeGreaterThan(40);
   });
 
-  it('se cierra del todo sin pasarse de 0 y nunca crece', () => {
+  it('baja a 0 exactamente en «cierra» sin saltos al empezar el cierre', () => {
+    expect(anguloPuerta(100, 100)).toBeCloseTo(0, 5);
+    const antes = anguloPuerta(inicioCierre - 1, 100);
+    const arranque = anguloPuerta(inicioCierre, 100);
+    expect(Math.abs(arranque - antes)).toBeLessThan(2);
     let previo = Infinity;
-    for (let f = 100; f < 140; f++) {
+    for (let f = inicioCierre; f <= 100; f++) {
       const a = anguloPuerta(f, 100);
-      expect(a).toBeLessThanOrEqual(previo);
-      expect(a).toBeGreaterThanOrEqual(0);
+      expect(a).toBeLessThanOrEqual(previo + 1e-9);
       previo = a;
     }
-    expect(anguloPuerta(140, 100)).toBe(0);
+  });
+
+  it('rebota un poco tras el portazo sin cruzar 0 y se asienta', () => {
+    const rebotes = Array.from({ length: 30 }, (_, k) => anguloPuerta(101 + k, 100));
+    expect(Math.max(...rebotes)).toBeGreaterThan(1);
+    expect(Math.min(...rebotes)).toBeGreaterThanOrEqual(0);
+    expect(anguloPuerta(140, 100)).toBeCloseTo(0, 1);
+  });
+});
+
+describe('barridoPeriodico', () => {
+  it('es null fuera del barrido y avanza 0→1 dentro, repitiéndose cada periodo', () => {
+    expect(barridoPeriodico(99, 100, 60, 20)).toBeNull();
+    expect(barridoPeriodico(100, 100, 60, 20)).toBe(0);
+    expect(barridoPeriodico(110, 100, 60, 20)).toBeCloseTo(0.5);
+    expect(barridoPeriodico(125, 100, 60, 20)).toBeNull();
+    expect(barridoPeriodico(170, 100, 60, 20)).toBeCloseTo(0.5);
   });
 });
 

@@ -27,14 +27,44 @@ export const GOLPES_E07 = {
   sigueme: en('sígueme', 6),
 };
 
-/** Grados de apertura de la puerta antes de cerrarse. */
+/** Grados de apertura de la puerta alrededor de los que oscila mientras espera. */
 export const ANGULO_ABIERTA = 52;
-/** Frames que tarda en cerrarse. */
-export const FRAMES_CIERRE = 14;
+/** Amplitud (grados) de la oscilación de la puerta entreabierta. */
+export const OSCILACION_PUERTA = 6;
+/** Frames que tarda en cerrarse: el portazo golpea exactamente en `cierra`. */
+export const FRAMES_CIERRE = 8;
+/** Grados del primer rebote de la puerta contra el marco. */
+const REBOTE_PORTAZO = 9;
 
-/** Apertura de la puerta en grados: fija hasta `cierra`, luego baja a 0 sin cruzarlo. */
+const clamp01 = (x: number): number => Math.min(1, Math.max(0, x));
+
+/**
+ * Apertura de la puerta en grados: oscila alrededor de `ANGULO_ABIERTA`, se cierra acelerando para
+ * golpear 0 en `cierra`, rebota contra el marco sin cruzarlo y se asienta.
+ */
 export function anguloPuerta(frame: number, cierra: number): number {
-  return ANGULO_ABIERTA * (1 - entrada(frame, cierra, FRAMES_CIERRE));
+  if (frame > cierra) {
+    const k = frame - cierra;
+    return REBOTE_PORTAZO * Math.exp(-k / 4) * Math.abs(Math.sin(k * 0.7));
+  }
+  const oscila = ANGULO_ABIERTA + OSCILACION_PUERTA * Math.sin(frame / 24);
+  const p = clamp01((frame - (cierra - FRAMES_CIERRE)) / FRAMES_CIERRE);
+  return oscila * (1 - p * p);
+}
+
+/**
+ * Barrido repetido (brillo que cruza): posición 0–1 dentro de cada barrido de `dur` frames que arranca
+ * en `inicio` y se repite cada `periodo`; null mientras descansa o antes de `inicio`.
+ */
+export function barridoPeriodico(
+  frame: number,
+  inicio: number,
+  periodo: number,
+  dur: number,
+): number | null {
+  if (frame < inicio) return null;
+  const t = (frame - inicio) % periodo;
+  return t < dur ? t / dur : null;
 }
 
 /** 0→1 de la transición PARCHE grande → PARCHE pequeño + «sígueme». */
