@@ -43,6 +43,9 @@ export const GOLPES_CAMARA: Golpe[] = [
   { frame: aFrame(palabra('alcanza', 5).inicio) + 10, fuerza: 0.45, x: 540, y: 1230 },
 
   // E07 — «PARCHE» cae
-  { frame: aFrame(palabra('PARCHE', 6).inicio), fuerza: 0.9, x: 540, y: 760 },
-  // (E07: agrega aquí los demás golpes de la escena)
+  { frame: aFrame(palabra('PARCHE', 6).inicio), fuerza: 0.9, x: 540, y: 640 },
+  // E07 — «sígueme»: el bloque sube y entra SÍGUEME (solo shake)
+  { frame: aFrame(palabra('sígueme', 6).inicio), fuerza: 0.45, x: 540, y: 820 },
+  // E07 — el botón de seguir pasa de «+» a «✓» 30 frames después (su onda propia nace en el botón)
+  { frame: aFrame(palabra('sígueme', 6).inicio) + 30, fuerza: 0.4, x: 540, y: 1160 },
 ];
