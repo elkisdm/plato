@@ -1,22 +1,20 @@
 import { AbsoluteFill } from 'remotion';
 
-import { COLORS, FONTS } from '../constants/theme';
-import { MARGEN_LATERAL, YINI_V } from '../lib/layout';
+import { PuertaCierre } from '../components/PuertaCierre';
+import { GOLPES_E05 } from '../lib/golpesFinales';
+import { ANCHO_V, MARGEN_LATERAL, YFIN_ESCENA, YINI_V } from '../lib/layout';
 import type { PropsEscena } from './tipos';
 
-/** STUB: titular provisional; la escena real se implementa aparte. */
+/** E05 (línea 4): una actualización cierra una puerta. Golpe: «cierra» → puerta ámbar a turquesa con candado. */
 export const E05Puerta = (_props: PropsEscena) => (
   <AbsoluteFill
     style={{
-      paddingTop: YINI_V,
-      paddingLeft: MARGEN_LATERAL,
-      paddingRight: MARGEN_LATERAL,
-      fontFamily: FONTS.sans,
-      fontSize: 72,
-      fontWeight: 800,
-      color: COLORS.text,
+      top: YINI_V,
+      left: MARGEN_LATERAL,
+      width: ANCHO_V,
+      height: YFIN_ESCENA - YINI_V,
     }}
   >
-    Cierra la puerta
+    <PuertaCierre actualizacion={GOLPES_E05.actualizacion} cierra={GOLPES_E05.cierra} />
   </AbsoluteFill>
 );
