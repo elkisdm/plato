@@ -3,12 +3,20 @@
 //   - SpecComposition: captions/overlays sobre el fondo del mundo de color (sin video).
 //   - SpecOverVideo: lo mismo ENCIMA del mp4 fuente (public/source.mp4, gitignored).
 //   - PaperScene: demo del sistema "papel que cobra vida" (paperTokens + paperMotion).
+//   - OctubreNegro: reel 9:16 "Octubre Negro, verificado", sincronizado con la voz (octubre-negro/).
 // El spec completo vive en src/fixtures/ como fixture de render; el golden sigue en /fixtures.
 
 import { Composition, staticFile } from 'remotion';
 import { ComposicionesEstudio } from '../estudio/Composiciones';
 
 import fullSpecJson from '../fixtures/olyasuharska.full.json';
+import {
+  DURACION_OCTUBRE_NEGRO,
+  FPS_OCTUBRE_NEGRO,
+  H_OCTUBRE_NEGRO,
+  OctubreNegro,
+  W_OCTUBRE_NEGRO,
+} from './octubre-negro/OctubreNegro';
 import { extractPresets } from './presets';
 import { PaperScene } from './scenes/PaperScene';
 import { SpecComposition } from './SpecComposition';
@@ -49,6 +57,14 @@ export const RemotionRoot = () => {
         height={s.height}
         fps={s.fps}
         durationInFrames={5 * s.fps}
+      />
+      <Composition
+        id="OctubreNegro"
+        component={OctubreNegro}
+        width={W_OCTUBRE_NEGRO}
+        height={H_OCTUBRE_NEGRO}
+        fps={FPS_OCTUBRE_NEGRO}
+        durationInFrames={DURACION_OCTUBRE_NEGRO}
       />
       {/* Estudio de video (ADR-0011): una composición por proyecto y formato, más su poster. */}
       <ComposicionesEstudio />
