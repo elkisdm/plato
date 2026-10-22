@@ -1,9 +1,10 @@
 import type { ComponentType } from 'react';
-import { AbsoluteFill, Audio, staticFile } from 'remotion';
+import { AbsoluteFill } from 'remotion';
 
 import { GridBackground } from '../arquitectura-ia/components/ui/GridBackground';
 import { loadFonts } from '../arquitectura-ia/lib/fonts';
 import { Escena } from './components/Escena';
+import { Sonido } from './components/Sonido';
 import { Subtitulos } from './components/Subtitulos';
 import { FPS, H, W } from './constants/theme';
 import { DURACION, ESCENAS, type IdEscena } from './lib/lineaTiempo';
@@ -36,7 +37,7 @@ const COMPONENTES: Record<IdEscena, ComponentType<PropsEscena>> = {
 /** Reel "Octubre Negro, para todos": escenas en tiempo global sobre la voz de ElevenLabs, con subtítulos siempre. */
 export const OctubreNegroGeneral = () => (
   <AbsoluteFill>
-    <Audio src={staticFile('octubre-negro-general/voz.mp3')} />
+    <Sonido />
     <GridBackground />
     {ESCENAS.map((e, i) => {
       const Componente = COMPONENTES[e.id];
