@@ -24,9 +24,8 @@ export const GOLPES_CAMARA: Golpe[] = [
   // E02 — «reportado»: la ficha 19 OCT aterriza sobre la línea de tiempo (termina su vuelo de 14 frames)
   { frame: aFrame(palabra('reportado', 1).inicio), fuerza: 0.6, x: 355, y: 1280 },
 
-  // E03 — «viene» (de dónde viene): la lupa revela la fuente
-  { frame: aFrame(palabra('viene', 2).inicio), fuerza: 0.7, x: 540, y: 820 },
-  // (E03: agrega aquí los demás golpes de la escena)
+  // E03 — «dónde»: la lupa aterriza y el haz de luz revela la ficha ¿FUENTE? (la onda nace en la ficha)
+  { frame: aFrame(palabra('dónde', 2).inicio), fuerza: 0.7, x: 540, y: 1195 },
 
   // E04 — «llaves» (cambiar tus llaves)
   { frame: aFrame(palabra('llaves', 3).inicio), fuerza: 0.85, x: 540, y: 800 },

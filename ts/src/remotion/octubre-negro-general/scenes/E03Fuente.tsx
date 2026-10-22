@@ -1,88 +1,42 @@
 /**
- * E03 · Fuente (línea 2). Dos extremos tachados (TODO ES EL FIN DEL MUNDO en «ni», TODO ES MENTIRA en
- * el segundo «ni»); entre ambos, una línea con el punto en el centro. «compartirla» → un interruptor
- * COMPARTIR que se apaga. Golpe: «dónde» → una lupa sobre la ficha ¿FUENTE? que pasa a turquesa.
+ * E03 · Fuente (línea 2). Una balanza física: cae «TODO ES EL FIN DEL MUNDO» y la viga se inclina, se tacha con
+ * un trazo; cae «TODO ES MENTIRA» y se inclina al otro lado, se tacha; con «noticia» oscila y se equilibra
+ * (CON CALMA). «compartirla» → el interruptor COMPARTIR se desliza con rebote. Golpe: «dónde» → la lupa barre y
+ * un haz de luz revela la ficha ¿FUENTE?, que se verifica con anillo y check (shake + destello + onda).
  */
 
 import type { CSSProperties } from 'react';
-import { AbsoluteFill, useCurrentFrame } from 'remotion';
+import { AbsoluteFill, spring, useCurrentFrame, useVideoConfig } from 'remotion';
 
+import { Balanza } from '../components/Balanza';
+import { Fragmentos } from '../components/Fragmentos';
 import { Lupa } from '../components/Lupa';
-import { COLORS, FONTS, FPS, SPACING, W, WARN, WARN_WASH } from '../constants/theme';
+import { COLORS, FONTS, SPACING, W, WARN, WARN_GLOW, WARN_WASH } from '../constants/theme';
 import { aFrame, normalizar, PALABRAS, palabra } from '../lib/alineacion';
-import { ANCHO_V, fsMinimo, MARGEN_LATERAL } from '../lib/layout';
-import { entrada, entre, rebote } from '../lib/motion';
+import { fsMinimo } from '../lib/layout';
+import { entrada, entre } from '../lib/motion';
 import type { PropsEscena } from './tipos';
 
 const LINEA = 2;
 const ancla = (texto: string) => aFrame(palabra(texto, LINEA).inicio);
 /** n-ésima aparición (0 = primera) de una palabra dentro de la línea. */
 const anclaN = (texto: string, n: number) =>
-  aFrame(
-    PALABRAS.filter((w) => w.linea === LINEA && normalizar(w.texto) === normalizar(texto))[n]!.inicio,
-  );
+  aFrame(PALABRAS.filter((w) => w.linea === LINEA && normalizar(w.texto) === normalizar(texto))[n]!.inicio);
 
-const Y_A = 260;
-const Y_EJE = 490;
-const Y_B = 620;
-const Y_INTERRUPTOR = 830;
-const Y_FUENTE = 1030;
-const ALTO_EXTREMO = 104;
-const FUENTE = { x: 320, ancho: 440, alto: 130 };
+const Y_CALMA = 772;
+const Y_INTERRUPTOR = 905;
+const FUENTE = { x: 320, y: 1130, ancho: 440, alto: 130 };
+const CENTRO_FUENTE = { x: FUENTE.x + FUENTE.ancho / 2, y: FUENTE.y + FUENTE.alto / 2 };
+/** Posición de la lupa al aterrizar sobre la ficha. */
+const LUPA_FIN = { x: CENTRO_FUENTE.x + 70, y: CENTRO_FUENTE.y - 10 };
+const RADIO_LUPA = 54;
 
-const Extremo = ({
-  y,
-  texto,
-  aparece,
-  tachado,
-}: {
-  y: number;
-  texto: string;
-  aparece: number;
-  tachado: number;
-}) => (
-  <div
-    style={{
-      position: 'absolute',
-      left: MARGEN_LATERAL,
-      top: y,
-      width: ANCHO_V,
-      height: ALTO_EXTREMO,
-      boxSizing: 'border-box',
-      borderRadius: SPACING.radius,
-      border: `2px solid ${WARN}`,
-      background: WARN_WASH,
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      fontFamily: FONTS.sans,
-      fontSize: 44,
-      fontWeight: 800,
-      letterSpacing: '-0.02em',
-      color: COLORS.text,
-      opacity: aparece * (1 - 0.35 * tachado),
-      transform: `translateY(${(1 - aparece) * 14}px)`,
-    }}
-  >
-    {texto}
-    <div
-      style={{
-        position: 'absolute',
-        left: 28,
-        width: (ANCHO_V - 56) * tachado,
-        top: ALTO_EXTREMO / 2 - 3,
-        height: 6,
-        borderRadius: 3,
-        background: WARN,
-      }}
-    />
-  </div>
-);
+const easeOut = (t: number): number => 1 - Math.pow(1 - t, 3);
 
-export const E03Fuente = (_: PropsEscena) => {
+export const E03Fuente = ({ desde }: PropsEscena) => {
   const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
 
-  const tSea = ancla('sea,');
   const tNi1 = anclaN('ni', 0);
   const tMundo = ancla('mundo,');
   const tNi2 = anclaN('ni', 1);
@@ -91,30 +45,47 @@ export const E03Fuente = (_: PropsEscena) => {
   const tAsustarte = ancla('asustarte');
   const tCompartirla = ancla('compartirla');
   const tSin = ancla('sin');
-  const tMirar = ancla('mirar');
   const golpe = ancla('dónde');
 
-  const eje = entrada(frame, tSea, 10);
-  const calma = entrada(frame, tNoticia, 8);
-  const interruptor = entrada(frame, tAsustarte, 8);
-  const apagado = entre(frame, tCompartirla, tCompartirla + 8);
-  const ficha = entrada(frame, tSin, 8);
-  const lupa = entre(frame, tMirar, golpe);
-  const k = rebote(frame, golpe, FPS);
-  const verificada = entrada(frame, golpe, 4);
-  const colorFicha = verificada > 0.5 ? COLORS.accent : WARN;
+  const calma = spring({ frame: frame - tNoticia, fps, config: { damping: 11, stiffness: 120 } });
+
+  // Interruptor: entra con spring y se apaga deslizándose con rebote.
+  const pop = spring({ frame: frame - tAsustarte, fps, config: { damping: 10, stiffness: 130 } });
+  const desliza = spring({ frame: frame - (tCompartirla + 2), fps, config: { damping: 7, stiffness: 220, mass: 0.6 } });
+  const apagado = frame >= tCompartirla + 2 ? desliza : 0;
+  const mitad = apagado > 0.5;
+
+  // Lupa: barre en zigzag desde la izquierda y aterriza sobre la ficha en el golpe.
+  const p = entre(frame, tSin, golpe);
+  const barre = frame >= tSin && frame <= golpe;
+  const flota = frame > golpe ? 1 : 0;
+  const lupa = barre
+    ? {
+        x: 150 + (LUPA_FIN.x - 150) * easeOut(p) + Math.sin(p * Math.PI * 3) * 70 * (1 - p),
+        y: LUPA_FIN.y + Math.sin(p * Math.PI * 2.5) * 130 * (1 - p),
+      }
+    : { x: LUPA_FIN.x + flota * Math.sin(frame / 9) * 8, y: LUPA_FIN.y + flota * Math.cos(frame / 7) * 6 };
+  const lupaVisible = frame >= tSin - 3;
+  const k = spring({ frame: frame - golpe, fps, config: { damping: 8, stiffness: 150, mass: 0.7 } });
+  const verificada = frame >= golpe;
+  const colorFicha = verificada ? COLORS.accent : WARN;
+  const radioReveal = verificada ? 170 + 900 * entre(frame, golpe, golpe + 8) : frame < tSin - 3 ? 0.01 : 170;
+  const cx = lupa.x - FUENTE.x;
+  const cy = lupa.y - FUENTE.y;
+  const mascara = `radial-gradient(circle ${radioReveal}px at ${cx}px ${cy}px, #000 55%, transparent 100%)`;
+  const check = entre(frame, golpe + 3, golpe + 13);
 
   const fichaEstilo: CSSProperties = {
     position: 'absolute',
     left: FUENTE.x,
-    top: Y_FUENTE,
+    top: FUENTE.y,
     width: FUENTE.ancho,
     height: FUENTE.alto,
     boxSizing: 'border-box',
     borderRadius: SPACING.radius,
     border: `4px solid ${colorFicha}`,
-    background: verificada > 0.5 ? COLORS.accentWash : WARN_WASH,
-    boxShadow: `0 0 ${34 * verificada}px ${COLORS.accentGlow}`,
+    background: verificada ? COLORS.accentWash : WARN_WASH,
+    boxShadow: `0 0 ${verificada ? 34 + 8 * Math.sin(frame / 8) : 18}px ${verificada ? COLORS.accentGlow : WARN_GLOW}`,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -123,67 +94,41 @@ export const E03Fuente = (_: PropsEscena) => {
     fontSize: 54,
     fontWeight: 800,
     color: colorFicha,
-    opacity: ficha,
-    transform: `scale(${1 + 0.1 * Math.max(0, k)})`,
+    WebkitMaskImage: mascara,
+    maskImage: mascara,
+    opacity: frame < tSin - 3 ? 0 : 1,
+    transform: `scale(${verificada ? 1 + 0.12 * Math.max(0, 1 - k) * 2 : 1})`,
   };
+
+  // Cono de luz desde arriba a la derecha hasta el cristal de la lupa.
+  const fuente = { x: lupa.x + 330, y: lupa.y - 340 };
+  const lx = lupa.x - 6;
+  const ly = lupa.y - 6;
+  const luzOpacidad = lupaVisible ? 0.5 * (frame > golpe + 18 ? Math.max(0.25, 1 - (frame - golpe - 18) / 20) : 1) : 0;
 
   return (
     <AbsoluteFill>
-      <Extremo
-        y={Y_A}
-        texto="TODO ES EL FIN DEL MUNDO"
-        aparece={entrada(frame, tNi1, 8)}
-        tachado={entre(frame, tMundo, tMundo + 10)}
-      />
+      <Balanza desde={desde} tNi={[tNi1, tNi2]} tTachado={[tMundo, tMentira]} tCalma={tNoticia} />
 
       <div
         style={{
           position: 'absolute',
-          left: MARGEN_LATERAL,
-          top: Y_EJE,
-          width: ANCHO_V * eje,
-          height: 4,
-          borderRadius: 2,
-          background: COLORS.line,
-        }}
-      />
-      <div
-        style={{
-          position: 'absolute',
-          left: W / 2 - 24,
-          top: Y_EJE - 22,
-          width: 48,
-          height: 48,
-          borderRadius: 24,
-          background: calma > 0.5 ? COLORS.accent : COLORS.idle,
-          boxShadow: `0 0 ${30 * calma}px ${COLORS.accentGlow}`,
-          opacity: eje,
-        }}
-      />
-      <div
-        style={{
-          position: 'absolute',
-          left: 0,
-          width: W,
-          top: Y_EJE + 44,
+          left: W / 2 - 150,
+          width: 300,
+          top: Y_CALMA,
           textAlign: 'center',
           fontFamily: FONTS.mono,
           fontSize: fsMinimo(34),
           letterSpacing: '0.1em',
           color: COLORS.accent,
-          opacity: calma,
+          opacity: Math.min(1, calma * 1.5),
+          transform: `translateY(${(1 - Math.min(1, calma)) * 18}px) scale(${0.9 + 0.1 * calma})`,
         }}
       >
         CON CALMA
       </div>
 
-      <Extremo
-        y={Y_B}
-        texto="TODO ES MENTIRA"
-        aparece={entrada(frame, tNi2, 8)}
-        tachado={entre(frame, tMentira, tMentira + 10)}
-      />
-
+      {/* Interruptor COMPARTIR */}
       <div
         style={{
           position: 'absolute',
@@ -193,8 +138,9 @@ export const E03Fuente = (_: PropsEscena) => {
           height: 100,
           boxSizing: 'border-box',
           borderRadius: 50,
-          border: `3px solid ${apagado > 0.5 ? COLORS.idle : WARN}`,
+          border: `3px solid ${mitad ? COLORS.idle : WARN}`,
           background: COLORS.surface,
+          boxShadow: mitad ? undefined : `0 0 ${14 + 8 * Math.sin(frame / 6)}px ${WARN_GLOW}`,
           display: 'flex',
           alignItems: 'center',
           gap: 26,
@@ -203,20 +149,12 @@ export const E03Fuente = (_: PropsEscena) => {
           fontSize: 40,
           fontWeight: 800,
           letterSpacing: '0.04em',
-          color: apagado > 0.5 ? COLORS.idle : COLORS.text,
-          opacity: interruptor,
+          color: mitad ? COLORS.idle : COLORS.text,
+          opacity: Math.min(1, pop * 2),
+          transform: `scale(${0.7 + 0.3 * pop}) translateY(${(1 - Math.min(1, pop)) * 30}px)`,
         }}
       >
-        <div
-          style={{
-            position: 'relative',
-            width: 92,
-            height: 48,
-            borderRadius: 24,
-            background: apagado > 0.5 ? COLORS.idle : WARN,
-            flexShrink: 0,
-          }}
-        >
+        <div style={{ position: 'relative', width: 92, height: 48, borderRadius: 24, background: mitad ? COLORS.idle : WARN, flexShrink: 0 }}>
           <div
             style={{
               position: 'absolute',
@@ -226,38 +164,93 @@ export const E03Fuente = (_: PropsEscena) => {
               height: 36,
               borderRadius: 18,
               background: COLORS.bg,
+              boxShadow: '0 2px 8px rgba(0,0,0,0.5)',
             }}
           />
         </div>
         COMPARTIR
       </div>
 
+      {/* Ficha ¿FUENTE?: hueco punteado hasta que la luz la revela */}
+      <div
+        style={{
+          position: 'absolute',
+          left: FUENTE.x,
+          top: FUENTE.y,
+          width: FUENTE.ancho,
+          height: FUENTE.alto,
+          boxSizing: 'border-box',
+          borderRadius: SPACING.radius,
+          border: `3px dashed ${COLORS.idle}`,
+          opacity: entrada(frame, tAsustarte, 8) * 0.7,
+        }}
+      />
       <div style={fichaEstilo}>
-        <svg
-          width={46}
-          height={46}
-          viewBox="0 0 46 46"
-          style={{ opacity: verificada, flexShrink: 0 }}
-        >
+        <svg width={46} height={46} viewBox="0 0 46 46" style={{ flexShrink: 0, opacity: check > 0 ? 1 : 0 }}>
           <path
             d="M7 24 L19 36 L40 10"
+            pathLength={1}
             fill="none"
             stroke={COLORS.accent}
             strokeWidth={7}
             strokeLinecap="round"
             strokeLinejoin="round"
+            strokeDasharray={1}
+            strokeDashoffset={1 - check}
           />
         </svg>
         ¿FUENTE?
       </div>
-      <Lupa
-        x={FUENTE.x + FUENTE.ancho + 20 + (1 - lupa) * 70}
-        y={Y_FUENTE - 14 + (1 - lupa) * 150}
-        radio={46}
-        color={colorFicha}
-        relleno="rgba(9,13,15,0.35)"
-        opacidad={ficha}
-      />
+
+      {/* Haz de luz y lupa */}
+      {lupaVisible ? (
+        <>
+          <svg width={W} height={1920} style={{ position: 'absolute', left: 0, top: 0, pointerEvents: 'none', opacity: luzOpacidad }}>
+            <defs>
+              <linearGradient id="haz-e03" x1={fuente.x} y1={fuente.y} x2={lx} y2={ly} gradientUnits="userSpaceOnUse">
+                <stop offset="0" stopColor="#FFFFFF" stopOpacity={0} />
+                <stop offset="1" stopColor={verificada ? COLORS.accent : '#FFFFFF'} stopOpacity={0.5} />
+              </linearGradient>
+            </defs>
+            <polygon points={`${fuente.x - 40},${fuente.y + 20} ${fuente.x + 40},${fuente.y - 20} ${lx + 90},${ly + 20} ${lx - 70},${ly - 60}`} fill="url(#haz-e03)" />
+            <circle cx={lx} cy={ly} r={RADIO_LUPA * 2.4} fill={verificada ? COLORS.accentGlow : 'rgba(255,255,255,0.10)'} style={{ filter: 'blur(14px)' }} />
+          </svg>
+          <Lupa x={lupa.x} y={lupa.y} radio={RADIO_LUPA} color={colorFicha} relleno="rgba(9,13,15,0.25)" opacidad={Math.min(1, entre(frame, tSin - 3, tSin + 3))} />
+        </>
+      ) : null}
+
+      {/* Anillo de verificación y chispas */}
+      {verificada ? (
+        <>
+          <div
+            style={{
+              position: 'absolute',
+              left: CENTRO_FUENTE.x - 260,
+              top: CENTRO_FUENTE.y - 260,
+              width: 520,
+              height: 520,
+              borderRadius: '50%',
+              border: `6px solid ${COLORS.accent}`,
+              opacity: Math.max(0, 1 - entre(frame, golpe, golpe + 14)) * 0.8,
+              transform: `scale(${0.3 + 0.7 * entre(frame, golpe, golpe + 14)})`,
+            }}
+          />
+          <div
+            style={{
+              position: 'absolute',
+              left: CENTRO_FUENTE.x - 300,
+              top: CENTRO_FUENTE.y - 300,
+              width: 600,
+              height: 600,
+              borderRadius: '50%',
+              border: `3px dashed ${COLORS.accent}`,
+              opacity: 0.35,
+              transform: `rotate(${(frame - golpe) * 3}deg)`,
+            }}
+          />
+        </>
+      ) : null}
+      <Fragmentos inicio={golpe} x={CENTRO_FUENTE.x} y={CENTRO_FUENTE.y} color={COLORS.accent} semilla="e03-fuente" cantidad={18} velocidad={20} gravedad={0.5} />
     </AbsoluteFill>
   );
 };
