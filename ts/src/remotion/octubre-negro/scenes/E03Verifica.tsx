@@ -42,7 +42,7 @@ const Y_TARJETA = 1290;
 const Y_DEPENDE = 1450;
 
 /** Fichas que el agente confirma en los avisos (fijas, sin azar). El resto queda sin verificar. */
-const VERIFICADAS = new Set([1, 4, 5, 9, 12, 16, 20, 23]);
+const VERIFICADAS = new Set([2, 5, 8]);
 
 export const E03Verifica = (_: PropsEscena) => {
   const frame = useCurrentFrame();
