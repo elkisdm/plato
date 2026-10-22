@@ -1,22 +1,23 @@
 import { AbsoluteFill } from 'remotion';
 
-import { COLORS, FONTS } from '../constants/theme';
-import { MARGEN_LATERAL, YINI_V } from '../lib/layout';
+import { CtaSigueme } from '../components/CtaSigueme';
+import { GOLPES_E07 } from '../lib/golpesFinales';
+import { ANCHO_V, MARGEN_LATERAL, YFIN_ESCENA, YINI_V } from '../lib/layout';
 import type { PropsEscena } from './tipos';
 
-/** STUB: titular provisional; la escena real se implementa aparte. */
+/**
+ * E07 (línea 6): CTA de la serie. Golpe: «PARCHE» entra letra por letra; en «sígueme» pasa a
+ * SÍGUEME + @elkis.dev, que se sostiene hasta el último frame.
+ */
 export const E07Cta = (_props: PropsEscena) => (
   <AbsoluteFill
     style={{
-      paddingTop: YINI_V,
-      paddingLeft: MARGEN_LATERAL,
-      paddingRight: MARGEN_LATERAL,
-      fontFamily: FONTS.sans,
-      fontSize: 72,
-      fontWeight: 800,
-      color: COLORS.text,
+      top: YINI_V,
+      left: MARGEN_LATERAL,
+      width: ANCHO_V,
+      height: YFIN_ESCENA - YINI_V,
     }}
   >
-    Comenta PARCHE
+    <CtaSigueme {...GOLPES_E07} />
   </AbsoluteFill>
 );
