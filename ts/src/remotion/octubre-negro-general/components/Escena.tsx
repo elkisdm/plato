@@ -1,9 +1,8 @@
 import type { ReactNode } from 'react';
-import { AbsoluteFill, useCurrentFrame } from 'remotion';
+import { useCurrentFrame } from 'remotion';
 
-import { entre } from '../lib/motion';
-
-const FUNDIDO = 10;
+import type { VarianteTransicion } from '../lib/fx/transicion';
+import { TransicionEscena } from './fx/TransicionEscena';
 
 type Props = {
   desde: number;
@@ -12,25 +11,39 @@ type Props = {
   fundirEntrada?: boolean;
   /** false en la última escena: el cierre se sostiene completo, sin apagarse a negro. */
   fundirSalida?: boolean;
+  /** Variante de la transición con la escena anterior (frontera de entrada). Por defecto 'zoom'. */
+  varianteEntra?: VarianteTransicion;
+  /** Variante de la transición con la escena siguiente (frontera de salida). Por defecto 'zoom'. */
+  varianteSale?: VarianteTransicion;
   children: ReactNode;
 };
 
 /**
- * Monta los hijos solo con el frame global en [desde, hasta) y aplica un fundido de 10 frames
- * en la entrada y la salida (salvo que se desactiven). No usa <Sequence>: los hijos siguen leyendo el frame global.
+ * Monta los hijos solo con el frame global en [desde, hasta) y los envuelve en `TransicionEscena`
+ * (movimiento de cámara con desenfoque y separación cromática en los `SOLAPE` frames de cada borde).
+ * No usa <Sequence>: los hijos siguen leyendo el frame global.
  */
 export const Escena = ({
   desde,
   hasta,
   fundirEntrada = true,
   fundirSalida = true,
+  varianteEntra = 'zoom',
+  varianteSale = 'zoom',
   children,
 }: Props) => {
   const frame = useCurrentFrame();
   if (frame < desde || frame >= hasta) return null;
-  const opacity = Math.min(
-    fundirEntrada ? entre(frame, desde, desde + FUNDIDO) : 1,
-    fundirSalida ? 1 - entre(frame, hasta - FUNDIDO, hasta) : 1,
+  return (
+    <TransicionEscena
+      desde={desde}
+      hasta={hasta}
+      entra={fundirEntrada}
+      sale={fundirSalida}
+      varianteEntra={varianteEntra}
+      varianteSale={varianteSale}
+    >
+      {children}
+    </TransicionEscena>
   );
-  return <AbsoluteFill style={{ opacity }}>{children}</AbsoluteFill>;
 };

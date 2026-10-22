@@ -3,6 +3,7 @@
  * alerta = ámbar, calma = turquesa (hábito), neutro = frío sin color.
  *
  * - `animoEn(frame)`: el ánimo discreto en ese frame global.
+ * - `colorAnimo(pesos)`: el color RGB de esa mezcla.
  * - `pesosAnimo(frame)`: mezcla continua {alerta, calma, neutro} (suma 1) con un fundido de 20 frames
  *   al cambiar de ánimo; es lo que usa `FondoVivo` para no pegar saltos de color.
  */
@@ -13,6 +14,19 @@ import { entre } from '../motion';
 
 export type Animo = 'alerta' | 'calma' | 'neutro';
 export type PesosAnimo = Record<Animo, number>;
+
+const RGB: Record<Animo, [number, number, number]> = {
+  alerta: [245, 165, 36], // WARN
+  calma: [56, 230, 193], // COLORS.accent
+  neutro: [140, 165, 180],
+};
+
+/** Color RGB de la mezcla de ánimos (ponderado por `pesos`). */
+export function colorAnimo(pesos: PesosAnimo): [number, number, number] {
+  const mezcla = (k: 0 | 1 | 2): number =>
+    Math.round(RGB.alerta[k] * pesos.alerta + RGB.calma[k] * pesos.calma + RGB.neutro[k] * pesos.neutro);
+  return [mezcla(0), mezcla(1), mezcla(2)];
+}
 
 /** Frames que dura el fundido entre un ánimo y el siguiente. */
 const FUNDIDO_ANIMO = 20;

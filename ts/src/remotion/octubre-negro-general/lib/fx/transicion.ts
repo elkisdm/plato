@@ -56,7 +56,7 @@ export function estadoTransicion(i: Entrada): EstadoTransicion {
     e.opacity = Math.min(e.opacity, suave(Math.min(1, t / 0.55)));
     const resto = 1 - q;
     if (i.variante === 'whip') {
-      e.x = 300 * Math.pow(1 - t, 2.2);
+      e.x = 400 * Math.pow(1 - t, 2.2);
       e.blurX = 10 * resto;
       e.blurY = 1.5 * resto;
     } else {
@@ -69,9 +69,9 @@ export function estadoTransicion(i: Entrada): EstadoTransicion {
   if (u > 0) {
     const a = Math.min(1, u * 1.1) ** 2; // ease-in: la escala llega a 1.08 al final
     const g = Math.min(1, u / 0.8); // desenfoque y cromática alcanzan su máximo antes de apagarse
-    e.opacity = Math.min(e.opacity, 1 - suave(Math.max(0, (u - 0.35) / 0.65)));
+    e.opacity = Math.min(e.opacity, 1 - suave(Math.max(0, (u - 0.5) / 0.5)));
     if (i.variante === 'whip') {
-      e.x += -300 * Math.pow(u, 2.2);
+      e.x += -400 * Math.pow(u, 2.2);
       e.blurX = Math.max(e.blurX, 10 * g);
       e.blurY = Math.max(e.blurY, 1.5 * g);
     } else {
@@ -82,6 +82,6 @@ export function estadoTransicion(i: Entrada): EstadoTransicion {
     e.cromatica = Math.max(e.cromatica, 6 * g);
   }
 
-  if (i.variante === 'flash' && t < 1) e.flash = Math.sin(Math.PI * t) ** 2 * 0.9;
+  if (i.variante === 'flash' && t < 1) e.flash = Math.sin(Math.PI * t) ** 4 * 0.7;
   return e;
 }

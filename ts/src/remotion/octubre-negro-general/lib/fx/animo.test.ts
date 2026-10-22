@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 
 import { aFrame, palabra } from '../alineacion';
 import { ESCENAS } from '../lineaTiempo';
-import { animoEn, pesosAnimo } from './animo';
+import { animoEn, colorAnimo, pesosAnimo } from './animo';
 
 const enEscena = (i: number, delta = 40) => ESCENAS[i]!.desde + delta;
 
@@ -49,5 +49,15 @@ describe('pesosAnimo', () => {
     expect(medio.alerta).toBeGreaterThan(0);
     expect(medio.calma).toBeGreaterThan(0);
     expect(despues.calma).toBe(1);
+  });
+});
+
+describe('colorAnimo', () => {
+  it('devuelve el color puro del ánimo asentado y mezcla entre dos', () => {
+    expect(colorAnimo({ alerta: 1, calma: 0, neutro: 0 })).toEqual([245, 165, 36]);
+    expect(colorAnimo({ alerta: 0, calma: 1, neutro: 0 })).toEqual([56, 230, 193]);
+    const mezcla = colorAnimo({ alerta: 0.5, calma: 0.5, neutro: 0 });
+    expect(mezcla[0]).toBeGreaterThan(56);
+    expect(mezcla[0]).toBeLessThan(245);
   });
 });

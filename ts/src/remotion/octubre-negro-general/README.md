@@ -11,6 +11,10 @@ Reel vertical 1080×1920 a 30 fps, 1834 frames (61,1 s): "Octubre Negro, para to
 - `scenes/E01Gancho … E07Cta`: una escena por línea del guion (escena n ↔ línea n−1), firma `PropsEscena = { desde, hasta }` en `scenes/tipos.ts`. Sin `<Sequence>`: leen el frame global y anclan con `aFrame(palabra('x', linea).inicio)`.
 - `data/`: `alineacion.json`, `onda.json`, `guion.txt`.
 
+## Sistema visual global (v2)
+
+`components/fx/` + `lib/fx/` (lógica pura con tests, determinista con `random(seed)`): `FondoVivo` (halo por ánimo, paralaje, ascuas, grano), `Camara` (empuje 1.00→1.045 por escena + shake por `GOLPES_CAMARA`, tope 1.06), `TransicionEscena` (variantes zoom/whip/flash con desenfoque y separación cromática; la usa `Escena`, solape `SOLAPE` = 14 frames), `CapaGolpes` (`Destello` + `OndaChoque` por golpe), y primitivas para escenas: `TextoCinetico`/`LetrasCaen`, `Sello`, `TarjetaProfunda`. `lib/fx/golpes.ts` es la lista de golpes (un bloque por escena) y `lib/fx/animo.ts` el ánimo alerta/calma/neutro por escena.
+
 ## Previsualizar y renderizar
 
 ```bash

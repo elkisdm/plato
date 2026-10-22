@@ -1,12 +1,15 @@
 import type { ComponentType } from 'react';
 import { AbsoluteFill } from 'remotion';
 
-import { GridBackground } from '../arquitectura-ia/components/ui/GridBackground';
 import { loadFonts } from '../arquitectura-ia/lib/fonts';
 import { Escena } from './components/Escena';
+import { Camara } from './components/fx/Camara';
+import { CapaGolpes } from './components/fx/CapaGolpes';
+import { FondoVivo } from './components/fx/FondoVivo';
 import { Sonido } from './components/Sonido';
 import { Subtitulos } from './components/Subtitulos';
 import { FPS, H, W } from './constants/theme';
+import { varianteTransicion } from './lib/fx/transicion';
 import { DURACION, ESCENAS, type IdEscena } from './lib/lineaTiempo';
 import { E01Gancho } from './scenes/E01Gancho';
 import { E02Mezcla } from './scenes/E02Mezcla';
@@ -38,21 +41,26 @@ const COMPONENTES: Record<IdEscena, ComponentType<PropsEscena>> = {
 export const OctubreNegroGeneral = () => (
   <AbsoluteFill>
     <Sonido />
-    <GridBackground />
-    {ESCENAS.map((e, i) => {
-      const Componente = COMPONENTES[e.id];
-      return (
-        <Escena
-          key={e.id}
-          desde={e.desde}
-          hasta={e.hasta}
-          fundirEntrada={i > 0}
-          fundirSalida={i < ESCENAS.length - 1}
-        >
-          <Componente desde={e.desde} hasta={e.hasta} />
-        </Escena>
-      );
-    })}
+    <FondoVivo />
+    <Camara>
+      {ESCENAS.map((e, i) => {
+        const Componente = COMPONENTES[e.id];
+        return (
+          <Escena
+            key={e.id}
+            desde={e.desde}
+            hasta={e.hasta}
+            fundirEntrada={i > 0}
+            fundirSalida={i < ESCENAS.length - 1}
+            varianteEntra={varianteTransicion(i)}
+            varianteSale={varianteTransicion(i + 1)}
+          >
+            <Componente desde={e.desde} hasta={e.hasta} />
+          </Escena>
+        );
+      })}
+    </Camara>
+    <CapaGolpes />
     <Subtitulos />
   </AbsoluteFill>
 );
