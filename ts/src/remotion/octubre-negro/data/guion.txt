@@ -1,0 +1,13 @@
+Me pasaron una lista de veintisiete hackeos en cuarenta y ocho horas. Le pedí a mi agente que la verificara.
+
+La llaman Octubre Negro. PHP, Railway, NGINX, Signal, hasta un banco de la India. Todo junto, todo grave.
+
+Mi agente fue a los avisos oficiales. Varios son reales. Pero lo de las cuarenta y ocho horas no se sostiene. El ataque a OVHcloud se reportó el día diecinueve, antes de que empezara esa cuenta. Y usar PHP o NGINX no significa que estés afectado: depende de tu versión.
+
+O sea, la lista mezcla hechos con titulares. Y esa mezcla te lleva a rotar todo a ciegas, o a no tocar nada.
+
+De los veintisiete, a quien construye con IA le tocan tres. Las variables de entorno de Railway. Los parches de Node y de PHP. Y las herramientas que ejecutas sin saber de dónde salió el archivo.
+
+Ahí va lo que me quedó. Fijar una versión no basta si alguien puede reemplazar lo que se publicó. Revisa de dónde viene lo que ejecutas, y no le des tus claves a cualquier herramienta.
+
+Comenta PARCHE y te paso el prompt para que Claude revise tus claves y tus versiones contigo.
